@@ -37,8 +37,8 @@ struct LoopFwdApp: App {
             .fixedSize(horizontal: true, vertical: true)
             .accessibilityLabel(
                 urgent > 0
-                    ? "LoopFwd, \(urgent) tasks need attention"
-                    : active > 0 ? "LoopFwd, \(active) active tasks" : "LoopFwd"
+                    ? L10n.format("LoopFwd, %d tasks need attention", urgent)
+                    : active > 0 ? L10n.format("LoopFwd, %d active tasks", active) : "LoopFwd"
             )
         }
         .commands {

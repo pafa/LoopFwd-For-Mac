@@ -28,6 +28,7 @@ enum OpenCodeSessions {
         let pendingQuestion: PendingQuestion?
         let control: OpenCodeControl
         let turnID: String?
+        var observedVersion: ProviderVersionEvidence? = nil
     }
 
     enum PermissionReply: String {
@@ -291,7 +292,8 @@ enum OpenCodeSessions {
                         questionRequestID: question?.isSupported == true ? question?.requestID : nil,
                         permission: permission
                     ),
-                    turnID: conversation.turnID
+                    turnID: conversation.turnID,
+                    observedVersion: .metadata(health["version"] as? String, source: "OpenCode health API")
                 ))
         }
         if summaries.count > 512 {

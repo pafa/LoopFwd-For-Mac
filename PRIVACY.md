@@ -35,11 +35,16 @@ configuration only after an explicit user action:
 
 - installing or removing the optional Claude notification hook;
 - installing or removing the optional Gemini, Qwen or Kimi local Hook observer;
-- enabling Launch at Login or requesting macOS notification/accessibility
+- enabling Launch at Login or requesting macOS notification
   permission; and
 - importing or removing a custom completion sound.
 
-Provider configuration changes are backed up before rewriting. Removing a card
+Provider configuration changes are backed up before rewriting. Claude setup
+shows the selected settings file; each attempt keeps a separate 0600 recovery
+copy under `.loopfwd-hook-backups` beside it. Removal only deregisters that
+profile. Shared observer files remain for other configured profiles, and old
+backups are not deleted. Terminal.app is return-only: the app no longer posts
+global keyboard events or requests Accessibility for terminal input. Removing a card
 from LoopFwd does not delete the provider's conversation or transcript.
 
 The optional local Hook observer runs only when explicitly configured. It writes

@@ -55,6 +55,14 @@ final class ApprovalCenter: ObservableObject {
 
     @Published private(set) var pending: [Int32: Approval] = [:]
     var hasPending: Bool { !pending.isEmpty }
+    var hasControllablePending: Bool {
+        pending.contains { pid, request in
+            AgentMonitor.shared.agents.contains {
+                $0.processID == pid && request.identity.matches($0)
+                    && $0.status == .needsAttention && TerminalBridge.canSend(to: $0)
+            }
+        }
+    }
 
     /// Live AskUserQuestion prompts, delivered by the PreToolUse hook the moment
     /// the question opens (the transcript only records it after it's answered).
@@ -285,8 +293,8 @@ final class ApprovalCenter: ObservableObject {
     // MARK: - Responding
 
     func respond(pid: Int32, action: Action, completion: @escaping (Bool) -> Void = { _ in }) {
-        guard UserDefaults.standard.bool(forKey: Pref.claudeControlsEnabled),
-            let request = pending[pid],
+        guard UserDefaults.standard.bool(forKey: Pref.claudeControlsEnabled) else { completion(false); return }
+        guard let request = pending[pid],
             let agent = AgentMonitor.shared.agents.first(where: { $0.processID == pid }),
             request.identity.matches(agent), agent.status == .needsAttention
         else {
@@ -294,6 +302,8 @@ final class ApprovalCenter: ObservableObject {
             completion(false)
             return
         }
+        // An unavailable control path does not resolve the real request.
+        guard TerminalBridge.canSend(to: agent) else { completion(false); return }
         DispatchQueue.global(qos: .userInitiated).async {
             let success = TerminalBridge.sendKey(action.key, to: agent)
             DispatchQueue.main.async {
@@ -326,7 +336,12 @@ final class ApprovalCenter: ObservableObject {
 
     /// Hotkey path: acts on the most recent pending approval.
     func respondToNewest(action: Action) {
-        guard let pid = pending.max(by: { $0.value.at < $1.value.at })?.key else { return }
+        let eligible = pending.filter { pid, request in
+            AgentMonitor.shared.agents.contains {
+                $0.processID == pid && request.identity.matches($0) && TerminalBridge.canSend(to: $0)
+            }
+        }
+        guard let pid = eligible.max(by: { $0.value.at < $1.value.at })?.key else { return }
         respond(pid: pid, action: action)
     }
 
@@ -398,15 +413,19 @@ final class ApprovalCenter: ObservableObject {
     /// Claude Code settings file the hook is registered in.
     /// (Overridable so tests never touch the real file.)
     static var settingsPathOverride: String?
-    private static var claudeSettingsPath: String {
-        settingsPathOverride ?? home + "/.claude/settings.json"
+    static var claudeSettingsPath: String {
+        settingsPathOverride ?? ProviderDataLocations.claudeConfigurationDirectory + "/settings.json"
+    }
+
+    static var hookBackupDirectory: URL {
+        ClaudeHookInstaller.backupRoot(for: URL(fileURLWithPath: claudeSettingsPath))
     }
 
     static var hookInstalled: Bool {
         guard let data = FileManager.default.contents(atPath: claudeSettingsPath),
-            let text = String(data: data, encoding: .utf8)
+            case .parsed(let root) = HookSettings.load(data: data)
         else { return false }
-        return text.contains(hookScriptPath)
+        return HookSettings.isInstalled(in: root, hookPath: hookScriptPath)
     }
 
     static var hookNeedsUpdate: Bool {
@@ -456,117 +475,25 @@ final class ApprovalCenter: ObservableObject {
     }
 
     private static func installHookThrowing() throws {
-        let fm = FileManager.default
-
-        // Validate and back up the user's settings before creating any of our
-        // files. A malformed settings file must leave no partial installation.
-        let root: [String: Any]
-        switch HookSettings.load(data: fm.contents(atPath: claudeSettingsPath)) {
-        case .missing:
-            root = [:]
-        case .parsed(let existing):
-            root = existing
-            try backUpSettings()
-        case .unreadable:
-            throw HookMutationError.invalidSettings(claudeSettingsPath)
-        }
-
-        try fm.createDirectory(
-            atPath: spoolDir, withIntermediateDirectories: true,
-            attributes: [.posixPermissions: 0o700]
-        )
-
-        // BSD date has no %N — epoch + pid + RANDOM is unique enough.
-        //
-        // Written to a dot-prefixed temp file and moved into place: the island
-        // polls this directory once a second and drops anything that does not
-        // parse, so a payload caught mid-write was a permission request that
-        // silently never appeared. `mv` within one directory is atomic, and the
-        // leading dot keeps the partial file out of the *.json scan.
-        let script = hookScript(spoolDirectory: spoolDir)
-        if let previous = fm.contents(atPath: hookScriptPath) {
-            let backup = URL(fileURLWithPath: hookScriptPath + ".loopfwd-backup")
-            try previous.write(to: backup, options: .atomic)
-            try fm.setAttributes([.posixPermissions: 0o600], ofItemAtPath: backup.path)
-        }
-        try Data(script.utf8).write(
-            to: URL(fileURLWithPath: hookScriptPath), options: .atomic
-        )
-        try fm.setAttributes([.posixPermissions: 0o700], ofItemAtPath: hookScriptPath)
-
-        guard let out = HookSettings.serialize(HookSettings.merged(into: root, hookPath: hookScriptPath))
-        else { throw HookMutationError.serializationFailed }
-        try writeSettings(out)
+        try ClaudeHookInstaller.update(
+            install: true,
+            settings: URL(fileURLWithPath: claudeSettingsPath),
+            scriptURL: URL(fileURLWithPath: hookScriptPath),
+            script: Data(hookScript(spoolDirectory: spoolDir).utf8))
     }
 
     @discardableResult
     static func uninstallHook() -> Result<Void, Error> {
         do {
-            try uninstallHookThrowing()
+            try ClaudeHookInstaller.update(
+                install: false,
+                settings: URL(fileURLWithPath: claudeSettingsPath),
+                scriptURL: URL(fileURLWithPath: hookScriptPath),
+                script: Data(hookScript(spoolDirectory: spoolDir).utf8))
             return .success(())
         } catch {
             NSLog("[LoopFwd] hook removal failed: %@", error.localizedDescription)
             return .failure(error)
-        }
-    }
-
-    private static func uninstallHookThrowing() throws {
-        let fm = FileManager.default
-        let root: [String: Any]
-        switch HookSettings.load(data: fm.contents(atPath: claudeSettingsPath)) {
-        case .missing:
-            if fm.fileExists(atPath: hookScriptPath) {
-                try fm.removeItem(atPath: hookScriptPath)
-            }
-            return  // nothing registered anywhere
-        case .parsed(let existing):
-            root = existing
-            try backUpSettings()
-        case .unreadable:
-            throw HookMutationError.invalidSettings(claudeSettingsPath)
-        }
-
-        guard let out = HookSettings.serialize(HookSettings.removed(from: root))
-        else { throw HookMutationError.serializationFailed }
-        try writeSettings(out)
-        if fm.fileExists(atPath: hookScriptPath) {
-            try fm.removeItem(atPath: hookScriptPath)
-        }
-    }
-
-    /// Keep a copy before rewriting. `copyItem` refuses to overwrite, so a
-    /// backup from an earlier install would otherwise stick around forever and
-    /// the pre-change state would be lost on the second run.
-    private static func backUpSettings() throws {
-        let fm = FileManager.default
-        let backup = claudeSettingsPath + ".loopfwd-backup"
-        guard let data = fm.contents(atPath: claudeSettingsPath) else { return }
-        try data.write(to: URL(fileURLWithPath: backup), options: .atomic)
-        try fm.setAttributes([.posixPermissions: 0o600], ofItemAtPath: backup)
-    }
-
-    private static func writeSettings(_ data: Data) throws {
-        let fm = FileManager.default
-        let url = URL(fileURLWithPath: claudeSettingsPath)
-        try fm.createDirectory(
-            at: url.deletingLastPathComponent(), withIntermediateDirectories: true,
-            attributes: [.posixPermissions: 0o700]
-        )
-        try data.write(to: url, options: .atomic)
-        try fm.setAttributes([.posixPermissions: 0o600], ofItemAtPath: claudeSettingsPath)
-    }
-
-    private enum HookMutationError: LocalizedError {
-        case invalidSettings(String)
-        case serializationFailed
-
-        var errorDescription: String? {
-            switch self {
-            case .invalidSettings(let path):
-                return L10n.format("Refusing to edit invalid JSON at %@", path)
-            case .serializationFailed:
-                return L10n.string("Could not serialize the Claude hook settings")
-            }
         }
     }
 }

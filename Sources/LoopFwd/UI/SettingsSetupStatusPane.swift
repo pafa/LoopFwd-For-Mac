@@ -43,11 +43,9 @@ struct SetupStatusPane: View {
                 }
                 SDiv()
                 statusRow(
-                    title: "Terminal input (Labs)",
-                    value: TerminalBridge.hasAccessibilityAccess
-                        ? "Accessibility permission is available"
-                        : "Not granted · required only for optional Terminal.app input",
-                    ready: TerminalBridge.hasAccessibilityAccess
+                    title: "Terminal.app",
+                    value: "Return only · keyboard injection disabled",
+                    ready: false
                 )
             }
 

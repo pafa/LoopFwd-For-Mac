@@ -10,9 +10,24 @@ import Foundation
 /// all live in it.
 enum HookSettings {
 
-    /// Every command we install contains this, so our entries can be found
-    /// again for upgrade and uninstall without matching the exact path.
-    static let marker = "loopfwd"
+    enum MutationError: LocalizedError {
+        case unsupportedLayout
+
+        var errorDescription: String? {
+            "Unsupported Claude hook layout. Settings were left unchanged."
+        }
+    }
+
+    /// Exact legacy and shell-quoted forms only. A brand substring never
+    /// grants ownership over a user's command or an entire matcher group.
+    static func command(for hookPath: String) -> String {
+        "'" + hookPath.replacingOccurrences(of: "'", with: "'\\''") + "'"
+    }
+
+    private static func owns(_ hook: [String: Any], path: String) -> Bool {
+        guard hook["type"] as? String == "command", let value = hook["command"] as? String else { return false }
+        return value == path || value == command(for: path)
+    }
 
     /// Hook events we register. PermissionRequest is the rich one (carries
     /// tool_name); Notification is the fallback on older Claude versions; the
@@ -57,16 +72,29 @@ enum HookSettings {
 
     /// Add our hook to `root`, leaving every other key untouched. Idempotent:
     /// re-running never appends a second copy.
-    static func merged(into root: [String: Any], hookPath: String) -> [String: Any] {
+    static func merged(into root: [String: Any], hookPath: String) throws -> [String: Any] {
+        try validate(root)
         var root = root
         var hooks = root["hooks"] as? [String: Any] ?? [:]
 
         for event in events {
             var entries = hooks[event.name] as? [[String: Any]] ?? []
-            let alreadyThere = entries.contains { containsOurHook($0) }
+            let alreadyThere = entries.contains { containsOurHook($0, path: hookPath) }
+            entries = try entries.map { entry in
+                var entry = entry
+                guard let commands = entry["hooks"] as? [[String: Any]] else {
+                    throw MutationError.unsupportedLayout
+                }
+                entry["hooks"] = commands.map { hook in
+                    var hook = hook
+                    if owns(hook, path: hookPath) { hook["command"] = command(for: hookPath) }
+                    return hook
+                }
+                return entry
+            }
             if !alreadyThere {
                 var entry: [String: Any] = [
-                    "hooks": [["type": "command", "command": hookPath, "async": true]]
+                    "hooks": [["type": "command", "command": command(for: hookPath), "async": true]]
                 ]
                 if let matcher = event.matcher { entry["matcher"] = matcher }
                 entries.append(entry)
@@ -80,13 +108,24 @@ enum HookSettings {
 
     /// Strip our hook, preserving any other hooks the user registered on the
     /// same events.
-    static func removed(from root: [String: Any]) -> [String: Any] {
+    static func removed(from root: [String: Any], hookPath: String) throws -> [String: Any] {
+        try validate(root)
         var root = root
         guard var hooks = root["hooks"] as? [String: Any] else { return root }
 
         for event in events {
             guard var entries = hooks[event.name] as? [[String: Any]] else { continue }
-            entries.removeAll { containsOurHook($0) }
+            entries = try entries.compactMap { entry in
+                guard containsOurHook(entry, path: hookPath) else { return entry }
+                var entry = entry
+                guard let commands = entry["hooks"] as? [[String: Any]] else {
+                    throw MutationError.unsupportedLayout
+                }
+                let remaining = commands.filter { !owns($0, path: hookPath) }
+                guard !remaining.isEmpty else { return nil }
+                entry["hooks"] = remaining
+                return entry
+            }
             if entries.isEmpty {
                 hooks.removeValue(forKey: event.name)
             } else {
@@ -98,9 +137,35 @@ enum HookSettings {
         return root
     }
 
-    private static func containsOurHook(_ entry: [String: Any]) -> Bool {
+    private static func containsOurHook(_ entry: [String: Any], path: String) -> Bool {
         ((entry["hooks"] as? [[String: Any]]) ?? [])
-            .contains { ($0["command"] as? String)?.contains(marker) == true }
+            .contains { owns($0, path: path) }
+    }
+
+    static func isInstalled(in root: [String: Any], hookPath: String) -> Bool {
+        guard (try? validate(root)) != nil, let hooks = root["hooks"] as? [String: Any] else { return false }
+        return events.contains { event in
+            (hooks[event.name] as? [[String: Any]] ?? []).contains { containsOurHook($0, path: hookPath) }
+        }
+    }
+
+    private static func validate(_ root: [String: Any]) throws {
+        guard let value = root["hooks"] else { return }
+        guard let hooks = value as? [String: Any] else { throw MutationError.unsupportedLayout }
+        for event in events {
+            guard let value = hooks[event.name] else { continue }
+            guard let entries = value as? [[String: Any]] else { throw MutationError.unsupportedLayout }
+            for entry in entries {
+                guard let commands = entry["hooks"] as? [[String: Any]],
+                    commands.allSatisfy({ $0["type"] is String })
+                else { throw MutationError.unsupportedLayout }
+                for hook in commands where hook["type"] as? String == "command" {
+                    guard let command = hook["command"] as? String, !command.isEmpty else {
+                        throw MutationError.unsupportedLayout
+                    }
+                }
+            }
+        }
     }
 
     /// Serialized the same way every time so re-running produces no diff noise

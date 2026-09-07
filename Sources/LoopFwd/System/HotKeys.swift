@@ -35,7 +35,7 @@ final class HotKeyCenter: ObservableObject {
                 keyCode: UInt32(kVK_ANSI_G), modifiers: modifiers | UInt32(shiftKey),
                 id: Self.backwardId, label: "Reverse Switcher")
         }
-        if defaults.bool(forKey: Pref.claudeControlsEnabled), ApprovalCenter.shared.hasPending {
+        if defaults.bool(forKey: Pref.claudeControlsEnabled), ApprovalCenter.shared.hasControllablePending {
             register(keyCode: UInt32(kVK_ANSI_Y), modifiers: modifiers, id: Self.approveId, label: "Approve")
             register(keyCode: UInt32(kVK_ANSI_A), modifiers: modifiers, id: Self.alwaysAllowId, label: "Always Allow")
             register(keyCode: UInt32(kVK_ANSI_N), modifiers: modifiers, id: Self.denyId, label: "Deny")

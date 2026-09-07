@@ -32,6 +32,7 @@ swift build -c release --arch arm64
 approved_icon_hash="259a56328ae30acea2a7c89c6409f4bfee9eed98d0663d183ae8f6ad0af79b0d"
 test "$(shasum -a 256 assets/icon-1024.png | awk '{print $1}')" = "$approved_icon_hash"
 shasum -a 256 -c assets/agent-icon-checksums.sha256
+node scripts/verify-agent-icons.mjs
 shasum -a 256 -c assets/brand-checksums.sha256
 
 icon_output="$stage_root/icon"
@@ -112,6 +113,7 @@ printf '%s\n' \
     "swift=$(swift --version | head -1)" \
     "xcode=$(xcodebuild -version | tr '\n' ' ')" \
     "agentIcons=@lobehub/icons-static-png@1.95.0" \
+    "agentIconProvenanceSha256=$(shasum -a 256 assets/agent-icon-provenance.json | awk '{print $1}')" \
     "platform=macOS 14+" \
     "architecture=arm64" \
     "signature=ad-hoc" \

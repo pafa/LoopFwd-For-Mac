@@ -1,116 +1,71 @@
-# LoopFwd 0.1.0 — early preview candidate
+# LoopFwd 0.1.1 — patch preview candidate
 
-Apple Silicon · macOS 14+ · manual updates · ad-hoc signature.
+Apple Silicon · macOS 14+ deployment target · manual updates · ad-hoc signature.
 
-The first open-source version is 0.1.0, with an intended v0.1.0 GitHub Pre-release.
-The previous 1.0.0-beta.1 development label is superseded; no stable 1.0 is claimed.
+This is a source/review candidate, not a published replacement for 0.1.0.
+The existing v0.1.0 tag and download remain immutable. Publishing 0.1.1 requires
+approval of the reviewed commit and its matching package.
 
-This is a reviewable early-preview candidate, not a stable certification of
-every provider or environment. Eight integrations ship: Codex, OpenCode,
-Copilot, Claude Code, Gemini, Qwen, Kimi and Grok. Codex Desktop, OpenCode TUI
-HTTP and Copilot CLI have basic real-task evidence and are labeled Preview
-tested; other surfaces remain Experimental. See the README capability table.
-The five optional providers are off by default for new users; existing choices
-are preserved. No state or control authority is granted by a preview badge.
-Publishing this MIT source does not require Developer ID or notarization.
+## Fixes
 
-## Changes in this candidate
+- Match Claude hooks by exact owned command. Preserve other commands in the
+  same matcher group and unrelated commands whose paths contain “loopfwd”.
+- Reject unsupported or unreadable hook settings. Keep separate private backups
+  for every operation, preserve concurrent edits, and report recovery failures.
+- Show the exact Claude settings target and allow choosing a custom
+  CLAUDE_CONFIG_DIR. Removal affects only that profile; shared observer files
+  remain available to other configured profiles.
+- Remove Terminal.app global keyboard injection and its Accessibility setup
+  prompt. Monitoring and verified terminal return remain available; replies and
+  approvals require a session-addressed API even with Labs enabled.
+- Read Codex Desktop's data root from the observed app environment, with an
+  explicit folder fallback for unavailable/ambiguous roots. Finder's environment
+  is not used as evidence of another app's CODEX_HOME.
+- Separate observed provider versions/sources from supported reader versions in
+  Diagnostics. Unknown is explicit; no provider executable is launched for a
+  version probe.
+- Replace inconsistent App provider icons with the exact unmodified assets from
+  the declared npm 1.95.0 archive. Verify SHA-512 archive integrity and file-level
+  SHA-256 provenance; include provenance identity in the build manifest.
+- Localize remaining dynamic task-count/diagnostic/availability text and the new
+  setup messages. Keep the approved LoopFwd logo, island size and display shape.
+- Replace outdated architecture/test-history prose with current capability and
+  configuration boundaries; improve issue reports for different installations.
 
-- Preserve the original notch wings and external-display transparent hot area.
-- Remove false completion derived from idle providers or historical responses.
-- Stop cards overriding the shared lifecycle state.
-- Match Codex CLI identity to the real thread ID, retain all managed identities,
-  and remove the eight-result Desktop output cap.
-- Keep a meaningful task title through short confirmations; prioritize active
-  Todo steps rather than pending work or generic thinking text.
-- Consolidate banner, sound and automatic reveal decisions, withdraw outdated
-  session alerts, and offer notification-detail privacy.
-- Perform return commands off the UI thread with bounded helper processes.
-  App-only return no longer marks an exact task as viewed.
-- Defer Cursor Agent, DeepSeek Harness, Mistral Vibe, WorkBuddy and Doubao Work.
-  They are not scanned or offered for new installation in 0.1.0. Existing
-  software, observers, configurations and conversations are not removed.
-- Preserve keyboard selection by session ID and keep the selected card visible.
-- Move new task/control entries into Labs; keep existing managed return/stop.
-- Centralize beta/build identity and make downloaded SHA-256 files portable.
-- Discover OpenCode active identities beyond the recent-session window and rotate expensive summaries.
-- Preserve notification group members across bursts and withdraw late deliveries after handling.
-- Keep stale managed identities recoverable; use the shared lifecycle reducer for managed projections.
-- Move community quota estimates into Labs and label historical Codex usage with its report time.
-- Add Chinese common settings/notifications and separate project, conversation and task-step labels.
-- Discover custom Codex homes from the CLI process environment, verify open
-  rollouts, and recheck bindings when a CLI switches threads without exiting.
-- Keep failed binding verification stale; cwd-only matches do not become rich
-  task observations or generate completion notifications.
-- Align card/detail reply controls with Labs and validate terminal return
-  prerequisites before advertising an exact jump.
-- Avoid repeated long-prompt parsing and unchanged process classification;
-  retain the existing refresh frequency and island dimensions.
-- Bound optional Claude usage reads and record buffers; hide incomplete
-  estimates while history is unread, unavailable or contains oversized records.
-- Budget CLI process batches independently by provider and prioritize unread
-  processes on the next scan. Partial scans do not refresh success timestamps.
-- Remove unused Codex history-directory guessing and its unbounded caches.
-- Query exact terminal visibility in the background and recheck notification
-  settings before delivery; late results cannot revive handled task alerts.
-- Retain only compact notification summaries, not full prompts, plans or
-  provider control payloads, while preserving original event deduplication.
-- Localize dynamic usage labels and reject malformed numeric limits and future
-  report timestamps as fresh usage data.
-- Add an explicit System / English / Simplified Chinese interface-language
-  choice that takes effect after restart without changing macOS preferences.
-- Keep Spark limit reports out of the main Codex allowance; show remaining
-  versus used percentages explicitly and hide missing or old main reports.
-- Reuse AppKit's visible-rect tracking area across island animations instead
-  of repeatedly removing and recreating it as the view changes size.
-- Remove the island's outer diffuse shadow and status glow while preserving
-  its dimensions, card styling and pointer regions.
-- Distinguish an oversized Codex tail record from an unreadable rollout,
-  retain the last trusted state without refreshing its timestamp, and avoid
-  a redundant historical-plan read when the live tail is unavailable.
-- Localize detailed status counts, approval controls, observation errors and
-  detail labels; use the selected app language for quota reset times.
-- Distinguish partial provider reads from unavailable or incompatible data in
-  Diagnostics, and label the last complete read explicitly.
-- Preserve meaningful goals through compound confirmations such as “好的，继续”
-  without filtering concrete requests such as “继续修复登录问题”.
-- Show return failures inside task details as well as the main task list;
-  an application-only return still does not mark the task as viewed.
+## Scope and known limitations
 
-## Installation and rollback
+Eight integrations remain: Codex, OpenCode, Copilot, Claude, Gemini, Qwen, Kimi
+and Grok. Preview tested still refers only to existing basic evidence for Codex
+Desktop, OpenCode TUI HTTP and Copilot CLI. It is not a new certification of
+every feature, account or environment. Other surfaces remain Experimental.
+Cursor, DeepSeek Harness, Mistral, WorkBuddy and Doubao Work stay deferred; no
+installed client, user history or configuration is removed automatically.
 
-Verify the ZIP with the matching SHA-256 file in the same directory.
-Quit the old LoopFwd, extract the ZIP, and drag the app into Applications.
-If macOS blocks this ad-hoc build, review System Settings → Privacy & Security
-→ Open Anyway. Only proceed when you trust the source and checksum; do not
-disable system-wide security protections.
+Terminal.app replies and approvals are deliberately unavailable. iTerm/tmux/
+WezTerm/kitty control remains experimental and requires the actual target API.
+Codex CLI/Desktop observation does not provide live approval authority.
 
-Keep the previous ZIP for manual rollback. Existing preferences and provider
-data are outside the app bundle. Quitting may affect LoopFwd-managed tasks,
-so the app asks before exiting while they are active.
+Observed versions currently use running-app bundle metadata or OpenCode's
+current health response. Other surfaces may report unknown; a supported version
+range is not the user's installed version.
 
-## Confirmed user feedback
+The deployment target is macOS 14. CI runs on macOS 26; the local development
+machine is macOS 26.6.2. A clean macOS 14 device run is not yet verified.
+This gap does not imply a confirmed startup failure, nor a claim that all
+macOS 14+ environments have been exercised.
 
-The reporter confirmed that the original fullscreen flicker and gray halo are
-gone. This confirms the reported scenario, not all displays or fullscreen apps.
-Explicit English and Simplified Chinese selection persisted after restart.
-For the reported Codex Desktop task, card navigation and a completion
-notification both returned to the correct conversation. These checks do not
-replace full lifecycle, notification withdrawal or permission-recovery tests.
+These packages are not Developer ID signed or notarized. Review the download's
+checksum and macOS warning before using Privacy & Security → Open Anyway.
+No App Store submission is involved. Updates and rollback remain manual.
 
-## Known limitations and follow-up work
+## Reviewing this candidate
 
-- The five optional integrations have not passed authenticated model-task checks.
-- OpenCode and Copilot actual terminal return and full failure/permission scenarios
-  remain unverified; basic progress/multi-session tests have passed.
-- Codex CLI/managed and OpenCode Desktop do not borrow other surfaces' test labels.
-- Complete bilingual visible UI and text-scaling/accessibility review.
-- Native notification permission/withdrawal behavior and detailed jump-failure reporting.
-- Display switching, sleep/wake and permission deny/recover gates.
-- Broader fullscreen and Space compatibility beyond the reported scenario.
-- Thirty-minute performance acceptance and refreshed product media.
+Run `./scripts/verify` and `./scripts/verify-public-tree` from a clean clone.
+For an upstream icon re-audit, use
+`node scripts/verify-agent-icons.mjs --archive <original-1.95.0.tgz>`.
+This optional check verifies the archive's pinned integrity before comparing
+its original files; normal builds do not require a network connection.
 
-These follow-ups do not turn unavailable capabilities into release promises or
-block the documented early-preview scope. Unknown or incompatible data remains
-visible as degraded observation. No Intel, automatic updates, cloud, mobile,
-daemon or cross-device history is included.
+A packaged-app smoke and exact candidate/CI results belong in the PR handoff.
+Do not infer those results from this release-note file. Stable 1.0 remains a
+separate readiness decision.
