@@ -95,6 +95,13 @@ After merging, delete that completed task branch and start the next change from
 the updated `main`. Keep release tags immutable; do not maintain a separate
 long-lived development or release branch for this preview.
 
+At task handoff, explicitly provide the preview link, PR and head commit, a short
+change summary, and actual check results. State whether the change is still on
+the task branch or already on `main`, then ask the maintainer whether to merge
+that specific candidate. Do not silently leave a finished change on a branch,
+assume approval from earlier work, or describe a branch preview as the live homepage.
+Wait for the answer before merging; materially changed candidates need confirmation again.
+
 The required job names are `macOS build and tests` and `Observer and configuration tests`.
 The macOS job includes the public-tree hygiene check before building. UI or packaging changes also
 need a real launch smoke on macOS; record what was exercised in the pull
