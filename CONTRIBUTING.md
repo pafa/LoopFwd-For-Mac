@@ -1,6 +1,6 @@
 # Contributing
 
-LoopFwd is a native macOS Swift package. Packaging requires full Xcode 26.6,
+LoopFwd for Mac is a native macOS Swift package. Packaging requires full Xcode 26.6,
 Node 24+, jq, and ripgrep on Apple Silicon. The app's deployment target remains macOS 14.
 Run `./scripts/preflight` for readable environment checks.
 
@@ -26,6 +26,40 @@ Keep changes product-first and narrow:
 - Keep provider configuration changes behind an explicit user action with a backup and recovery path.
 - Do not add generated builds, diagnostics, transcripts, credentials, or personal machine paths.
 - Preserve the notices in `THIRD_PARTY_NOTICES.md` when modifying imported upstream work.
+
+## Develop with your own agent
+
+Fork the repository and use the coding agent you already trust. Useful contributions
+include a local integration, clearer task summaries, a small interaction improvement,
+translations and reproducible bug fixes. A reliable observation-only integration is
+welcome; it does not need to implement replies or approvals.
+
+Give your agent a concrete goal and a bounded starting prompt:
+
+```text
+I forked LoopFwd for Mac. Implement this focused change: [describe the need].
+Read README, CONTRIBUTING and docs/ARCHITECTURE.md. Work on a task branch.
+Reuse the existing implementation and official provider interfaces; avoid unrelated rewrites.
+For an integration, state what it can observe, whether it can return to an exact task,
+and whether a live, verifiable control interface actually exists.
+Do not infer completion from old replies or promote process detection to rich task state.
+Configuration writes need explicit actions, backups and recoverable failures.
+Do not log in, purchase credits or expand permissions without approval.
+Add focused regressions and run ./scripts/verify; smoke the real App for UI changes.
+Open a small PR with the change, actual verification and limitations. Do not merge or publish it.
+```
+
+For provider work, start with [existing Readers](Sources/LoopFwd/Providers),
+[surface contracts](Sources/LoopFwd/Core/IntegrationProfile.swift) and
+[the support registry](Sources/LoopFwd/Core/SupportRegistry.swift). Keep stable session
+identity, source freshness, task state and control authority separate. Add only the
+capabilities supported by the actual source, keep unverified surfaces Experimental,
+and test the production read path with sanitized fixtures. Never submit transcripts,
+credentials or local configuration backups to a PR.
+
+Generated code is still your contribution: review its complete diff, run the checks,
+and describe which provider/version you actually exercised. Account or environment
+limits are fine to disclose; they are not reasons to invent a passing result.
 
 ## Branches and pull requests
 
@@ -54,7 +88,7 @@ Provider compatibility versions and snapshot schema versions are independent.
 change, keep unrelated formatting out of the diff, and prefer squash merge.
 Agent-created branches use the `codex/` prefix.
 
-The required job names are `macOS build and tests` and `DeepSeek observer`.
+The required job names are `macOS build and tests` and `Observer and configuration tests`.
 The macOS job includes the public-tree hygiene check before building. UI or packaging changes also
 need a real launch smoke on macOS; record what was exercised in the pull
 request.
