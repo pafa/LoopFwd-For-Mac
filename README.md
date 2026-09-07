@@ -1,25 +1,166 @@
-# LoopFwd
+<p align="center">
+  <img src="assets/icon-1024.png" width="96" height="96" alt="LoopFwd for Mac icon">
+</p>
+<h1 align="center">LoopFwd for Mac</h1>
+<p align="center"><strong>Your agents are working. You shouldn't have to keep checking.</strong></p>
+<p align="center">A small island on your Mac. A clear view of your AI tasks.</p>
+<p align="center">
+  <a href="https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.0"><strong>Download for Mac</strong></a> ·
+  <a href="#see-it-in-26-seconds">Watch the film</a> ·
+  <a href="#features">Explore features</a> ·
+  <a href="README.zh-CN.md">简体中文</a>
+</p>
+<p align="center">Apple Silicon · macOS 14+ · Native SwiftUI + AppKit · MIT</p>
 
-[简体中文](README.zh-CN.md)
+Running a few AI tasks at once shouldn't mean cycling through windows to ask, “Is it still working?”
+**LoopFwd for Mac** brings ongoing tasks into one glanceable island: see what is happening,
+notice when you are needed, and get back to the right place.
+Keep using your own agents, editors and terminals.
 
-A native Mac island for keeping track of local AI coding tasks: what is running,
-what really needs your attention, and where to return.
+## See it in 26 seconds
 
-LoopFwd uses the sides of the MacBook notch without changing your working
-environment. On a display without a notch, a transparent top-center hot area
-reveals the island. Completed tasks appear briefly; idle sessions do not become
-a permanent task list.
+https://github.com/user-attachments/assets/d4fdb119-f78b-47f4-b49e-13d833e83da7
 
-## Preview status
+[Download the launch film · 26 seconds, with sound](https://github.com/pafa/LoopFwd-For-Mac/releases/download/v0.1.0/LoopFwd-Launch-Selected-A-26s.mp4)
 
-The first open-source release is **0.1.0**, for Apple Silicon and macOS 14+.
-It is an early preview, not a 1.0 or stable release.
-This checkout is a development candidate, not a validated public release.
-The preview includes **eight integrations**. **Preview tested** means basic
-real-task monitoring was checked on the named surface, not all capabilities or
-every user's environment. Installed software and parser tests alone do not earn
-that label. Five optional integrations remain **Experimental**, off by default
-on a fresh install; existing choices are preserved.
+*The selected product film. Integration availability for **0.1.0** is listed below.*
+
+## Features
+
+<table>
+<tr>
+<td width="33%" valign="top"><h3>👀 One glance, multiple tasks</h3>Keep active sessions from different tools and projects together. Expand the island when you want detail; scroll to reach more sessions.</td>
+<td width="33%" valign="top"><h3>🧩 Know what is happening</h3>Read the <b>project, task and current step</b> separately. Meaningless follow-ups such as “continue” don't replace the task's goal.</td>
+<td width="33%" valign="top"><h3>🔔 Notice the moments that matter</h3>Get alerts for confirmed completions, failures and supported live requests. Keep focusing on your work instead of repeatedly checking each window.</td>
+</tr>
+<tr>
+<td width="33%" valign="top"><h3>🧭 Get back to the task</h3>Click to return using the available route. <b>Jump to task</b> and <b>Open App</b> are clearly different—Codex Desktop supports task links.</td>
+<td width="33%" valign="top"><h3>✅ Done, then out of your way</h3>Completed tasks appear briefly and idle tasks leave the main list. The island stays focused on work in progress, not a growing archive.</td>
+<td width="33%" valign="top"><h3>⌨️ Keep your hands on the keyboard</h3>Open the switcher with <b>Control + G</b>, cycle through sessions, press Return to jump, or Escape to dismiss. Choose your preferred modifier.</td>
+</tr>
+</table>
+
+
+## Make it feel like your Mac
+
+<table>
+<tr>
+<td width="33%" valign="top"><h3>🖥️ Notch or external display</h3>Use the MacBook notch's sides, or a transparent top-center hot area on a screen without one. Pick the display and choose Clean or Detailed style.</td>
+<td width="33%" valign="top"><h3>🎛️ As much detail as you want</h3>Adjust panel width, height and text size. Choose task summaries, activity, model, branch, terminal labels and checklists when the source provides them.</td>
+<td width="33%" valign="top"><h3>🌐 English or 简体中文</h3>Follow macOS, or explicitly choose English or Simplified Chinese in settings. Your interface changes; your original task text stays intact.</td>
+</tr>
+<tr>
+<td width="33%" valign="top"><h3>🌙 Set your own rhythm</h3>Tune hover delay, automatic collapse, event reveal and fullscreen visibility. Choose alert types, hide notification details, and enable login launch when wanted.</td>
+<td width="33%" valign="top"><h3>🎵 Sound that suits your day</h3>Pick sounds by event, preview them, import your own, and adjust volume. Quiet hours mute sounds overnight without hiding tasks that need attention.</td>
+<td width="33%" valign="top"><h3>📊 Usage and allowance, in view</h3>See Codex's latest reported usage and remaining allowance when available, with reset time and data age. Main Codex and Spark stay separate—not a live balance query.</td>
+</tr>
+</table>
+
+
+## Take the next step, right from the island
+
+Optional **Labs** controls bring small actions closer to the work. They are experimental,
+off by default, and appear only when the session provides a valid control path.
+
+<table>
+<tr>
+<td width="33%" valign="top"><h3>🚀 Start a task</h3>Create a LoopFwd-managed Codex task from the island, send a follow-up, or stop that managed task. Your existing external sessions remain separate.</td>
+<td width="33%" valign="top"><h3>💬 Give a quick answer</h3>Answer a supported live question or choose one of its options without leaving the island. Available through OpenCode and optional Claude terminal controls.</td>
+<td width="33%" valign="top"><h3>☑️ Approve or decline</h3>Review a live request and choose whether the agent may continue. For supported OpenCode and Claude requests, with setup and permission requirements below.</td>
+</tr>
+</table>
+
+These are not universal controls for all eight agents. Unavailable or unverified actions stay disabled;
+Codex CLI/Desktop observation does not provide approval controls. See the setup details below.
+
+### 🔒 Local by design. Clear when something is wrong.
+
+The monitoring path reads local session data—no LoopFwd cloud account, telemetry or transcript uploads.
+Setup status shows what's available; Diagnostics explains missing or stale sources and provides a
+redacted report for troubleshooting. Permissions and observer installation stay behind explicit actions.
+
+## Your tools, together
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agents/dark/openai.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/assets/agents/light/openai.png">
+    <img src="docs/assets/agents/light/openai.png" width="32" height="32" alt="Codex">
+  </picture>&nbsp;&nbsp;
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agents/dark/opencode.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/assets/agents/light/opencode.png">
+    <img src="docs/assets/agents/light/opencode.png" width="32" height="32" alt="OpenCode">
+  </picture>&nbsp;&nbsp;
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agents/dark/githubcopilot.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/assets/agents/light/githubcopilot.png">
+    <img src="docs/assets/agents/light/githubcopilot.png" width="32" height="32" alt="Copilot">
+  </picture>&nbsp;&nbsp;
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agents/dark/claude-color.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/assets/agents/light/claude-color.png">
+    <img src="docs/assets/agents/light/claude-color.png" width="32" height="32" alt="Claude Code">
+  </picture>&nbsp;&nbsp;
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agents/dark/gemini-color.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/assets/agents/light/gemini-color.png">
+    <img src="docs/assets/agents/light/gemini-color.png" width="32" height="32" alt="Gemini">
+  </picture>&nbsp;&nbsp;
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agents/dark/qwen.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/assets/agents/light/qwen.png">
+    <img src="docs/assets/agents/light/qwen.png" width="32" height="32" alt="Qwen">
+  </picture>&nbsp;&nbsp;
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agents/dark/kimi.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/assets/agents/light/kimi.png">
+    <img src="docs/assets/agents/light/kimi.png" width="32" height="32" alt="Kimi">
+  </picture>&nbsp;&nbsp;
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agents/dark/grok.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/assets/agents/light/grok.png">
+    <img src="docs/assets/agents/light/grok.png" width="32" height="32" alt="Grok">
+  </picture>
+</p>
+
+**Codex · OpenCode · Copilot · Claude Code · Gemini · Qwen · Kimi · Grok**
+
+Eight integrations, enabled only when you want them. The first three have basic real-task evidence
+on specific surfaces; the other five are optional **Experimental** integrations, off by default on new installs.
+[See the exact scope and current limitations](#compatibility-and-preview-notes).
+
+## Fork it. Ask your agent. Make it yours.
+
+Your workflow won't look exactly like someone else's—and it shouldn't have to.
+**LoopFwd for Mac is MIT-licensed source, ready to adapt with your own coding agent.**
+
+| 🍴 Start with a fork | 🤖 Describe your workflow | 🌱 Share what works |
+| --- | --- | --- |
+| Keep the native island and the integrations you already use. | Ask your agent to add a local tool, improve a task summary, tune the UI, or contribute a translation. | Test the focused change and send a small PR, including its actual capability and limitations. |
+
+Different sources offer different abilities: a local transcript can describe a task;
+a verified app link can return to it; a live control API can accept a response.
+You don't need to implement everything to contribute a useful integration.
+
+[Use the ready-to-adapt agent prompt and contribution guide](CONTRIBUTING.md#develop-with-your-own-agent).
+
+## Get started
+
+1. **[Download the 0.1.0 preview](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.0)** and its matching checksum.
+2. **Move LoopFwd into Applications.** Quit any previous copy before replacing it.
+3. **Open Setup status**, enable the integrations you use, then continue working in your own tools.
+
+The preview is ad-hoc signed, not Apple-notarized. If macOS blocks it, verify the download and
+review **System Settings → Privacy & Security → Open Anyway**. Don't disable system-wide protection.
+
+---
+
+## Compatibility and preview notes
+
+**0.1.0 is an early preview, not a stable 1.0.**
+“Preview tested” means basic real-task monitoring on the named surface—not every capability,
+account or environment. Installed software and parser tests alone do not earn that label.
 
 | Integration | Preview scope and evidence | Main limitation |
 | --- | --- | --- |
@@ -41,25 +182,10 @@ live approval observation. An idle provider or an old assistant reply is not
 evidence of successful completion. Unknown, stale and incompatible data are
 reported as observation health, not invented task outcomes.
 
-## Build and run
+<details>
+<summary><strong>Download verification, installation and rollback</strong></summary>
 
-Install full **Xcode 26.6**, **Node 24+**, **Python 3.11+**, **jq**, and **ripgrep**, then select Xcode using
-`xcode-select`. Command Line Tools alone are insufficient for packaging icons.
-
-```sh
-./scripts/preflight
-./scripts/verify
-open dist/LoopFwd.app
-```
-
-For a quick compile, use `swift build`. For tests only, use `swift test`.
-No provider configuration is changed by building or starting LoopFwd.
-Python is used for installer transaction tests and explicit Kimi observer setup.
-LoopFwd does not install or manage a separate Python environment.
-
-## Install a preview package
-
-When a tagged pre-release is available:
+The [0.1.0 pre-release](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.0) contains the ZIP, checksum and build manifest:
 
 1. Download its ZIP and matching SHA-256 file.
 2. In their download directory, run `shasum -a 256 -c <archive-name>.sha256`.
@@ -76,7 +202,29 @@ See [Apple's Gatekeeper explanation](https://developer.apple.com/news/?id=saqach
 Updates are manual. Keep the previous ZIP to reinstall an earlier build.
 Quitting may disconnect LoopFwd-managed tasks; external agent processes are not stopped.
 
-## First use
+</details>
+
+<details>
+<summary><strong>Build from source</strong></summary>
+
+Install full **Xcode 26.6**, **Node 24+**, **Python 3.11+**, **jq**, and **ripgrep**, then select Xcode using
+`xcode-select`. Command Line Tools alone are insufficient for packaging icons.
+
+```sh
+./scripts/preflight
+./scripts/verify
+open dist/LoopFwd.app
+```
+
+For a quick compile, use `swift build`. For tests only, use `swift test`.
+No provider configuration is changed by building or starting LoopFwd.
+Python is used for installer transaction tests and explicit Kimi observer setup.
+LoopFwd does not install or manage a separate Python environment.
+
+</details>
+
+<details>
+<summary><strong>Setup details, optional observers and development-build upgrades</strong></summary>
 
 Open **Settings → Setup status** to inspect software, data sources and permissions.
 Use **Agents → Choose CLI…** when Finder's environment cannot find your CLI.
@@ -152,6 +300,8 @@ may still run inside their provider; disabling LoopFwd observation does not
 uninstall them. Keep the previous development build and its configuration backups
 if you need its observer removal/recovery actions. Compare backups before a
 manual restore so later user changes are not overwritten.
+
+</details>
 
 ## Privacy and contributions
 
