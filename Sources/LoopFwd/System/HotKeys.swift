@@ -178,12 +178,7 @@ final class SwitcherState: ObservableObject {
             if result.opened {
                 self.end(collapse: true)
             } else {
-                OperationalDiagnostics.shared.showNotice(
-                    sessionID: agent.id,
-                    title: agent.displayTitle,
-                    message: result.reason
-                        ?? "The task target could not be reached."
-                )
+                OperationalDiagnostics.shared.showReturnFailure(result, session: agent)
             }
         }
     }

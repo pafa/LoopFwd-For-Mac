@@ -71,6 +71,13 @@ final class AgentMonitor: ObservableObject {
             guard let self else { return }
             let completedAt = Date()
             self.applyScanDiagnostics(result, startedAt: startedAt, completedAt: completedAt)
+            if !Pref.disabledKinds.contains(.codex),
+                result.codexUsageConfiguration == UserDefaults.standard.string(forKey: Pref.codexDesktopDataDirectory)
+            {
+                UsageTracker.shared.updateCodexSource(result.codexUsageSource)
+            } else {
+                UsageTracker.shared.invalidateCodexSource()
+            }
             self.reschedule()
 
             // Record that a scan completed *before* the unchanged-list

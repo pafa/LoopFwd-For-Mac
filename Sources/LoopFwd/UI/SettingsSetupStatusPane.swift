@@ -7,6 +7,7 @@ import UserNotifications
 /// permission prompt or automatic install.
 struct SetupStatusPane: View {
     @ObservedObject private var monitor = AgentMonitor.shared
+    @ObservedObject private var scanUpdates = AgentMonitor.shared.diagnosticsUpdates
     @State private var notificationsGranted = false
 
     var body: some View {
@@ -40,6 +41,7 @@ struct SetupStatusPane: View {
                     subtitle: "Open Notifications to review macOS authorization"
                 ) {
                     statusBadge(notificationsGranted ? "Authorized" : "Not authorized", ready: notificationsGranted)
+                    Button(L10n.string("Review access")) { SettingsWindowController.shared.show(pane: .notifications) }
                 }
                 SDiv()
                 statusRow(
@@ -80,14 +82,14 @@ struct SetupStatusPane: View {
     ) -> some View {
         let active = monitor.agents.filter { $0.kind == kind }
         let enabled = !Pref.disabledKinds.contains(kind)
-        let rich = enabled && active.contains { $0.observation.mode == .rich }
-        let status =
-            !enabled
-            ? "Disabled in Agents"
-            : rich
-                ? "Rich data active"
-                : active.isEmpty ? (softwareAvailable ? "Installed · not verified" : "Not installed") : "Limited data"
-        let ready = rich
+        let selected = kind == .codex ? UserDefaults.standard.string(forKey: Pref.codexDesktopDataDirectory) : nil
+        let missingFolder = selected.map { !$0.isEmpty && !FileManager.default.fileExists(atPath: $0) } ?? false
+        let readiness = ProviderReadiness.resolve(
+            enabled: enabled, installed: softwareAvailable,
+            observations: active.map { $0.observation.mode }, diagnostic: monitor.providerDiagnostics[kind],
+            scanFailed: monitor.lastScanError != nil, missingConfiguration: missingFolder,
+            usesObserver: [.claude, .gemini, .qwen, .kimi].contains(kind))
+        let ready = readiness.ready
 
         return HStack(spacing: 11) {
             AgentIconView(kind: kind, status: ready ? .working : .idle, size: 24, showStatus: false)
@@ -99,17 +101,21 @@ struct SetupStatusPane: View {
                         .font(.system(size: 10))
                         .foregroundStyle(.secondary)
                 }
-                Text(L10n.string(detail))
+                Text(L10n.string(readiness.detail ?? detail))
                     .font(.system(size: 10.5))
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
             }
             Spacer(minLength: 12)
-            statusBadge(status, ready: ready)
+            VStack(alignment: .trailing, spacing: 6) {
+                statusBadge(readiness.status, ready: ready)
+                Button(readiness.action.title) { SettingsWindowController.shared.show(pane: readiness.action) }
+                    .font(.system(size: 10.5))
+            }
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 10)
-        .accessibilityElement(children: .combine)
+        .accessibilityElement(children: .contain)
     }
 
     private func statusRow(title: String, value: String, ready: Bool) -> some View {
@@ -129,4 +135,65 @@ struct SetupStatusPane: View {
             )
     }
 
+}
+
+/// Pure presentation policy: installation is never treated as successful
+/// observation, and an old successful read cannot cover a current failure.
+struct ProviderReadiness {
+    let status: String
+    let detail: String?
+    let action: SettingsPane
+    var ready = false
+
+    static func resolve(
+        enabled: Bool, installed: Bool, observations: [ObservationMode],
+        diagnostic: ProviderScanDiagnostic?, scanFailed: Bool = false,
+        missingConfiguration: Bool = false, usesObserver: Bool = false
+    ) -> Self {
+        if !enabled {
+            return .init(
+                status: "Disabled in Agents", detail: "Enable this integration in Agents when you want to use it.",
+                action: .agents)
+        }
+        if missingConfiguration {
+            return .init(
+                status: "Data folder unavailable",
+                detail: "The selected data folder is missing. Choose its current location in Agents.", action: .agents)
+        }
+        if scanFailed || observations.contains(.stale) || observations.contains(.incompatible)
+            || ["failed", "incompatible", "partial"].contains(diagnostic?.outcome ?? "")
+        {
+            return .init(
+                status: "Data temporarily unavailable",
+                detail: "Review Diagnostics for the failed source, then refresh after correcting it.",
+                action: .diagnostics)
+        }
+        if observations.contains(.rich) {
+            return .init(status: "Rich data active", detail: nil, action: .diagnostics, ready: true)
+        }
+        if !observations.isEmpty {
+            return .init(
+                status: "Limited data",
+                detail: usesObserver
+                    ? "Only process data is available. Review the observer and its configuration in Integrations."
+                    : "Only process data is available. Review the data source in Diagnostics.",
+                action: usesObserver ? .integrations : .diagnostics)
+        }
+        if diagnostic?.outcome == "empty" {
+            return .init(
+                status: "No active tasks",
+                detail: "The source was read successfully. Start a task in the provider to see it here.",
+                action: .agents)
+        }
+        if !installed {
+            return .init(
+                status: "CLI or app not found",
+                detail: "Install the official provider, or choose an existing CLI in Agents.", action: .agents)
+        }
+        return .init(
+            status: "Installed · not verified",
+            detail:
+                "Start a task in the provider, then refresh status. Installation alone does not verify observation.",
+            action: .agents)
+    }
 }

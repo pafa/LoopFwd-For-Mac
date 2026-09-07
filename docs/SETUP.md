@@ -43,6 +43,11 @@ Open **Settings → Setup status** to inspect software, data sources and permiss
 Use **Agents → Choose CLI…** when Finder's environment cannot find your CLI.
 Enable only the providers you want to track.
 
+Setup status distinguishes disabled integrations, installed-but-unverified software,
+process-only observation, failed reads and successfully read empty sources. Each row
+links to the relevant Agents, Integrations or Diagnostics settings; it never installs
+an observer automatically.
+
 In **General → Interface language**, choose System, English, or Simplified Chinese.
 The default follows macOS; an explicit choice applies after restarting LoopFwd
 and does not change the system language.
@@ -50,6 +55,19 @@ and does not change the system language.
 Codex usage comes from local reports, not a live account balance query. Main
 Codex and Spark limits are kept separate; window labels reflect the reported
 duration. Missing or old main-limit reports are not shown as current allowance.
+Usage follows the same observed Codex data directory as task discovery, including
+custom CLI homes and the explicit Agents data-folder selection. If automatic
+discovery finds multiple account folders, select one rather than combining their
+limits. Expired reset windows disappear until Codex reports again; they do not turn
+into an assumed 100% balance. Recently modified rollouts and known active paths
+are considered across month/year boundaries, with bounded reading.
+
+If returning fails, LoopFwd distinguishes known terminal Automation denial, timeout,
+closed targets and helper failures, with a refresh or setup action. No failure
+falls back to typing into another window. Sound-import recovery failures display
+the retained backup location; preserve that copy before retrying. The General idle
+cleanup interval applies to Claude CLI, Codex CLI, OpenCode TUI/Desktop and Qwen
+records, not every integration; Idle tasks remain hidden from the main island.
 
 Controls for creating managed Codex tasks and OpenCode replies/approvals live in
 **Integrations → Labs** and are off by default. Existing managed tasks retain

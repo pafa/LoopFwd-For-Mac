@@ -73,3 +73,18 @@ its original files; normal builds do not require a network connection.
 A packaged-app smoke and exact candidate/CI results belong in the PR handoff.
 Do not infer those results from this release-note file. Stable 1.0 remains a
 separate readiness decision.
+
+## Unreleased — reliability polish
+
+- Keep Codex usage within the observed or explicitly selected account directory,
+  retain cross-calendar active rollouts, hide expired windows, and invalidate old
+  reads when the source changes. Unknown allowance is not a reset balance.
+- Show specific known return failures and an actionable recovery entry across
+  cards, keyboard navigation, the menu bar and notification clicks.
+- Make Setup status actionable without mistaking installation for successful
+  observation, and explain which readers use the idle-cleanup setting.
+- Report sound-import and rollback failures separately, retaining the recovery
+  copy without overwriting a concurrently replaced sound.
+- Add focused regressions and English/Simplified Chinese copy. Provider support
+  levels and island dimensions are unchanged. This candidate does not replace
+  the published 0.1.1 assets; a future distributed update needs a new version.

@@ -5,6 +5,18 @@ struct IslandNotice: Equatable {
     let title: String
     let message: String
     let createdAt: Date
+    var recovery: NoticeRecovery? = nil
+}
+
+enum NoticeRecovery: Equatable {
+    case refreshTasks, setup, agents
+    var label: String {
+        switch self {
+        case .refreshTasks: return "Refresh tasks"
+        case .setup: return "Setup status"
+        case .agents: return "Agents"
+        }
+    }
 }
 
 /// Bounded, in-memory operational evidence. It intentionally records decisions
@@ -31,7 +43,23 @@ final class OperationalDiagnostics: ObservableObject {
         publish { self.lastControlFailure = DiagnosticsSanitizer.sanitize(value) }
     }
 
-    func showNotice(sessionID: String?, title: String, message: String, duration: TimeInterval = 7) {
+    func showReturnFailure(_ result: ReturnExecutionResult, session: AgentSession) {
+        let recovery: NoticeRecovery
+        switch result.failure {
+        case .targetExpired: recovery = .refreshTasks
+        case .applicationUnavailable: recovery = .agents
+        default: recovery = .setup
+        }
+        showNotice(
+            sessionID: session.id, title: session.displayTitle,
+            message: L10n.string(result.reason ?? ReturnFailure.helperFailed.message),
+            duration: 12, recovery: recovery)
+    }
+
+    func showNotice(
+        sessionID: String?, title: String, message: String, duration: TimeInterval = 7,
+        recovery: NoticeRecovery? = nil
+    ) {
         publish {
             self.noticeRevision += 1
             let revision = self.noticeRevision
@@ -39,7 +67,7 @@ final class OperationalDiagnostics: ObservableObject {
                 sessionID: sessionID,
                 title: title,
                 message: message,
-                createdAt: Date()
+                createdAt: Date(), recovery: recovery
             )
             DispatchQueue.main.asyncAfter(deadline: .now() + duration) { [weak self] in
                 guard let self, revision == self.noticeRevision else { return }

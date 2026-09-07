@@ -190,3 +190,5 @@
 3|scripts/verify-release.mjs
 3|scripts/verify-release.test.mjs
 3|scripts/verify-public-tree
+1|Sources/LoopFwd/System/CodexUsageSource.swift
+1|Tests/LoopFwdTests/ReliabilityPolishTests.swift

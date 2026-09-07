@@ -76,12 +76,7 @@ struct LoopFwdApp: App {
                 ) {
                     TerminalBridge.jump(to: agent) { result in
                         if !result.opened {
-                            OperationalDiagnostics.shared.showNotice(
-                                sessionID: agent.id,
-                                title: agent.displayTitle,
-                                message: result.reason
-                                    ?? "The task target could not be reached."
-                            )
+                            OperationalDiagnostics.shared.showReturnFailure(result, session: agent)
                             NotificationCenter.default.post(name: .islandExpand, object: nil)
                         }
                     }

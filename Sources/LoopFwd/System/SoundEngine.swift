@@ -100,28 +100,38 @@ final class SoundEngine {
 
     /// Copy a user-picked audio file into the custom sounds folder.
     @discardableResult
-    static func importSound(from url: URL) -> Result<Void, Error> {
+    static func importSound(
+        from url: URL, directory: URL = customSoundsDirectory,
+        move: (URL, URL) throws -> Void = { try FileManager.default.moveItem(at: $0, to: $1) }
+    ) -> Result<Void, Error> {
         do {
             let manager = FileManager.default
-            let dir = customSoundsDirectory
+            let dir = directory
             try manager.createDirectory(at: dir, withIntermediateDirectories: true)
             let destination = dir.appendingPathComponent(url.lastPathComponent)
             let staging = dir.appendingPathComponent(".\(UUID().uuidString)-\(url.lastPathComponent)")
             let backup = dir.appendingPathComponent(".\(UUID().uuidString)-backup-\(url.lastPathComponent)")
+            defer { try? manager.removeItem(at: staging) }
             try manager.copyItem(at: url, to: staging)
             if manager.fileExists(atPath: destination.path) {
-                try manager.moveItem(at: destination, to: backup)
+                try move(destination, backup)
             }
             do {
-                try manager.moveItem(at: staging, to: destination)
+                try move(staging, destination)
             } catch {
-                if !manager.fileExists(atPath: destination.path),
-                    manager.fileExists(atPath: backup.path)
-                {
-                    try? manager.moveItem(at: backup, to: destination)
+                let importError = error
+                if manager.fileExists(atPath: backup.path) {
+                    do {
+                        // Never overwrite a file created by another operation.
+                        guard !manager.fileExists(atPath: destination.path) else {
+                            throw CocoaError(.fileWriteFileExists)
+                        }
+                        try move(backup, destination)
+                    } catch {
+                        throw SoundImportRecoveryError(importError: importError, recoveryError: error, backup: backup)
+                    }
                 }
-                try? manager.removeItem(at: staging)
-                throw error
+                throw importError
             }
             if manager.fileExists(atPath: backup.path) {
                 do {
@@ -147,5 +157,17 @@ final class SoundEngine {
         } catch {
             return .failure(error)
         }
+    }
+}
+
+struct SoundImportRecoveryError: LocalizedError {
+    let importError: Error
+    let recoveryError: Error
+    let backup: URL
+
+    var errorDescription: String? {
+        L10n.format(
+            "Sound import failed: %@. The previous sound could not be restored: %@. Recovery copy: %@",
+            importError.localizedDescription, recoveryError.localizedDescription, backup.path)
     }
 }

@@ -128,7 +128,7 @@ struct GeneralPane: View {
                 SRow(
                     title: "Idle session cleanup",
                     subtitle:
-                        "Trim idle provider records from Diagnostics after this long. Idle never fills the island."
+                        "Applies to Claude CLI, Codex CLI, OpenCode TUI/Desktop and Qwen idle records. Other readers manage their own lifetime. Idle never fills the island."
                 ) {
                     Picker("", selection: $hideIdleAfterMinutes) {
                         Text(L10n.string("Never")).tag(0)
