@@ -1,13 +1,17 @@
-# LoopFwd 0.1.1 — patch preview candidate
+# LoopFwd 0.1.1 — patch preview
 
 Apple Silicon · macOS 14+ deployment target · manual updates · ad-hoc signature.
 
-This is a source/review candidate, not a published replacement for 0.1.0.
-The existing v0.1.0 tag and download remain immutable. Publishing 0.1.1 requires
-approval of the reviewed commit and its matching package.
+These notes describe 0.1.1, build 3. Downloadable packages and their exact source
+identity are listed on the corresponding GitHub pre-release page. The existing
+v0.1.0 tag and download remain immutable; updates and rollback are manual.
 
 ## Fixes
 
+- Fix a packaged-app startup crash when localized resources fall back to the
+  build machine's directory. All runtime resources now resolve inside the app.
+  Verification moves the built package, hides build resources and checks both
+  languages before any provider service starts; missing resources fail visibly.
 - Match Claude hooks by exact owned command. Preserve other commands in the
   same matcher group and unrelated commands whose paths contain “loopfwd”.
 - Reject unsupported or unreadable hook settings. Keep separate private backups

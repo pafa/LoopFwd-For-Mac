@@ -4,23 +4,52 @@ import SwiftUI
 /// Loads resources without relying on SwiftPM's generated `Bundle.module`
 /// accessor, which can retain an absolute path to the build machine.
 enum LoopFwdResources {
+    private final class ResourceAnchor: NSObject {}
+
     static let bundle: Bundle? = {
-        let name = "LoopFwd_LoopFwd.bundle"
-        let candidates: [URL?] = [
+        var candidates: [URL?] = [
             Bundle.main.resourceURL,
             Bundle.main.executableURL?.deletingLastPathComponent(),
             Bundle.main.bundleURL,
         ]
+        // XCTest keeps the resource bundle beside its test bundle. Packaged
+        // apps must never search outside their own application directory.
+        if Bundle.main.bundleURL.pathExtension != "app" {
+            candidates.append(Bundle(for: ResourceAnchor.self).bundleURL.deletingLastPathComponent())
+        }
+        return findBundle(in: candidates.compactMap { $0 })
+    }()
+
+    static func findBundle(in candidates: [URL]) -> Bundle? {
         for candidate in candidates {
-            if let url = candidate?.appendingPathComponent(name),
-                FileManager.default.fileExists(atPath: url.path),
+            let url = candidate.appendingPathComponent("LoopFwd_LoopFwd.bundle")
+            if FileManager.default.fileExists(atPath: url.path),
                 let bundle = Bundle(url: url)
             {
                 return bundle
             }
         }
         return nil
-    }()
+    }
+
+    /// Runs before SwiftUI, monitors or provider services are initialized.
+    /// A release package must be self-contained even on a different machine.
+    static func verifyPackagedResources() -> Bool {
+        guard Bundle.main.bundleURL.pathExtension == "app",
+            let resources = Bundle.main.resourceURL, let bundle,
+            bundle.bundleURL.standardizedFileURL.path
+                == resources.appendingPathComponent("LoopFwd_LoopFwd.bundle").standardizedFileURL.path,
+            bundle.path(forResource: "Localizable", ofType: "strings", inDirectory: "zh-Hans.lproj") != nil,
+            bundle.path(forResource: "Localizable", ofType: "strings", inDirectory: "en.lproj") != nil,
+            L10n.string("Unknown", language: "zh-Hans") == "未知",
+            L10n.string("Unknown", language: "en") == "Unknown",
+            bundle.url(forResource: "loopfwd-symbol-on-dark", withExtension: "svg", subdirectory: "brand") != nil
+        else { return false }
+        return SupportRegistry.shippedKinds.allSatisfy { kind in
+            guard let name = kind.iconFile else { return false }
+            return bundle.url(forResource: name, withExtension: "png", subdirectory: "agents") != nil
+        }
+    }
 
     static func image(named name: String, extension fileExtension: String, subdirectory: String) -> NSImage? {
         guard

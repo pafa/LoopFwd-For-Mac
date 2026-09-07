@@ -2,6 +2,17 @@ import SwiftUI
 import UserNotifications
 
 @main
+enum LoopFwdEntryPoint {
+    static func main() {
+        if CommandLine.arguments.contains("--verify-packaged-resources") {
+            let valid = LoopFwdResources.verifyPackagedResources()
+            print(valid ? "Packaged resources verified" : "Packaged resources missing or invalid")
+            exit(valid ? 0 : 1)
+        }
+        LoopFwdApp.main()
+    }
+}
+
 struct LoopFwdApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @ObservedObject private var monitor = AgentMonitor.shared

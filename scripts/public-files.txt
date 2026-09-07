@@ -123,6 +123,7 @@
 1|assets/AGENT_ICONS.md
 2|assets/agent-icon-provenance.json
 3|scripts/verify-agent-icons.mjs
+3|scripts/verify-packaged-resources.mjs
 1|assets/AppIcon.icns
 1|assets/Assets.xcassets/AppIcon.appiconset/Contents.json
 1|assets/Assets.xcassets/AppIcon.appiconset/icon_128x128.png
