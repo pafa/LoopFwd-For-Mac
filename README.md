@@ -5,12 +5,12 @@
 <p align="center"><strong>Keep your agents moving. Stop checking every window.</strong></p>
 <p align="center">A native Mac island for following your AI tasks, catching requests, and getting back to work.</p>
 <p align="center">
-  <a href="https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.1"><strong>Download the preview</strong></a> ·
+  <a href="https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.2"><strong>Download the preview</strong></a> ·
   <a href="#see-it-in-26-seconds">Watch the film</a> ·
   <a href="#your-tools-together">Integrations</a> ·
   <a href="README.zh-CN.md">简体中文</a>
 </p>
-<p align="center">Apple Silicon · macOS 14+ deployment target · 0.1.1 Preview · MIT</p>
+<p align="center">Apple Silicon · macOS 14+ deployment target · 0.1.2 Preview · MIT</p>
 
 <p align="center">
   <img src="docs/assets/product-overview-en.svg" width="960" alt="Illustrated preview with sample tasks: Codex checks a mobile checkout while OpenCode asks which tests to run. Follow progress, catch a request, then return to work.">
@@ -150,7 +150,7 @@ Optional Claude community estimates stay in Labs and are labeled as estimates, n
 | ☑️ **Approve or decline** | Review supported live OpenCode or Claude requests. The actual request and control target must still be valid. |
 
 **Not universal controls for all eight agents.** Codex CLI/Desktop observation doesn't provide live approval control.
-Terminal.app is observation/return-only in 0.1.1; enabling Labs does not restore global keyboard injection.
+Terminal.app has been observation/return-only since 0.1.1; enabling Labs does not restore global keyboard injection.
 [Read the setup and control conditions](docs/SETUP.md#setup-and-optional-observers).
 
 ## Local observation. Your connections. Your choice.
@@ -161,7 +161,7 @@ Hooks, observer setup and system permissions need your explicit action, with bac
 
 ## Get started
 
-1. **[Download the 0.1.1 preview](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.1)** and its matching checksum.
+1. **[Download the 0.1.2 preview](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.2)** and its matching checksum.
 2. **Quit the old copy and drag LoopFwd into Applications.**
 3. **Open Settings → Setup status**, enable the integrations you use, and continue working in your own tools.
 
@@ -224,7 +224,7 @@ Open a focused PR with actual checks and limitations. Do not merge or publish it
 
 ## Compatibility and preview notes
 
-The current published download is **0.1.1**, an early preview, not a stable 1.0.
+The current published download is **0.1.2**, an early preview, not a stable 1.0.
 The previous [0.1.0 release](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.0) remains archived.
 It has the same localized-resource startup risk fixed in 0.1.1; do not use it as a rollback for that fault.
 
@@ -245,7 +245,7 @@ account or environment. Installed software and parser tests alone do not earn th
 | Grok CLI | Optional 1.0.13 / event-schema 1.0 reader | Authenticated tasks and actual return not yet verified |
 
 Cursor Agent, DeepSeek Harness, Mistral Vibe, WorkBuddy and Doubao Work are
-**not supported in 0.1.1**. Their state interfaces or setup/version costs are
+**not supported in 0.1.2**. Their state interfaces or setup/version costs are
 not suitable for this first release. Retained source is not an active integration.
 
 Capabilities vary by data source. Codex CLI/Desktop transcripts do not provide

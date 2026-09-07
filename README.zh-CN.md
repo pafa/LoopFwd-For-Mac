@@ -5,12 +5,12 @@
 <p align="center"><strong>让 AI 继续推进，让你少些反复切窗。</strong></p>
 <p align="center">Mac 顶部的任务监控小岛：看清进展，接住请求，回到工作。</p>
 <p align="center">
-  <a href="https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.1"><strong>下载预览版</strong></a> ·
+  <a href="https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.2"><strong>下载预览版</strong></a> ·
   <a href="#26-秒感受它">观看宣传片</a> ·
   <a href="#熟悉的工具先聚在一起">接入范围</a> ·
   <a href="README.md">English</a>
 </p>
-<p align="center">Apple Silicon · macOS 14+ 部署目标 · 0.1.1 预览版 · MIT 开源</p>
+<p align="center">Apple Silicon · macOS 14+ 部署目标 · 0.1.2 预览版 · MIT 开源</p>
 
 <p align="center">
   <img src="docs/assets/product-overview-zh.svg" width="960" alt="产品示意，使用示例任务：Codex 正在检查移动端结账流程，OpenCode 正在询问测试范围。看清进展、接住请求、回到工作。">
@@ -150,7 +150,7 @@ Claude 社区预算估算保留在 Labs，明确作为估算，不与官方账�
 | ☑️ **同意或拒绝** | 处理支持的 OpenCode／Claude 实时请求；请求与控制目标仍须有效。 |
 
 **不是八款 Agent 全部通用的控制能力。** Codex CLI/Desktop 观察接入不提供实时审批控制。
-0.1.1 的 Terminal.app 只监控和返回；开启 Labs 也不会恢复全局按键注入。
+从 0.1.1 起，Terminal.app 只监控和返回；开启 Labs 也不会恢复全局按键注入。
 [查看设置与控制条件](docs/SETUP.zh-CN.md#设置与可选观察器)。
 
 ## 在本机观察，按你的选择连接
@@ -161,7 +161,7 @@ Hook、观察器和系统权限需要明确操作，配置修改保留备份，�
 
 ## 三步开始使用
 
-1. **[下载 0.1.1 预览版](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.1)**，同时取得校验文件。
+1. **[下载 0.1.2 预览版](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.2)**，同时取得校验文件。
 2. **退出旧版，把 LoopFwd 拖入 Applications。**
 3. **打开“设置 → 设置状态”**，启用需要的接入，继续在原来的工具里工作。
 
@@ -224,9 +224,9 @@ Hook、观察器和系统权限需要明确操作，配置修改保留备份，�
 
 ## 兼容性与预览版说明
 
-当前公开下载是 **0.1.1**，属于早期预览版，不是稳定 1.0。
+当前公开下载是 **0.1.2**，属于早期预览版，不是稳定 1.0。
 原 [0.1.0 发布页](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.0) 和文件保留作历史版本。
-它也存在本次修复的语言资源启动风险，不建议用于回退这一故障。
+它也存在 0.1.1 修复的语言资源启动风险，不建议用于回退这一故障。
 
 macOS 14 是编译部署目标。目前 CI 在 macOS 26 运行，本地开发 Mac 为 26.6.2；
 干净 macOS 14 设备上的实际运行尚未验证。
@@ -244,7 +244,7 @@ macOS 14 是编译部署目标。目前 CI 在 macOS 26 运行，本地开发 Ma
 | Kimi Code | 可选的 0.41.0 主 wire 与生命周期观察器 | 不承诺精确返回；真实模型任务尚未验证 |
 | Grok CLI | 可选的 1.0.13 / 事件 schema 1.0 读取 | 真实模型任务和实际返回尚未验证 |
 
-**0.1.1 暂不支持** Cursor Agent、DeepSeek Harness、Mistral Vibe、WorkBuddy 和豆包工作。
+**0.1.2 暂不支持** Cursor Agent、DeepSeek Harness、Mistral Vibe、WorkBuddy 和豆包工作。
 这些产品目前的状态接口或安装、版本维护成本不适合首发。保留代码不代表启用集成。
 
 只有明确的成功边界才能显示完成。历史回答、非 busy、进程存在都不代表完成。

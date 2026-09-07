@@ -4,7 +4,7 @@
 
 ## Installation and recovery
 
-The [0.1.1 pre-release](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.1) contains the ZIP, checksum and build manifest:
+The [0.1.2 pre-release](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.2) contains the ZIP, checksum and build manifest:
 
 1. Download its ZIP and matching SHA-256 file.
 2. In their download directory, run `shasum -a 256 -c <archive-name>.sha256`.
@@ -20,6 +20,10 @@ See [Apple's Gatekeeper explanation](https://developer.apple.com/news/?id=saqach
 
 Updates are manual. Keep previously downloaded ZIPs for manual recovery. Version 0.1.0 has the same localized-resource startup risk fixed in 0.1.1; do not use it to recover from that fault.
 Quitting may disconnect LoopFwd-managed tasks; external agent processes are not stopped.
+
+To receive the usage-source, return-error and setup-status fixes, replace 0.1.1
+with 0.1.2 using the steps above. Existing settings are retained; there is no
+automatic updater. The original 0.1.1 download remains unchanged.
 
 ## Build from source
 
@@ -72,7 +76,7 @@ records, not every integration; Idle tasks remain hidden from the main island.
 Controls for creating managed Codex tasks and OpenCode replies/approvals live in
 **Integrations → Labs** and are off by default. Existing managed tasks retain
 return and stop controls when Labs is disabled. Claude terminal input has its
-own separate Labs switch. **Terminal.app is return-only** in 0.1.1:
+own separate Labs switch. **Terminal.app has been return-only since 0.1.1**:
 global keyboard injection and its Accessibility setup prompt have been removed.
 Other terminal controls require a session-addressed API. Hook/plugin
 installation always requires a click.
