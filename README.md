@@ -16,7 +16,7 @@
   <img src="docs/assets/product-overview-en.svg" width="960" alt="Illustrated preview with sample tasks: Codex checks a mobile checkout while OpenCode asks which tests to run. Follow progress, catch a request, then return to work.">
 </p>
 
-*Illustrated preview, not an app screenshot. Sample tasks; capabilities depend on the integration.*
+*Drawn from the 0.1.1 expanded layout (no-notch display), not an app screenshot. Tasks and quota are sample data. The “+” new-task button requires Labs; capabilities depend on the integration.*
 
 One agent is fixing a checkout. Another is waiting for a test choice. **You shouldn't have to open every conversation to find out.**
 LoopFwd for Mac brings local tasks into one small island: what is running, what actually needs you, and where to return.
