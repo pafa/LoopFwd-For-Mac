@@ -66,6 +66,14 @@ final class UsageTracker: ObservableObject {
         var reportedAt: Date?
         var hasData: Bool { primary != nil || secondary != nil }
         var isRecent: Bool { isRecent(at: Date()) }
+        /// An expired allowance is unknown until the provider reports again,
+        /// not a newly reset 100% balance.
+        func removingExpiredWindows(at now: Date) -> CodexSnapshot {
+            var result = self
+            if let reset = primary?.resetsAt, reset <= now { result.primary = nil }
+            if let reset = secondary?.resetsAt, reset <= now { result.secondary = nil }
+            return result
+        }
         func isRecent(at now: Date) -> Bool {
             guard let reportedAt else { return false }
             let age = now.timeIntervalSince(reportedAt)
@@ -89,6 +97,11 @@ final class UsageTracker: ObservableObject {
     private var files: [String: FileState] = [:]
     private var timer: Timer?
     private let queue = DispatchQueue(label: "app.loopfwd.usage", qos: .utility)
+    // Main-thread inputs from the same discovery pass that populates cards.
+    private var codexSource = CodexUsageSource()
+    private var codexReadInFlight = false
+    private var codexReadPending = false
+    private var codexSourceRevision = 0
     private static let home = FileManager.default.homeDirectoryForCurrentUser.path
 
     private static let isoFractional: ISO8601DateFormatter = {
@@ -99,15 +112,32 @@ final class UsageTracker: ObservableObject {
     private static let iso = ISO8601DateFormatter()
 
     func start() {
+        timer?.invalidate()
         queue.async { self.recompute() }
         timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
+            self?.refreshCodex()
             self?.queue.async { self?.recompute() }
         }
     }
 
+    func updateCodexSource(_ source: CodexUsageSource) {
+        precondition(Thread.isMainThread)
+        let changed = source != codexSource
+        if changed { codexSourceRevision += 1 }
+        if source.root != codexSource.root { codex = CodexSnapshot() }
+        codexSource = source
+        if changed { refreshCodex() }
+    }
+
+    func invalidateCodexSource() {
+        precondition(Thread.isMainThread)
+        codexSourceRevision += 1
+        codexSource = CodexUsageSource()
+        if codex != CodexSnapshot() { codex = CodexSnapshot() }
+    }
+
     private func recompute() {
         guard UserDefaults.standard.bool(forKey: Pref.usageEnabled) else { return }
-        recomputeCodex()
         guard UserDefaults.standard.bool(forKey: Pref.communityUsageEnabled) else {
             files.removeAll()
             DispatchQueue.main.async { self.snapshot = Snapshot() }
@@ -160,17 +190,43 @@ final class UsageTracker: ObservableObject {
 
     // MARK: - Codex (exact server rate limits from ~/.codex rollouts)
 
-    private func recomputeCodex() {
+    func refreshCodex() {
+        precondition(Thread.isMainThread)
+        guard UserDefaults.standard.bool(forKey: Pref.usageEnabled) else {
+            if codex.hasData { codex = CodexSnapshot() }
+            return
+        }
+        let unexpired = codex.removingExpiredWindows(at: Date())
+        if codex != unexpired { codex = unexpired }
+        guard !codexReadInFlight else { codexReadPending = true; return }
+        let source = codexSource
+        let revision = codexSourceRevision
+        guard source.root != nil else {
+            if codex.hasData { codex = CodexSnapshot() }
+            return
+        }
+        codexReadInFlight = true
         // A Spark-only rollout must not hide a recently reported main bucket
         // from another active session. Keep body reads bounded to 8 × 128 KB.
-        let candidates = latestCodexRollouts().compactMap { Self.codexSnapshot(path: $0.path) }
-        guard
-            let next = candidates.filter(\.hasData).max(by: {
-                ($0.reportedAt ?? .distantPast) < ($1.reportedAt ?? .distantPast)
-            })
-        else { return }
-        DispatchQueue.main.async {
-            if self.codex != next { self.codex = next }
+        queue.async {
+            let candidates = source.rollouts().compactMap { Self.codexSnapshot(path: $0.path) }
+            let next =
+                candidates.max(by: {
+                    ($0.reportedAt ?? .distantPast) < ($1.reportedAt ?? .distantPast)
+                }) ?? CodexSnapshot()
+            DispatchQueue.main.async {
+                self.codexReadInFlight = false
+                if self.codexSourceRevision == revision, self.codexSource == source,
+                    UserDefaults.standard.bool(forKey: Pref.usageEnabled)
+                {
+                    let current = next.removingExpiredWindows(at: Date())
+                    if self.codex != current { self.codex = current }
+                }
+                if self.codexReadPending {
+                    self.codexReadPending = false
+                    self.refreshCodex()
+                }
+            }
         }
     }
 
@@ -235,34 +291,6 @@ final class UsageTracker: ObservableObject {
             planType: (rate["plan_type"] as? String).map { String($0.prefix(80)) },
             reportedAt: reportedAt
         )
-    }
-
-    /// Up to eight recently modified rollouts under ~/.codex/sessions. We scan the
-    /// latest month's day folders (not just today's) by mtime, so an empty
-    /// current-day folder or a session that spans midnight still resolves.
-    private func latestCodexRollouts() -> [URL] {
-        let fm = FileManager.default
-        func children(_ dir: String) -> [String] {
-            ((try? fm.contentsOfDirectory(atPath: dir)) ?? [])
-                .filter { !$0.hasPrefix(".") }.sorted()
-        }
-        let base = (ProcessInfo.processInfo.environment["CODEX_HOME"] ?? Self.home + "/.codex") + "/sessions"
-        guard let year = children(base).last.map({ base + "/" + $0 }),
-            let month = children(year).last.map({ year + "/" + $0 })
-        else { return [] }
-
-        var newest: [(path: String, mtime: Date)] = []
-        for day in children(month) {
-            let dayDir = month + "/" + day
-            for file in children(dayDir) where file.hasPrefix("rollout-") && file.hasSuffix(".jsonl") {
-                let path = dayDir + "/" + file
-                guard let m = (try? fm.attributesOfItem(atPath: path))?[.modificationDate] as? Date else { continue }
-                newest.append((path, m))
-                newest.sort { $0.mtime == $1.mtime ? $0.path < $1.path : $0.mtime > $1.mtime }
-                if newest.count > 8 { newest.removeLast() }
-            }
-        }
-        return newest.map { URL(fileURLWithPath: $0.path) }
     }
 
     /// Parse appended bytes into hourly weighted-token buckets.

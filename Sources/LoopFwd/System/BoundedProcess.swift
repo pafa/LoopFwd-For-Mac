@@ -15,7 +15,7 @@ enum BoundedProcess {
     static func run(
         _ executable: String, _ arguments: [String],
         timeout: TimeInterval = 2, maximumBytes: Int = 1024 * 1024,
-        removingEnvironmentKeys: [String] = []
+        removingEnvironmentKeys: [String] = [], includingStandardError: Bool = false
     ) -> Result {
         let process = Process()
         let pipe = Pipe()
@@ -27,7 +27,7 @@ enum BoundedProcess {
         environment["PATH"] = bin + ":" + (environment["PATH"] ?? "/usr/bin:/bin:/usr/sbin:/sbin")
         process.environment = environment
         process.standardOutput = pipe
-        process.standardError = FileHandle.nullDevice
+        process.standardError = includingStandardError ? pipe : FileHandle.nullDevice
         process.standardInput = FileHandle.nullDevice
         let fd = pipe.fileHandleForReading.fileDescriptor
         _ = fcntl(fd, F_SETFL, fcntl(fd, F_GETFL) | O_NONBLOCK)

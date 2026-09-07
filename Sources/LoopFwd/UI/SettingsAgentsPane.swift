@@ -29,11 +29,13 @@ struct AgentsPane: View {
                         panel.allowsMultipleSelection = false
                         guard panel.runModal() == .OK, let url = panel.url else { return }
                         codexDataDirectory = url.path
+                        UsageTracker.shared.invalidateCodexSource()
                         monitor.scanNow()
                     }
                     if !codexDataDirectory.isEmpty {
                         Button(L10n.string("Use automatic")) {
                             codexDataDirectory = ""
+                            UsageTracker.shared.invalidateCodexSource()
                             monitor.scanNow()
                         }
                     }
@@ -96,6 +98,7 @@ struct AgentsPane: View {
                 var set = disabledSet
                 if enabled { set.remove(kind.rawValue) } else { set.insert(kind.rawValue) }
                 disabledCSV = set.sorted().joined(separator: ",")
+                if kind == .codex { UsageTracker.shared.invalidateCodexSource() }
                 AgentMonitor.shared.scanNow()
             }
         )

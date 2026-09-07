@@ -86,42 +86,42 @@ enum TerminalBridge {
 
     @discardableResult
     static func jump(to agent: AgentSession) -> Bool {
-        let success = performJump(to: agent)
-        if !success {
-            let reason = agent.returnTarget.unavailableReason ?? "The selected task target could not be reached"
+        executeJump(to: agent).opened
+    }
+
+    private static func executeJump(to agent: AgentSession) -> ReturnExecutionResult {
+        let result: ReturnExecutionResult
+        do {
+            let resolution = ReturnResolver.resolve(agent)
+            if let reason = resolution.reason { throw ReturnFailure.targetUnavailable(reason) }
+            guard try performJump(to: agent) else { throw ReturnFailure.helperFailed }
+            let exact: Bool
+            if case .exact = resolution.capability { exact = true } else { exact = false }
+            result = .init(opened: true, exact: exact, reason: nil)
+        } catch {
+            result = .failed(error as? ReturnFailure ?? .helperFailed)
             OperationalDiagnostics.shared.recordReturnFailure(
-                "\(agent.kind.rawValue)/\(agent.surfaceID.rawValue): \(reason)"
+                "\(agent.kind.rawValue)/\(agent.surfaceID.rawValue): \(result.reason ?? "Return failed")"
             )
         }
-        return success
+        return result
     }
 
     /// User-initiated execution never waits for terminal helpers on the UI thread.
     static func jump(to agent: AgentSession, completion: @escaping (ReturnExecutionResult) -> Void) {
-        let resolution = ReturnResolver.resolve(agent)
-        guard resolution.reason == nil else {
-            completion(.init(opened: false, exact: false, reason: resolution.reason))
-            return
-        }
         DispatchQueue.global(qos: .userInitiated).async {
-            let success = jump(to: agent)
+            let result = executeJump(to: agent)
             DispatchQueue.main.async {
-                let exact: Bool
-                if case .exact = resolution.capability { exact = true } else { exact = false }
-                if success && exact {
+                if result.opened && result.exact {
                     AgentNotificationRouter.shared.markHandled(sessionID: agent.id)
                     OutcomePresentation.shared.dismiss(agent)
                 }
-                completion(
-                    .init(
-                        opened: success, exact: success && exact,
-                        reason: success ? nil : "The target expired, permission was denied, or the return timed out"))
+                completion(result)
             }
         }
     }
 
-    private static func performJump(to agent: AgentSession) -> Bool {
-        guard ReturnResolver.resolve(agent).reason == nil else { return false }
+    private static func performJump(to agent: AgentSession) throws -> Bool {
         if case .web(let url) = agent.returnTarget {
             guard DeepSeekHarnessSessions.safeLoopbackURL(url.absoluteString) != nil,
                 let pid = agent.processID,
@@ -131,21 +131,24 @@ enum TerminalBridge {
                     == expectedStart,
                 AgentScanner.detect(args: run("/bin/ps", ["-p", String(pid), "-o", "args="])) == .deepseek,
                 OpenCodeSessions.listeningPorts(pid: pid).contains(port)
-            else { return false }
-            return NSWorkspace.shared.open(url)
+            else { throw ReturnFailure.targetExpired }
+            guard NSWorkspace.shared.open(url) else { throw ReturnFailure.applicationUnavailable }
+            return true
         }
         if case .application(let bundleIdentifier, _) = agent.returnTarget {
             guard
                 let app = NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleIdentifier)
-            else { return false }
-            return NSWorkspace.shared.open(app)
+            else { throw ReturnFailure.applicationUnavailable }
+            guard NSWorkspace.shared.open(app) else { throw ReturnFailure.applicationUnavailable }
+            return true
         }
         if case .applicationLink(let bundleIdentifier, _, let url) = agent.returnTarget {
             guard
                 let applicationURL = NSWorkspace.shared.urlForApplication(toOpen: url),
                 Bundle(url: applicationURL)?.bundleIdentifier == bundleIdentifier
-            else { return false }
-            return NSWorkspace.shared.open(url)
+            else { throw ReturnFailure.applicationUnavailable }
+            guard NSWorkspace.shared.open(url) else { throw ReturnFailure.applicationUnavailable }
+            return true
         }
         if case .unavailable = agent.returnTarget { return false }
         let dev = agent.tty.map { "/dev/\($0)" }
@@ -167,10 +170,10 @@ enum TerminalBridge {
             return app.activate(options: [.activateAllWindows])
         case "tmux":
             guard let dev else { return false }
-            return tmuxSelectPane(tty: dev)
+            return try tmuxSelectPane(tty: dev)
         case "iTerm":
-            guard let dev else { return false }
-            return osascript(
+            guard let dev else { throw ReturnFailure.targetExpired }
+            return try returnAppleScript(
                 """
                 on run argv
                     set targetTTY to item 1 of argv
@@ -194,8 +197,8 @@ enum TerminalBridge {
                 """,
                 arguments: [dev])
         case "Terminal":
-            guard let dev else { return false }
-            return osascript(
+            guard let dev else { throw ReturnFailure.targetExpired }
+            return try returnAppleScript(
                 """
                 on run argv
                     set targetTTY to item 1 of argv
@@ -217,22 +220,33 @@ enum TerminalBridge {
                 arguments: [dev])
         case "WezTerm":
             guard let dev, let wez = weztermPath, let pane = weztermPaneId(dev: dev) else { return false }
-            let selected = succeeds(wez, ["cli", "activate-pane", "--pane-id", pane])
-            let activated = osascript("tell application \"WezTerm\" to activate")
-            return selected && activated
+            try returnProcess(wez, ["cli", "activate-pane", "--pane-id", pane])
+            return try returnAppleScript("tell application \"WezTerm\" to activate")
         case "kitty":
             guard let kitten = kittenPath, let pid = agent.processID,
                 let win = kittyWindowId(pid: pid)
             else { return false }
-            let selected = succeeds(kitten, ["@", "focus-window", "--match", "id:\(win)"])
-            let activated = osascript("tell application \"kitty\" to activate")
-            return selected && activated
+            try returnProcess(kitten, ["@", "focus-window", "--match", "id:\(win)"])
+            return try returnAppleScript("tell application \"kitty\" to activate")
         case .some(let app):
             guard ProcessNaming.isSupportedTerminalHost(app) else { return false }
-            return osascript("tell application \"\(app)\" to activate")
+            return try returnAppleScript("tell application \"\(app)\" to activate")
         case nil:
             return false
         }
+    }
+
+    private static func returnAppleScript(_ source: String, arguments: [String] = []) throws -> Bool {
+        try returnProcess(
+            "/usr/bin/osascript", appleScriptProcessArguments(source: source, arguments: arguments), appleScript: true)
+        return true
+    }
+
+    private static func returnProcess(_ path: String, _ arguments: [String], appleScript: Bool = false) throws {
+        let result = BoundedProcess.run(
+            path, arguments, timeout: 3, maximumBytes: 16_384,
+            includingStandardError: appleScript)
+        if let failure = ReturnFailure.fromProcess(result, appleScript: appleScript) { throw failure }
     }
 
     /// Send a single raw key (no Enter) to the agent's session — used to
@@ -431,11 +445,12 @@ enum TerminalBridge {
         return succeeds(tmux, ["send-keys", "-t", pane, "Enter"])
     }
 
-    private static func tmuxSelectPane(tty: String) -> Bool {
+    private static func tmuxSelectPane(tty: String) throws -> Bool {
         guard let tmux = tmuxPath, let pane = tmuxPane(tty: tty) else { return false }
-        guard succeeds(tmux, ["switch-client", "-t", pane]) else { return false }
-        guard succeeds(tmux, ["select-window", "-t", pane]) else { return false }
-        return succeeds(tmux, ["select-pane", "-t", pane])
+        try returnProcess(tmux, ["switch-client", "-t", pane])
+        try returnProcess(tmux, ["select-window", "-t", pane])
+        try returnProcess(tmux, ["select-pane", "-t", pane])
+        return true
     }
 
     // MARK: - WezTerm (wezterm cli — precise, matched by tty)

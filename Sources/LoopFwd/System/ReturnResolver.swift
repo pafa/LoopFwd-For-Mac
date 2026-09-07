@@ -74,4 +74,46 @@ struct ReturnExecutionResult {
     let opened: Bool
     let exact: Bool
     let reason: String?
+    var failure: ReturnFailure? = nil
+
+    static func failed(_ failure: ReturnFailure) -> Self {
+        .init(opened: false, exact: false, reason: failure.message, failure: failure)
+    }
+}
+
+enum ReturnFailure: Error, Equatable {
+    case targetUnavailable(String)
+    case targetExpired
+    case permissionDenied
+    case timedOut
+    case applicationUnavailable
+    case helperFailed
+
+    var message: String {
+        switch self {
+        case .targetUnavailable(let reason): return reason
+        case .targetExpired: return "The task target has closed or changed. Refresh tasks and try again."
+        case .permissionDenied:
+            return
+                "Allow LoopFwd to control this terminal in System Settings → Privacy & Security → Automation, then try again."
+        case .timedOut: return "The return helper timed out. Check that the target app is responding, then try again."
+        case .applicationUnavailable:
+            return "The target application could not be opened. Review its location in Agents settings."
+        case .helperFailed: return "The return helper failed. Open the task manually and review Setup status."
+        }
+    }
+
+    static func fromProcess(_ result: BoundedProcess.Result, appleScript: Bool = false) -> Self? {
+        if result.timedOut { return .timedOut }
+        guard !result.succeeded else { return nil }
+        // Only classify known osascript error codes. Never show raw stderr:
+        // it can contain local paths or script arguments.
+        if appleScript && !result.exceededOutputLimit {
+            if result.output.contains("(-1743)") { return .permissionDenied }
+            if result.output.contains("(-1712)") { return .timedOut }
+            if result.output.contains("(1001)") { return .targetExpired }
+            if result.output.contains("(-600)") { return .applicationUnavailable }
+        }
+        return .helperFailed
+    }
 }

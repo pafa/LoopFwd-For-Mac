@@ -9,6 +9,8 @@ struct AgentScanResult {
     var readerResults: [IntegrationSurfaceID: ProviderReadResult] = [:]
     var surfaceDurations: [IntegrationSurfaceID: TimeInterval] = [:]
     var processScanSucceeded = true
+    var codexUsageSource = CodexUsageSource()
+    var codexUsageConfiguration: String?
 }
 
 /// Pure scanning and provider-projection assembly kept separate from the
@@ -69,9 +71,10 @@ enum AgentScanner {
             runningApplications
             .filter { $0.bundleIdentifier == "com.openai.codex" }
             .map { processEnvironmentValues(pid: $0.processIdentifier, keys: ["CODEX_HOME"]) }
+        let selectedCodexRoot = UserDefaults.standard.string(forKey: Pref.codexDesktopDataDirectory)
         let codexDesktopRoot = Result {
             try ProviderDataLocations.codexDesktopRoot(
-                selected: UserDefaults.standard.string(forKey: Pref.codexDesktopDataDirectory),
+                selected: selectedCodexRoot,
                 processEnvironments: codexDesktopEnvironments, defaultRoot: NSHomeDirectory() + "/.codex")
         }
         let openCodeDesktopRunning = runningBundleIDs.contains("ai.opencode.desktop")
@@ -94,6 +97,15 @@ enum AgentScanner {
             }
         }
         classificationCache.retain(livePIDs: Set(procs.keys))
+        // Account identity must survive idle-record trimming and sessions that
+        // have not opened a rollout yet. Read the observed CLI, not our env.
+        let codexUsageRoots: [String?] = candidates.filter { $0.kind == .codex }.map { row in
+            try? ProviderDataLocations.codexDesktopRoot(
+                selected: nil,
+                processEnvironments: [processEnvironmentValues(pid: row.pid, keys: ["CODEX_HOME"])],
+                defaultRoot: NSHomeDirectory() + "/.codex")
+        }
+        var codexUsagePaths: [String] = []
 
         // Identify official bootstrap/relaunch processes before filtering helpers.
         let agentKindByPid = Dictionary(uniqueKeysWithValues: candidates.map { ($0.pid, $0.kind) })
@@ -249,6 +261,7 @@ enum AgentScanner {
                     pid: row.pid, cwd: cwds[row.pid],
                     codexHome: cachedProcessEnvironmentValue(pid: row.pid, key: "CODEX_HOME"))
                 : nil
+            if let path = codexDiscovery?.path { codexUsagePaths.append(path) }
             if row.kind == .claude { session.surfaceID = .claudeCLI }
             if row.kind == .codex { session.surfaceID = .codexCLI }
             defer {
@@ -758,7 +771,15 @@ enum AgentScanner {
             providerDurations: providerDurations,
             providerCacheHits: providerCacheHits,
             readerResults: readerResults,
-            surfaceDurations: surfaceDurations
+            surfaceDurations: surfaceDurations,
+            codexUsageSource: disabled.contains(.codex)
+                ? CodexUsageSource()
+                : .resolve(
+                    selected: selectedCodexRoot,
+                    desktopRoot: try? codexDesktopRoot.get(), desktopRunning: codexDesktopRunning,
+                    rolloutPaths: codexUsagePaths + sessions.filter { $0.kind == .codex }.compactMap(\.transcriptPath),
+                    defaultRoot: NSHomeDirectory() + "/.codex", cliRoots: codexUsageRoots),
+            codexUsageConfiguration: selectedCodexRoot
         )
     }
 

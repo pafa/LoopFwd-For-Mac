@@ -93,9 +93,20 @@ struct UsagePane: View {
                             SDiv(); codexRow(secondary)
                         }
                     }
+                } else {
+                    SSection(title: "Codex") {
+                        SRow(
+                            title: "No current usage report",
+                            subtitle:
+                                "Expired windows are hidden. Usage follows the observed Codex data folder; select one in Agents if multiple accounts are running."
+                        ) {
+                            Button(L10n.string("Agents")) { SettingsWindowController.shared.show(pane: .agents) }
+                        }
+                    }
                 }
             }
         }
+        .onChange(of: enabled) { _, _ in tracker.refreshCodex() }
     }
 
     private static func planName(_ plan: String) -> String {

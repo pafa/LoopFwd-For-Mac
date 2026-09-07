@@ -417,13 +417,17 @@ final class AgentNotificationDelegate: NSObject, UNUserNotificationCenterDelegat
                 OperationalDiagnostics.shared.showNotice(
                     sessionID: sessionID,
                     title: "\(provider) · \(title)",
-                    message: L10n.string("This task ended or its exact return target is no longer available.")
+                    message: L10n.string("This task ended or its exact return target is no longer available."),
+                    recovery: .refreshTasks
                 )
                 NotificationCenter.default.post(name: .islandExpand, object: nil)
             }
             if let session = sessions.first(where: { $0.id == sessionID }) {
                 TerminalBridge.jump(to: session) { result in
-                    if !result.opened { unavailable() }
+                    if !result.opened {
+                        OperationalDiagnostics.shared.showReturnFailure(result, session: session)
+                        NotificationCenter.default.post(name: .islandExpand, object: nil)
+                    }
                 }
             } else {
                 unavailable()

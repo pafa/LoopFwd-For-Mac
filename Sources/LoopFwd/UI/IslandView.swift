@@ -676,11 +676,7 @@ struct IslandView: View {
         if !disableClickToJump, ReturnResolver.resolve(agent).reason == nil {
             TerminalBridge.jump(to: agent) { result in
                 if !result.opened {
-                    OperationalDiagnostics.shared.showNotice(
-                        sessionID: agent.id,
-                        title: agent.displayTitle,
-                        message: result.reason ?? "The task target could not be reached."
-                    )
+                    OperationalDiagnostics.shared.showReturnFailure(result, session: agent)
                 }
             }
         } else {
@@ -731,7 +727,19 @@ struct IslandView: View {
                 Text(notice.message)
                     .font(.system(size: 9.5))
                     .foregroundStyle(.white.opacity(0.55))
-                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
+                if let recovery = notice.recovery {
+                    Button(L10n.string(recovery.label)) {
+                        operationalDiagnostics.dismissNotice()
+                        switch recovery {
+                        case .refreshTasks: monitor.scanNow()
+                        case .setup: SettingsWindowController.shared.show(pane: .setup)
+                        case .agents: SettingsWindowController.shared.show(pane: .agents)
+                        }
+                    }.buttonStyle(.plain)
+                        .foregroundStyle(.blue)
+                        .font(.system(size: 10, weight: .semibold))
+                }
             }
             Spacer(minLength: 4)
             Button {
