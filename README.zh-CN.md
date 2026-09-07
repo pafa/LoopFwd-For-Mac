@@ -5,7 +5,7 @@
 <p align="center"><strong>让 AI 继续工作，让你不必反复切窗。</strong></p>
 <p align="center">Mac 顶部的一座小岛，看清多个 AI 任务的进展。</p>
 <p align="center">
-  <a href="https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.0"><strong>下载 Mac 版</strong></a> ·
+  <a href="https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.1"><strong>下载 Mac 版</strong></a> ·
   <a href="#26-秒看懂它">观看宣传片</a> ·
   <a href="#让多任务工作更从容">了解功能</a> ·
   <a href="README.md">English</a>
@@ -23,7 +23,7 @@ https://github.com/user-attachments/assets/d4fdb119-f78b-47f4-b49e-13d833e83da7
 
 [下载宣传片 · 26 秒，含配乐](https://github.com/pafa/LoopFwd-For-Mac/releases/download/v0.1.0/LoopFwd-Launch-Selected-A-26s.mp4)
 
-*已选定的产品宣传片；**0.1.0** 的实际接入范围见下方说明。*
+*已选定的产品宣传片；**0.1.1** 的实际接入范围见下方说明。*
 
 ## 让多任务工作更从容
 
@@ -162,7 +162,7 @@ Setup status 帮你了解接入是否可用；Diagnostics 说明数据缺失、�
 
 ## 开始使用
 
-1. **[下载 0.1.0 预览版](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.0)** 及对应校验文件。
+1. **[下载 0.1.1 预览版](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.1)** 及对应校验文件。
 2. **拖入 Applications。** 替换旧版前，先退出正在运行的 LoopFwd。
 3. **打开 Setup status**，开启你需要的接入，然后继续使用原有工具工作。
 
@@ -173,9 +173,10 @@ Setup status 帮你了解接入是否可用；Diagnostics 说明数据缺失、�
 
 ## 兼容性与预览版说明
 
-当前公开下载是 **0.1.0**，属于早期预览版，不是稳定 1.0。
-此源码分支是 **0.1.1** 修补候选，尚未替换公开下载包。下方新增修复说明对应候选源码；
-已发布包请沿用原发布页及其对应版本说明。
+当前公开下载是 **0.1.1**，属于早期预览版，不是稳定 1.0。
+下方修复已包含在此版本中。原
+[0.1.0 发布页](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.0)
+及安装包继续保留，可手动回退。
 
 macOS 14 是编译部署目标。目前 CI 在 macOS 26 运行，本地开发 Mac 为 26.6.2；
 干净 macOS 14 设备上的实际运行尚未验证。
@@ -193,7 +194,7 @@ macOS 14 是编译部署目标。目前 CI 在 macOS 26 运行，本地开发 Ma
 | Kimi Code | 可选的 0.41.0 主 wire 与生命周期观察器 | 不承诺精确返回；真实模型任务尚未验证 |
 | Grok CLI | 可选的 1.0.13 / 事件 schema 1.0 读取 | 真实模型任务和实际返回尚未验证 |
 
-**0.1.0 暂不支持** Cursor Agent、DeepSeek Harness、Mistral Vibe、WorkBuddy 和豆包工作。
+**0.1.1 暂不支持** Cursor Agent、DeepSeek Harness、Mistral Vibe、WorkBuddy 和豆包工作。
 这些产品目前的状态接口或安装、版本维护成本不适合首发。保留代码不代表启用集成。
 
 只有明确的成功边界才能显示完成。历史回答、非 busy、进程存在都不代表完成。
@@ -202,7 +203,7 @@ macOS 14 是编译部署目标。目前 CI 在 macOS 26 运行，本地开发 Ma
 <details>
 <summary><strong>下载校验、安装与回退</strong></summary>
 
-从 [0.1.0 发布页](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.0) 下载 ZIP 及同名 SHA-256 文件，在下载目录校验：
+从 [0.1.1 发布页](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.1) 下载 ZIP 及同名 SHA-256 文件，在下载目录校验：
 `shasum -a 256 -c <下载包文件名>.sha256`。
 退出旧版，将解压后的 LoopFwd 拖入 Applications，再启动。
 
@@ -255,7 +256,7 @@ Codex 额度来自本地报告，不是实时查询账户余额。主 Codex 与 
 
 ## 自定义目录、控制与恢复
 
-**此候选中的 Terminal.app 仅支持监控和返回**：已移除全局键盘输入及其辅助功能授权入口。
+**0.1.1 中的 Terminal.app 仅支持监控和返回**：已移除全局键盘输入及其辅助功能授权入口。
 其他终端的实验回复／审批必须使用能定向到具体会话的接口，开启 Labs 也不能绕过此限制。
 
 在 Agent → Codex 桌面版数据中，默认读取正在运行的 Codex 应用环境；无法读取或发现多个

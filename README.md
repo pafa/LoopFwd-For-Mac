@@ -5,7 +5,7 @@
 <p align="center"><strong>Your agents are working. You shouldn't have to keep checking.</strong></p>
 <p align="center">A small island on your Mac. A clear view of your AI tasks.</p>
 <p align="center">
-  <a href="https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.0"><strong>Download for Mac</strong></a> ·
+  <a href="https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.1"><strong>Download for Mac</strong></a> ·
   <a href="#see-it-in-26-seconds">Watch the film</a> ·
   <a href="#features">Explore features</a> ·
   <a href="README.zh-CN.md">简体中文</a>
@@ -23,7 +23,7 @@ https://github.com/user-attachments/assets/d4fdb119-f78b-47f4-b49e-13d833e83da7
 
 [Download the launch film · 26 seconds, with sound](https://github.com/pafa/LoopFwd-For-Mac/releases/download/v0.1.0/LoopFwd-Launch-Selected-A-26s.mp4)
 
-*The selected product film. Integration availability for **0.1.0** is listed below.*
+*The selected product film. Integration availability for **0.1.1** is listed below.*
 
 ## Features
 
@@ -147,7 +147,7 @@ You don't need to implement everything to contribute a useful integration.
 
 ## Get started
 
-1. **[Download the 0.1.0 preview](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.0)** and its matching checksum.
+1. **[Download the 0.1.1 preview](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.1)** and its matching checksum.
 2. **Move LoopFwd into Applications.** Quit any previous copy before replacing it.
 3. **Open Setup status**, enable the integrations you use, then continue working in your own tools.
 
@@ -158,10 +158,10 @@ review **System Settings → Privacy & Security → Open Anyway**. Don't disable
 
 ## Compatibility and preview notes
 
-The published download is **0.1.0**, an early preview, not a stable 1.0.
-This source branch is the **0.1.1** patch candidate; it has not replaced the
-published download. The fixes below describe this candidate. Keep the existing
-release URL for the published package and its version-specific instructions.
+The current published download is **0.1.1**, an early preview, not a stable 1.0.
+The fixes below are included in this release. The previous
+[0.1.0 release](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.0)
+remains available for manual rollback.
 
 macOS 14 is the deployment target. Current CI runs on macOS 26 and the local
 development Mac is 26.6.2; a clean macOS 14 device run is not yet verified.
@@ -180,7 +180,7 @@ account or environment. Installed software and parser tests alone do not earn th
 | Grok CLI | Optional 1.0.13 / event-schema 1.0 reader | Authenticated tasks and actual return not yet verified |
 
 Cursor Agent, DeepSeek Harness, Mistral Vibe, WorkBuddy and Doubao Work are
-**not supported in 0.1.0**. Their state interfaces or setup/version costs are
+**not supported in 0.1.1**. Their state interfaces or setup/version costs are
 not suitable for this first release. Retained source is not an active integration.
 
 Capabilities vary by data source. Codex CLI/Desktop transcripts do not provide
@@ -191,7 +191,7 @@ reported as observation health, not invented task outcomes.
 <details>
 <summary><strong>Download verification, installation and rollback</strong></summary>
 
-The [0.1.0 pre-release](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.0) contains the ZIP, checksum and build manifest:
+The [0.1.1 pre-release](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.1) contains the ZIP, checksum and build manifest:
 
 1. Download its ZIP and matching SHA-256 file.
 2. In their download directory, run `shasum -a 256 -c <archive-name>.sha256`.
@@ -247,7 +247,7 @@ duration. Missing or old main-limit reports are not shown as current allowance.
 Controls for creating managed Codex tasks and OpenCode replies/approvals live in
 **Integrations → Labs** and are off by default. Existing managed tasks retain
 return and stop controls when Labs is disabled. Claude terminal input has its
-own separate Labs switch. **Terminal.app is return-only** in this candidate:
+own separate Labs switch. **Terminal.app is return-only** in 0.1.1:
 global keyboard injection and its Accessibility setup prompt have been removed.
 Other terminal controls require a session-addressed API. Hook/plugin
 installation always requires a click.
