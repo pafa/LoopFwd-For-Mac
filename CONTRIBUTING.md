@@ -1,0 +1,92 @@
+# Contributing
+
+LoopFwd is a native macOS Swift package. Packaging requires full Xcode 26.6,
+Node 24+, jq, and ripgrep on Apple Silicon. The app's deployment target remains macOS 14.
+Run `./scripts/preflight` for readable environment checks.
+
+Before opening a change:
+
+```bash
+xcrun swift-format format --in-place --recursive Sources Tests
+./scripts/verify-public-tree
+./scripts/verify
+```
+
+Changes to `Integrations/DeepSeekHarnessObserver/` also require Node.js 24 or
+later and:
+
+```bash
+npm test --prefix Integrations/DeepSeekHarnessObserver
+```
+
+Keep changes product-first and narrow:
+
+- Add a provider Reader only when a real local data source exists.
+- Treat process tables and transcripts as observation, never as approval authority.
+- Keep provider configuration changes behind an explicit user action with a backup and recovery path.
+- Do not add generated builds, diagnostics, transcripts, credentials, or personal machine paths.
+- Preserve the notices in `THIRD_PARTY_NOTICES.md` when modifying imported upstream work.
+
+## Branches and pull requests
+
+### Versioning
+
+The first open-source release is **0.1.0**, an early preview, not a stable 1.0.
+`assets/release.env` is the App's version authority: `release_version`,
+`build_number`, and `release_channel`. The numeric bundle version is derived,
+not maintained again in Info.plist. About and Diagnostics read the packaged metadata.
+
+Use 0.1.x for fixes and 0.2.0 for the next feature iteration. Increment the build
+number for each distributed rebuild. Do not silently replace a published ZIP or
+move an existing tag; a replacement release needs a new patch version and tag.
+Keep 0.x releases in the `preview` channel and mark GitHub releases as Pre-release.
+Moving to 1.0 requires a separate product-readiness decision.
+
+Update the English/Chinese README and Release Notes with the chosen version.
+Preflight rejects mismatches, and verification checks the packaged version,
+channel, build, manifest and Observer version. The Observer owns its version in
+its package.json; its resource name is stable so version bumps need no Swift edits.
+Provider compatibility versions and snapshot schema versions are independent.
+
+### Workflow
+
+`main` is the only long-lived branch. Use a short-lived branch for one focused
+change, keep unrelated formatting out of the diff, and prefer squash merge.
+Agent-created branches use the `codex/` prefix.
+
+The required job names are `macOS build and tests` and `DeepSeek observer`.
+The macOS job includes the public-tree hygiene check before building. UI or packaging changes also
+need a real launch smoke on macOS; record what was exercised in the pull
+request.
+
+Successful `main` builds retain the verified ZIP, matching SHA-256 file and
+build manifest for 14 days in the Actions run. The artifact name includes the
+built commit; extract the outer Actions archive before checking the inner app
+ZIP with its SHA-256 file. These are review candidates, not public releases.
+Never use an expiring Actions artifact URL as the website download link.
+
+After real-device acceptance and explicit publication approval, use an
+annotated preview tag and a GitHub Pre-release for the selected commit. Upload
+the exact verified ZIP, checksum and manifest together, compare the manifest's
+`gitHead` with the tag, and verify a fresh download before changing the website.
+Keep the previous version's release URL for manual rollback. Publishing source,
+creating a release and changing the website are separate approval boundaries.
+
+Do not create a stable release tag from fixture-only evidence. Provider
+lifecycle, display behavior, permissions, and the packaged App must pass their
+real-device release gates first.
+
+For the 0.1.0 preview, use the eight-provider scope in README and
+`SupportRegistry.shippedKinds`. Basic real-task evidence earns a per-surface
+Preview tested label, not stable certification. Optional integrations stay
+Experimental; unverified accounts and uncommon environment combinations do not
+block this preview. Deferred readers remain source references, not active support.
+
+`verify-public-tree` accepts normal uncommitted development changes. Use
+`./scripts/verify-public-tree --release` only when checking a clean release
+commit. Build caches and packaged output are excluded from source-tree checks.
+
+Translate visible strings in the String Catalog, not in generated runtime
+resources. Keep new controls behind Labs until their authority and real target
+checks have been exercised. An integration's support tier is controlled by
+`SupportRegistry` per surface, never by brand-wide assumptions.
