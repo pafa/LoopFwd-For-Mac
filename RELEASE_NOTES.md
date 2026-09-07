@@ -1,12 +1,26 @@
-# LoopFwd 0.1.1 — patch preview
+# LoopFwd 0.1.2 — reliability patch preview
 
 Apple Silicon · macOS 14+ deployment target · manual updates · ad-hoc signature.
 
-These notes describe 0.1.1, build 3. Downloadable packages and their exact source
+These notes describe 0.1.2, build 4. Downloadable packages and their exact source
 identity are listed on the corresponding GitHub pre-release page. The existing
-v0.1.0 tag and download remain immutable; updates and rollback are manual.
+v0.1.0 and v0.1.1 tags and downloads remain immutable; updates and rollback are manual.
 
 ## Fixes
+
+- Keep Codex usage within the observed or explicitly selected account directory,
+  retain cross-calendar active rollouts, hide expired windows, and invalidate old
+  reads when the source changes. Unknown allowance is not a reset balance.
+- Show specific known return failures and an actionable recovery entry across
+  cards, keyboard navigation, the menu bar and notification clicks.
+- Make Setup status actionable without mistaking installation for successful
+  observation, and explain which readers use the idle-cleanup setting.
+- Report sound-import and rollback failures separately, retaining the recovery
+  copy without overwriting a concurrently replaced sound.
+- Add focused regressions and English/Simplified Chinese copy. Provider support
+  levels, user settings and island dimensions are unchanged.
+
+## Retained from 0.1.1
 
 - Fix a packaged-app startup crash when localized resources fall back to the
   build machine's directory. All runtime resources now resolve inside the app.
@@ -58,6 +72,10 @@ machine is macOS 26.6.2. A clean macOS 14 device run is not yet verified.
 This gap does not imply a confirmed startup failure, nor a claim that all
 macOS 14+ environments have been exercised.
 
+Zero-task idle CPU at or below 2% and a 30-minute parallel stability run have
+not been revalidated for this release. A short local sample with active tasks
+is not evidence that either performance target has been met.
+
 These packages are not Developer ID signed or notarized. Review the download's
 checksum and macOS warning before using Privacy & Security → Open Anyway.
 No App Store submission is involved. Updates and rollback remain manual.
@@ -73,18 +91,3 @@ its original files; normal builds do not require a network connection.
 A packaged-app smoke and exact candidate/CI results belong in the PR handoff.
 Do not infer those results from this release-note file. Stable 1.0 remains a
 separate readiness decision.
-
-## Unreleased — reliability polish
-
-- Keep Codex usage within the observed or explicitly selected account directory,
-  retain cross-calendar active rollouts, hide expired windows, and invalidate old
-  reads when the source changes. Unknown allowance is not a reset balance.
-- Show specific known return failures and an actionable recovery entry across
-  cards, keyboard navigation, the menu bar and notification clicks.
-- Make Setup status actionable without mistaking installation for successful
-  observation, and explain which readers use the idle-cleanup setting.
-- Report sound-import and rollback failures separately, retaining the recovery
-  copy without overwriting a concurrently replaced sound.
-- Add focused regressions and English/Simplified Chinese copy. Provider support
-  levels and island dimensions are unchanged. This candidate does not replace
-  the published 0.1.1 assets; a future distributed update needs a new version.
