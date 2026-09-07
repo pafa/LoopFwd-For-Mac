@@ -158,7 +158,13 @@ review **System Settings → Privacy & Security → Open Anyway**. Don't disable
 
 ## Compatibility and preview notes
 
-**0.1.0 is an early preview, not a stable 1.0.**
+The published download is **0.1.0**, an early preview, not a stable 1.0.
+This source branch is the **0.1.1** patch candidate; it has not replaced the
+published download. The fixes below describe this candidate. Keep the existing
+release URL for the published package and its version-specific instructions.
+
+macOS 14 is the deployment target. Current CI runs on macOS 26 and the local
+development Mac is 26.6.2; a clean macOS 14 device run is not yet verified.
 “Preview tested” means basic real-task monitoring on the named surface—not every capability,
 account or environment. Installed software and parser tests alone do not earn that label.
 
@@ -241,10 +247,31 @@ duration. Missing or old main-limit reports are not shown as current allowance.
 Controls for creating managed Codex tasks and OpenCode replies/approvals live in
 **Integrations → Labs** and are off by default. Existing managed tasks retain
 return and stop controls when Labs is disabled. Claude terminal input has its
-own separate Labs switch. Hook/plugin installation always requires a click.
+own separate Labs switch. **Terminal.app is return-only** in this candidate:
+global keyboard injection and its Accessibility setup prompt have been removed.
+Other terminal controls require a session-addressed API. Hook/plugin
+installation always requires a click.
 Older Claude hooks need **Update hook** in Integrations to add event-source
 identity. Until updated, their unbound events are ignored; restarting LoopFwd
 does not rewrite the hook or enable controls. The prior script is backed up.
+
+**Custom data directories:** Agents → Codex Desktop data defaults to the running
+Codex app's environment. If that environment is unavailable or multiple roots
+disagree, select the actual CODEX_HOME folder. This changes only LoopFwd's
+preference; it never moves Codex data.
+
+In Integrations → Claude Code, check the displayed settings target before
+installing. Use Choose folder for a custom CLAUDE_CONFIG_DIR. Choosing a folder
+does not install anything. Each edit keeps a separate private recovery folder;
+Show backup opens it. Remove deregisters only the selected profile and retains
+the shared observer files for other profiles. Unsupported layouts and symbolic
+settings files are refused unchanged. After an interrupted operation, quit
+LoopFwd and confirm the recorded owner has exited before moving that exact
+configuration/script lock aside; do not delete backups or break a live lock.
+
+Diagnostics distinguishes supported formats from observed version metadata and
+its source. Unknown is explicit when actual version metadata is unavailable;
+the app does not launch providers just to collect version numbers.
 
 Task clicks say **Jump to task**, **Open App**, or explain why returning is
 unavailable. Opening an application does not mark its task as viewed.

@@ -81,8 +81,12 @@ struct DiagnosticsPane: View {
                 let health = L10n.string(Self.sourceHealthKey(for: read.outcome))
                 let lastSuccess = read.lastSuccessfulAt.map { L10n.relativeTime($0) } ?? L10n.string("Never")
                 let lastComplete = L10n.format("Last complete read: %@", lastSuccess)
+                let observed = Self.observedVersions(sessions.filter { $0.surfaceID == surface })
+                let version = L10n.format(
+                    "Observed version: %@", observed == "unknown" ? L10n.string("Unknown") : observed)
                 let reason = read.errorCategory.map { " · " + L10n.string($0) } ?? ""
-                return "\(surface.rawValue) · \(health) · \(lastComplete) · \(Int(read.duration * 1000)) ms\(reason)"
+                return
+                    "\(surface.rawValue) · \(health) · \(lastComplete) · \(Int(read.duration * 1000)) ms\(reason)\n\(version)"
             }.joined(separator: "\n")
         }
         guard !sessions.isEmpty else {
@@ -99,10 +103,16 @@ struct DiagnosticsPane: View {
             .sorted().joined(separator: ", ")
         let sources = Set(sessions.map(\.observation.source)).sorted().joined(separator: ", ")
         let diagnostic = monitor.providerDiagnostics[kind]
-        let duration = diagnostic.map { "\(Int($0.duration * 1000)) ms" } ?? "not scanned"
-        let cache = diagnostic.map { "\($0.cacheHits) cache hits" } ?? "cache unknown"
+        let duration = diagnostic.map { "\(Int($0.duration * 1000)) ms" } ?? L10n.string("Not scanned")
+        let cache = diagnostic.map { L10n.format("%d cache hits", $0.cacheHits) } ?? L10n.string("Cache unknown")
         return
-            "\(sessions.count) observed · \(surfaces) · \(phases) · \(modes)/\(authorities) · \(sources) · \(capabilities) · \(duration) · \(cache)"
+            L10n.format("%d observed sessions", sessions.count)
+            + " · \(surfaces) · \(phases) · \(modes)/\(authorities) · \(sources) · \(capabilities) · \(duration) · \(cache)"
+    }
+
+    static func observedVersions(_ sessions: [AgentSession]) -> String {
+        let versions = Set(sessions.compactMap { $0.observedVersion?.value }).sorted()
+        return versions.isEmpty ? "unknown" : versions.joined(separator: " | ")
     }
 
     /// Partial reads retain their usable sessions, but must not claim that the
@@ -151,7 +161,7 @@ struct DiagnosticsPane: View {
                     .map { DiagnosticsSanitizer.sanitize($0) }.sorted().joined(separator: " | ")
                 let diagnostic = monitor.providerDiagnostics[kind]
                 return
-                    "\(kind.rawValue): count=\(sessions.count) surfaces=\(surfaces.isEmpty ? "none" : surfaces) phases=\(phases.isEmpty ? "none" : phases) modes=\(modes.isEmpty ? "none" : modes) authority=\(authorities.isEmpty ? "none" : authorities) capabilities=\(capabilities.isEmpty ? "none" : capabilities) versions=\(versions.isEmpty ? "none" : versions) cli=\(kind.installedCLIPath != nil) scanMs=\(Int((diagnostic?.duration ?? 0) * 1000)) cacheHits=\(diagnostic?.cacheHits ?? 0) source=\(DiagnosticsSanitizer.sanitize(diagnostic?.source ?? "none")) outcome=\(diagnostic?.outcome ?? "unknown") error=\(diagnostic?.errorCategory ?? "none") reason=\(reasons)"
+                    "\(kind.rawValue): count=\(sessions.count) surfaces=\(surfaces.isEmpty ? "none" : surfaces) phases=\(phases.isEmpty ? "none" : phases) modes=\(modes.isEmpty ? "none" : modes) authority=\(authorities.isEmpty ? "none" : authorities) capabilities=\(capabilities.isEmpty ? "none" : capabilities) supportedVersions=\(versions.isEmpty ? "none" : versions) observedVersions=\(Self.observedVersions(sessions)) versionSources=\(Set(sessions.compactMap { $0.observedVersion?.source }).sorted().joined(separator: ",")) cli=\(kind.installedCLIPath != nil) scanMs=\(Int((diagnostic?.duration ?? 0) * 1000)) cacheHits=\(diagnostic?.cacheHits ?? 0) source=\(DiagnosticsSanitizer.sanitize(diagnostic?.source ?? "none")) outcome=\(diagnostic?.outcome ?? "unknown") error=\(diagnostic?.errorCategory ?? "none") reason=\(reasons)"
             }
         NSPasteboard.general.clearContents()
         NSPasteboard.general.setString(lines.joined(separator: "\n"), forType: .string)

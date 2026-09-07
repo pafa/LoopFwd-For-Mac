@@ -27,6 +27,19 @@ Keep changes product-first and narrow:
 - Do not add generated builds, diagnostics, transcripts, credentials, or personal machine paths.
 - Preserve the notices in `THIRD_PARTY_NOTICES.md` when modifying imported upstream work.
 
+## Compatibility checks without an exhaustive matrix
+
+The deployment target is macOS 14. CI uses macOS 26; the local development
+machine is 26.6.2. A clean macOS 14 runtime check is still unverified.
+Contributors with that environment can verify a fresh download/build, launch,
+empty state, one Codex task, return and notification. Report the exact OS,
+LoopFwd commit, provider surface/version and any custom data-directory use;
+do not submit prompts, credentials or complete paths.
+
+Changes should add focused regression tests and run the existing verification
+chain, not re-test every account/provider combination. A fixture is not
+real-account acceptance. Keep unknown capabilities and versions explicit.
+
 ## Develop with your own agent
 
 Fork the repository and use the coding agent you already trust. Useful contributions
@@ -124,7 +137,7 @@ Do not create a stable release tag from fixture-only evidence. Provider
 lifecycle, display behavior, permissions, and the packaged App must pass their
 real-device release gates first.
 
-For the 0.1.0 preview, use the eight-provider scope in README and
+For 0.1.x previews, use the eight-provider scope in README and
 `SupportRegistry.shippedKinds`. Basic real-task evidence earns a per-surface
 Preview tested label, not stable certification. Optional integrations stay
 Experimental; unverified accounts and uncommon environment combinations do not

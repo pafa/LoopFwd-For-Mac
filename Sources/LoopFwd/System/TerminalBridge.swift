@@ -4,11 +4,9 @@ import Foundation
 
 /// Sends text to an agent's terminal session and jumps to it, targeting the
 /// exact tab/pane via the process's tty. iTerm and Terminal have precise
-/// AppleScript APIs; tmux uses send-keys. Terminal.app can select the exact tab
-/// by tty, then needs Accessibility to type into an interactive TUI.
+/// AppleScript return APIs; tmux uses send-keys. Terminal.app is return-only:
+/// global keyboard events cannot be bound to an exact interactive session.
 enum TerminalBridge {
-
-    static var hasAccessibilityAccess: Bool { AXIsProcessTrusted() }
 
     static func hasReturnHelper(for app: String) -> Bool {
         switch app {
@@ -19,19 +17,6 @@ enum TerminalBridge {
         }
     }
 
-    /// Terminal.app has no API for typing into an already-running interactive
-    /// TUI. Ask only after an explicit user action (reply / approval / settings
-    /// button), never during startup or passive discovery.
-    @discardableResult
-    static func requestAccessibilityAccess() -> Bool {
-        let key = kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String
-        return AXIsProcessTrustedWithOptions([key: true] as CFDictionary)
-    }
-
-    static func needsAccessibilityAccess(for agent: AgentSession) -> Bool {
-        agent.terminalApp == "Terminal" && !hasAccessibilityAccess
-    }
-
     /// Whether this host has a control path that can address one exact session.
     /// App activation alone is not enough for sending user text: it can land in
     /// the wrong tab when several agents share a terminal.
@@ -39,7 +24,7 @@ enum TerminalBridge {
         switch agent.terminalApp {
         case "tmux":
             return agent.tty != nil && tmuxPath != nil
-        case "iTerm", "Terminal":
+        case "iTerm":
             return agent.tty != nil
         case "WezTerm":
             return agent.tty != nil && weztermPath != nil
@@ -53,7 +38,7 @@ enum TerminalBridge {
     @discardableResult
     static func send(text: String, to agent: AgentSession) -> Bool {
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty, controlProcessStillMatches(agent) else { return false }
+        guard canSend(to: agent), !trimmed.isEmpty, controlProcessStillMatches(agent) else { return false }
         let dev = agent.tty.map { "/dev/\($0)" }
 
         switch agent.terminalApp {
@@ -83,18 +68,7 @@ enum TerminalBridge {
                 """,
                 arguments: [dev, trimmed])
         case "Terminal":
-            // Terminal's `do script` API runs a shell command; it is not an
-            // input API for an already-running interactive TUI. It can report
-            // success while Codex receives nothing (or queue the command for
-            // the shell after Codex exits). Select the exact tab first, then
-            // deliver keyboard input only when Accessibility is already
-            // granted. Otherwise fail closed and leave the user's text intact.
-            guard hasAccessibilityAccess else {
-                requestAccessibilityAccess()
-                return false
-            }
-            guard dev != nil, jump(to: agent) else { return false }
-            return synthesize(text: trimmed, pressReturn: true)
+            return false
         case "WezTerm":
             guard let dev, let wez = weztermPath, let pane = weztermPaneId(dev: dev) else { return false }
             return succeeds(wez, ["cli", "send-text", "--pane-id", pane, "--no-paste", trimmed + "\n"])
@@ -265,7 +239,7 @@ enum TerminalBridge {
     /// answer Claude Code permission prompts ("1"/"2"/"3").
     @discardableResult
     static func sendKey(_ key: String, to agent: AgentSession) -> Bool {
-        guard controlProcessStillMatches(agent) else { return false }
+        guard canSend(to: agent), controlProcessStillMatches(agent) else { return false }
         let dev = agent.tty.map { "/dev/\($0)" }
 
         switch agent.terminalApp {
@@ -304,12 +278,7 @@ enum TerminalBridge {
             else { return false }
             return succeeds(kitten, ["@", "send-text", "--match", "id:\(win)", key])
         case "Terminal":
-            guard hasAccessibilityAccess else {
-                requestAccessibilityAccess()
-                return false
-            }
-            guard jump(to: agent) else { return false }
-            return synthesize(text: key, pressReturn: false)
+            return false
         case .some, nil:
             // A raw approval key must never land in whichever editor or
             // terminal window happens to be frontmost.
@@ -554,35 +523,6 @@ enum TerminalBridge {
         BoundedProcess.run(path, arguments).succeeded
     }
 
-    /// Post Unicode keyboard input to the selected Terminal tab. We deliberately
-    /// do not trigger the system permission prompt here: a send action without
-    /// existing Accessibility authority returns false and the UI explains that
-    /// nothing was sent.
-    private static func synthesize(text: String, pressReturn: Bool) -> Bool {
-        guard hasAccessibilityAccess,
-            let source = CGEventSource(stateID: .hidSystemState)
-        else { return false }
-
-        let units = Array(text.utf16)
-        for start in stride(from: 0, to: units.count, by: 20) {
-            var chunk = Array(units[start..<min(start + 20, units.count)])
-            guard let down = CGEvent(keyboardEventSource: source, virtualKey: 0, keyDown: true),
-                let up = CGEvent(keyboardEventSource: source, virtualKey: 0, keyDown: false)
-            else { return false }
-            down.keyboardSetUnicodeString(stringLength: chunk.count, unicodeString: &chunk)
-            down.post(tap: .cghidEventTap)
-            up.post(tap: .cghidEventTap)
-        }
-
-        if pressReturn {
-            guard let down = CGEvent(keyboardEventSource: source, virtualKey: 36, keyDown: true),
-                let up = CGEvent(keyboardEventSource: source, virtualKey: 36, keyDown: false)
-            else { return false }
-            down.post(tap: .cghidEventTap)
-            up.post(tap: .cghidEventTap)
-        }
-        return true
-    }
 }
 
 enum ExactTargetVisibilityPolicy {

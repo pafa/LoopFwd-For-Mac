@@ -1,5 +1,19 @@
 import Foundation
 
+/// Version metadata actually observed, never the compatibility range of a
+/// reader. Missing metadata remains unknown; no CLI is launched to fill it.
+struct ProviderVersionEvidence: Equatable {
+    let value: String
+    let source: String
+
+    static func metadata(_ value: String?, source: String) -> Self? {
+        guard let value, value.utf8.count <= 80,
+            value.range(of: #"^v?[0-9][0-9A-Za-z.+_-]*$"#, options: .regularExpression) != nil
+        else { return nil }
+        return .init(value: value, source: source)
+    }
+}
+
 /// Empty is a successful observation, not a synonym for a failed read.
 struct ProviderReadResult {
     enum Outcome: String { case success, empty, failed, incompatible, partial }

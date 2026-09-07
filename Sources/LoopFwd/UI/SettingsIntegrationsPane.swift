@@ -8,7 +8,8 @@ import UserNotifications
 struct IntegrationsPane: View {
     @State private var installed = ApprovalCenter.hookInstalled
     @State private var hookMessage: String?
-    @State private var accessibilityGranted = TerminalBridge.hasAccessibilityAccess
+    @State private var hookBusy = false
+    @AppStorage(Pref.claudeConfigurationDirectory) private var claudeConfigurationDirectory = ""
     @AppStorage(Pref.claudeControlsEnabled) private var claudeControlsEnabled = Pref.Default.claudeControlsEnabled
     @ObservedObject private var kimiHooks = KimiHookIntegration.shared
     @ObservedObject private var geminiHooks = JSONHookIntegration.gemini
@@ -67,8 +68,28 @@ struct IntegrationsPane: View {
                 title: "Claude Code",
                 footer: installed
                     ? "The observer reports explicit permission and question events. Terminal input remains a Labs feature and is off by default."
-                    : "Installs a Notification hook into ~/.claude/settings.json after writing a backup. It observes explicit attention events and never answers them unless Labs control is separately enabled."
+                    : "Installs attention hooks only in the settings file shown below, after writing a private backup. Choosing a folder does not install anything."
             ) {
+                SRow(title: "Claude settings target", subtitle: ApprovalCenter.claudeSettingsPath) {
+                    Button(L10n.string("Choose folder…")) {
+                        let panel = NSOpenPanel()
+                        panel.canChooseFiles = false
+                        panel.canChooseDirectories = true
+                        panel.allowsMultipleSelection = false
+                        guard panel.runModal() == .OK, let url = panel.url else { return }
+                        claudeConfigurationDirectory = url.path
+                        installed = ApprovalCenter.hookInstalled
+                        hookMessage = nil
+                    }.disabled(hookBusy)
+                    if !claudeConfigurationDirectory.isEmpty {
+                        Button(L10n.string("Use default")) {
+                            claudeConfigurationDirectory = ""
+                            installed = ApprovalCenter.hookInstalled
+                            hookMessage = nil
+                        }.disabled(hookBusy)
+                    }
+                }
+                SDiv()
                 SRow(
                     title: "Attention observer",
                     subtitle: hookMessage
@@ -78,23 +99,30 @@ struct IntegrationsPane: View {
                     Button(
                         L10n.string(ApprovalCenter.hookNeedsUpdate ? "Update hook" : installed ? "Remove" : "Install")
                     ) {
-                        let result =
-                            installed && !ApprovalCenter.hookNeedsUpdate
-                            ? ApprovalCenter.uninstallHook()
-                            : ApprovalCenter.installHook()
-                        switch result {
-                        case .success:
-                            hookMessage = nil
-                        case .failure(let error):
-                            hookMessage = error.localizedDescription
+                        let remove = installed && !ApprovalCenter.hookNeedsUpdate
+                        hookBusy = true
+                        DispatchQueue.global(qos: .userInitiated).async {
+                            let result = remove ? ApprovalCenter.uninstallHook() : ApprovalCenter.installHook()
+                            DispatchQueue.main.async {
+                                switch result {
+                                case .success: hookMessage = nil
+                                case .failure(let error): hookMessage = L10n.string(error.localizedDescription)
+                                }
+                                installed = ApprovalCenter.hookInstalled
+                                hookBusy = false
+                            }
                         }
-                        installed = ApprovalCenter.hookInstalled
-                    }
+                    }.disabled(hookBusy)
+                }
+                SRow(title: "Configuration backup", subtitle: "Each operation retains its own private recovery copy.") {
+                    Button(L10n.string("Show backup")) {
+                        NSWorkspace.shared.open(ApprovalCenter.hookBackupDirectory)
+                    }.disabled(!FileManager.default.fileExists(atPath: ApprovalCenter.hookBackupDirectory.path))
                 }
                 SDiv()
                 SRow(
                     title: "Labs: terminal input controls",
-                    subtitle: "Experimental digit/text injection into one exact terminal session"
+                    subtitle: "Experimental session-addressed input only. Terminal.app remains return-only."
                 ) {
                     Toggle(L10n.string(""), isOn: $claudeControlsEnabled)
                         .toggleStyle(.switch)
@@ -140,15 +168,8 @@ struct IntegrationsPane: View {
                 SDiv()
                 SRow(
                     title: "Terminal.app",
-                    subtitle: accessibilityGranted
-                        ? "Ready — exact tab selection plus keyboard input"
-                        : "Accessibility permission required for replies"
-                ) {
-                    Button(L10n.string(accessibilityGranted ? "Ready" : "Enable…")) {
-                        accessibilityGranted = TerminalBridge.requestAccessibilityAccess()
-                    }
-                    .disabled(accessibilityGranted)
-                }
+                    subtitle: "Return only. Global keyboard input is disabled to prevent sending to the wrong window."
+                ) { EmptyView() }
                 SDiv()
                 SRow(
                     title: "Ghostty / Warp / editors",
@@ -156,16 +177,8 @@ struct IntegrationsPane: View {
                 ) { EmptyView() }
             }
         }
-        .onAppear { accessibilityGranted = TerminalBridge.hasAccessibilityAccess }
         .onAppear {
             kimiHooks.refresh(); geminiHooks.refresh(); qwenHooks.refresh()
-        }
-        .onReceive(
-            NSWorkspace.shared.notificationCenter.publisher(
-                for: NSWorkspace.didActivateApplicationNotification
-            )
-        ) { _ in
-            accessibilityGranted = TerminalBridge.hasAccessibilityAccess
         }
     }
 }

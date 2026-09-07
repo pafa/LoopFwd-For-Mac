@@ -36,6 +36,7 @@
 1|Sources/LoopFwd/Core/Localization.swift
 1|Sources/LoopFwd/Core/ProcessNaming.swift
 1|Sources/LoopFwd/Core/ProviderReadResult.swift
+1|Sources/LoopFwd/Core/ProviderDataLocations.swift
 1|Sources/LoopFwd/Core/ReaderDeadline.swift
 1|Sources/LoopFwd/Core/SupportRegistry.swift
 1|Sources/LoopFwd/Core/TailRead.swift
@@ -76,6 +77,7 @@
 1|Sources/LoopFwd/System/ApprovalCenter.swift
 1|Sources/LoopFwd/System/BoundedProcess.swift
 1|Sources/LoopFwd/System/HookSettings.swift
+1|Sources/LoopFwd/System/ClaudeHookInstaller.swift
 1|Sources/LoopFwd/System/HotKeys.swift
 1|Sources/LoopFwd/System/LoginItem.swift
 1|Sources/LoopFwd/System/LoopbackRedirectGuard.swift
@@ -117,7 +119,10 @@
 1|Tests/LoopFwdTests/Fixtures/deepseek-snapshot.json
 1|Tests/LoopFwdTests/Fixtures/opencode-messages.json
 1|Tests/LoopFwdTests/ProviderReaderTests.swift
+1|Tests/LoopFwdTests/PreviewHardeningTests.swift
 1|assets/AGENT_ICONS.md
+2|assets/agent-icon-provenance.json
+3|scripts/verify-agent-icons.mjs
 1|assets/AppIcon.icns
 1|assets/Assets.xcassets/AppIcon.appiconset/Contents.json
 1|assets/Assets.xcassets/AppIcon.appiconset/icon_128x128.png

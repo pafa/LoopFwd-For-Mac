@@ -449,6 +449,7 @@ struct AgentSession: Identifiable, Equatable {
     /// provider session, and two provider sessions must never collide on PID.
     var id: String
     var processID: Int32? = nil
+    var observedVersion: ProviderVersionEvidence? = nil
     let kind: AgentKind
     var cpu: Double
     var elapsed: String
@@ -618,7 +619,9 @@ struct AgentSession: Identifiable, Equatable {
             if controlsEnabled { result.insert(.reply) }
         }
         if !controlsEnabled, kind != .claude { result.subtract([.reply, .approve]) }
-        if kind == .claude, !claudeControlsEnabled { result.subtract([.reply, .approve]) }
+        if kind == .claude, !claudeControlsEnabled || !TerminalBridge.canSend(to: self) {
+            result.subtract([.reply, .approve])
+        }
         if codexManagedControl == nil, status != .needsAttention { result.subtract([.reply, .approve]) }
         return result
     }

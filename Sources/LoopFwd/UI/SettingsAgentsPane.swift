@@ -8,8 +8,41 @@ import UserNotifications
 struct AgentsPane: View {
     @AppStorage(Pref.disabledAgents) private var disabledCSV = Pref.Default.disabledAgents
     @ObservedObject private var monitor = AgentMonitor.shared
+    @AppStorage(Pref.codexDesktopDataDirectory) private var codexDataDirectory = ""
 
     var body: some View {
+        VStack(alignment: .leading, spacing: 22) {
+            trackedAgents
+            SSection(
+                title: "Codex Desktop data",
+                footer:
+                    "Automatic uses the running Codex app's environment. Choose its actual CODEX_HOME folder if detection is unavailable or ambiguous. This does not move or modify Codex data."
+            ) {
+                SRow(
+                    title: "Data directory",
+                    subtitle: codexDataDirectory.isEmpty ? "Automatic · observed app environment" : codexDataDirectory
+                ) {
+                    Button(L10n.string("Choose folder…")) {
+                        let panel = NSOpenPanel()
+                        panel.canChooseFiles = false
+                        panel.canChooseDirectories = true
+                        panel.allowsMultipleSelection = false
+                        guard panel.runModal() == .OK, let url = panel.url else { return }
+                        codexDataDirectory = url.path
+                        monitor.scanNow()
+                    }
+                    if !codexDataDirectory.isEmpty {
+                        Button(L10n.string("Use automatic")) {
+                            codexDataDirectory = ""
+                            monitor.scanNow()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private var trackedAgents: some View {
         SSection(
             title: "Tracked agents",
             footer:
@@ -78,10 +111,11 @@ struct AgentsPane: View {
 
     private func availability(for kind: AgentKind) -> String {
         let level = kind.hasRichSessionReader ? "local session reader" : "process tracking"
-        if isRunning(kind) { return "Running now · \(level)" }
+        if isRunning(kind) { return L10n.format("Running now · %@", L10n.string(level)) }
         if let path = kind.installedCLIPath {
-            return "Installed · \(level) · \((path as NSString).abbreviatingWithTildeInPath)"
+            return L10n.format(
+                "Installed · %@ · %@", L10n.string(level), (path as NSString).abbreviatingWithTildeInPath)
         }
-        return "CLI not found · \(level)"
+        return L10n.format("CLI not found · %@", L10n.string(level))
     }
 }

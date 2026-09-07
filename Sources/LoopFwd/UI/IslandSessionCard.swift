@@ -178,7 +178,7 @@ struct SessionCard: View {
 
                 // Pending permission request → answer from the island.
                 if hasApproval {
-                    if (approval != nil && !claudeControlsEnabled)
+                    if (approval != nil && (!claudeControlsEnabled || !TerminalBridge.canSend(to: agent)))
                         || (openCodePermission != nil && !controlCapabilities.contains(.approve))
                     {
                         attentionOnlyBar
@@ -345,9 +345,6 @@ struct SessionCard: View {
     private var controlFailureMessage: String {
         if agent.codexManagedControl != nil {
             return "Codex connection stopped; your reply was not sent"
-        }
-        if TerminalBridge.needsAccessibilityAccess(for: agent) {
-            return "Allow LoopFwd in Accessibility, then try again"
         }
         return "Request expired or could not be reached"
     }

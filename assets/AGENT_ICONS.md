@@ -2,12 +2,17 @@
 
 The 11 icons in `Sources/LoopFwd/Resources/agents/` are unmodified dark-theme
 assets from `@lobehub/icons-static-png@1.95.0`, retrieved from the npm registry
-on 2026-09-03. The upstream project is
+on 2026-09-07. The 0.1.1 source candidate corrects earlier mismatched resources. The upstream project is
 [Lobe Icons](https://github.com/lobehub/lobe-icons), licensed under MIT. The
 distributed license is preserved in `LICENSES/lobe-icons-MIT.txt`.
 
 The exact production hashes are stored in `agent-icon-checksums.sha256` and
-verified before every release build.
+verified before every release build. The original npm archive URL, SHA-512
+integrity and per-file upstream paths/digests are recorded in
+`agent-icon-provenance.json`. The archive was integrity-checked before import.
+Use `node scripts/verify-agent-icons.mjs --archive <original-1.95.0.tgz>`
+for an independent byte comparison against that archive. Normal builds verify
+the recorded provenance offline.
 
 ## README theme variants
 

@@ -1032,10 +1032,10 @@ final class CoreContractTests: XCTestCase {
         }
         XCTAssertTrue(ApprovalCenter.hookInstalled)
         XCTAssertFalse(ApprovalCenter.hookNeedsUpdate)
-        XCTAssertEqual(
-            try Data(contentsOf: URL(fileURLWithPath: settings.path + ".loopfwd-backup")),
-            original
-        )
+        let backups = try FileManager.default.contentsOfDirectory(
+            at: ApprovalCenter.hookBackupDirectory, includingPropertiesForKeys: nil)
+        XCTAssertEqual(backups.count, 1)
+        XCTAssertEqual(try Data(contentsOf: backups[0].appendingPathComponent("settings.json")), original)
         let hookMode =
             try FileManager.default.attributesOfItem(
                 atPath: ApprovalCenter.hookScriptPath
@@ -1050,7 +1050,8 @@ final class CoreContractTests: XCTestCase {
             try JSONSerialization.jsonObject(with: Data(contentsOf: settings)) as? [String: Any]
         )
         XCTAssertEqual(final["model"] as? String, "claude-test")
-        XCTAssertFalse(FileManager.default.fileExists(atPath: ApprovalCenter.hookScriptPath))
+        // Another selected Claude profile can still reference the shared observer.
+        XCTAssertTrue(FileManager.default.fileExists(atPath: ApprovalCenter.hookScriptPath))
     }
 
     func testClaudeHookRefusesInvalidSettingsWithoutPartialInstall() throws {

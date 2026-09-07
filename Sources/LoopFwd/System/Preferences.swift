@@ -79,6 +79,8 @@ enum Pref {
 
     // MARK: Labs
     static let claudeControlsEnabled = "claudeControlsEnabled"
+    static let claudeConfigurationDirectory = "claudeConfigurationDirectory"
+    static let codexDesktopDataDirectory = "codexDesktopDataDirectory"
     static let providerControlsEnabled = "providerControlsEnabled"
 
     /// AppStorage fallbacks and registered defaults must share these values.

@@ -14,6 +14,13 @@ enum CodexDesktopSessions {
         read().sessions
     }
 
+    static func read(root: Result<String, Error>) -> ProviderReadResult {
+        switch root {
+        case .success(let path): return read(databasePath: path + "/state_5.sqlite")
+        case .failure(let error): return .failed("Codex Desktop registry", reason: error.localizedDescription)
+        }
+    }
+
     static func read(databasePath suppliedPath: String? = nil, pageSize: Int = 32) -> ProviderReadResult {
         let source = "Codex Desktop registry"
         let root = ProcessInfo.processInfo.environment["CODEX_HOME"] ?? NSHomeDirectory() + "/.codex"

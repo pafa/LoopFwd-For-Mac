@@ -65,6 +65,15 @@ enum AgentScanner {
                 Bundle(url: url)?.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "unknown"
         }
         let codexDesktopRunning = runningBundleIDs.contains("com.openai.codex")
+        let codexDesktopEnvironments =
+            runningApplications
+            .filter { $0.bundleIdentifier == "com.openai.codex" }
+            .map { processEnvironmentValues(pid: $0.processIdentifier, keys: ["CODEX_HOME"]) }
+        let codexDesktopRoot = Result {
+            try ProviderDataLocations.codexDesktopRoot(
+                selected: UserDefaults.standard.string(forKey: Pref.codexDesktopDataDirectory),
+                processEnvironments: codexDesktopEnvironments, defaultRoot: NSHomeDirectory() + "/.codex")
+        }
         let openCodeDesktopRunning = runningBundleIDs.contains("ai.opencode.desktop")
 
         for row in processRows(output) {
@@ -364,6 +373,7 @@ enum AgentScanner {
                     session.todos = info.todos
                     session.pendingQuestion = info.pendingQuestion
                     session.openCodeControl = info.control
+                    session.observedVersion = info.observedVersion
                     session.observation = .rich(
                         "OpenCode loopback API",
                         updatedAt: Date(timeIntervalSince1970: info.updatedAt / 1000),
@@ -664,7 +674,7 @@ enum AgentScanner {
             if codexDesktopRunning, !disabled.contains(.codex) {
                 group.addTask {
                     let startedAt = Date()
-                    let result = CodexDesktopSessions.read()
+                    let result = CodexDesktopSessions.read(root: codexDesktopRoot)
                     return DesktopRead(
                         kind: .codex, surface: .codexDesktop, result: result,
                         duration: Date().timeIntervalSince(startedAt))
@@ -685,7 +695,20 @@ enum AgentScanner {
         }
         for read in desktopReads {
             readerResults[read.surface] = read.result
-            sessions.append(contentsOf: read.result.sessions)
+            let bundleID = read.kind == .codex ? "com.openai.codex" : "ai.opencode.desktop"
+            let versions = Set(
+                runningApplications.filter { $0.bundleIdentifier == bundleID }.compactMap {
+                    $0.bundleURL.flatMap {
+                        Bundle(url: $0)?.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+                    }
+                })
+            let version = versions.count == 1 ? versions.first : nil
+            sessions.append(
+                contentsOf: read.result.sessions.map {
+                    var session = $0
+                    session.observedVersion = .metadata(version, source: "Running app bundle")
+                    return session
+                })
             providerDurations[read.kind, default: 0] += read.duration
             surfaceDurations[read.surface] = read.duration
         }

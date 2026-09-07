@@ -15,6 +15,16 @@ body:
       description: Include the provider, CLI/Desktop surface, steps, and whether the issue repeats.
     validations:
       required: true
+  - type: input
+    id: provider_version
+    attributes:
+      label: Agent version and surface
+      description: Actual agent version if known (not the supported range), plus CLI, Desktop or managed. Unknown is fine.
+  - type: input
+    id: environment
+    attributes:
+      label: Terminal and data location
+      description: Terminal app/version and whether you use a custom data directory. Do not paste the full path.
   - type: textarea
     id: diagnostics
     attributes:

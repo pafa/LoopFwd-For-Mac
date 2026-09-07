@@ -43,6 +43,9 @@ from `@lobehub/icons-static-png@1.95.0`.
 - License: MIT
 - Distributed license: `LICENSES/lobe-icons-MIT.txt`
 - Exact production hashes: `assets/agent-icon-checksums.sha256`
+- Original npm archive integrity and file mappings: `assets/agent-icon-provenance.json`
+- The 0.1.1 source candidate re-imports the App assets from that verified archive;
+  previously published 0.1.0 artifacts are not silently replaced.
 
 Claude, Codex, OpenCode, Cursor, Gemini, GitHub Copilot, Qwen, Kimi,
 DeepSeek, Grok, Mistral, LoopFwd, and their associated marks belong to their

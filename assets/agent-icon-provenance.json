@@ -1,0 +1,64 @@
+{
+  "package": "@lobehub/icons-static-png",
+  "version": "1.95.0",
+  "archiveURL": "https://registry.npmjs.org/@lobehub/icons-static-png/-/icons-static-png-1.95.0.tgz",
+  "archiveIntegrity": "sha512-pREk6hQ24WGxVu/l/M7DQomaNJmbOagmFs4dziTmCE0zxrLtm5Gv1dJpugbWwBzbVl4mp52vFrujwuYAjV6QtQ==",
+  "verifiedAt": "2026-09-07",
+  "files": [
+    {
+      "path": "Sources/LoopFwd/Resources/agents/claude-color.png",
+      "upstreamPath": "package/dark/claude-color.png",
+      "sha256": "97b53fb85b3bf401ffeb8ee7c5ebad734ce9f6edc3038f242021c53bcc18e23d"
+    },
+    {
+      "path": "Sources/LoopFwd/Resources/agents/cursor.png",
+      "upstreamPath": "package/dark/cursor.png",
+      "sha256": "1ac411d127a35bb2d287f39e3a4084ed1407884e52377a5cd9bda1a3ea7ef47b"
+    },
+    {
+      "path": "Sources/LoopFwd/Resources/agents/deepseek.png",
+      "upstreamPath": "package/dark/deepseek.png",
+      "sha256": "2cb107c96e3edfc128b04cb8368929c9b9157ecf392b5addf9ae5bc81d8290f1"
+    },
+    {
+      "path": "Sources/LoopFwd/Resources/agents/gemini-color.png",
+      "upstreamPath": "package/dark/gemini-color.png",
+      "sha256": "10c628f55d22a9725b9f9fccce7cf062b9fb68da5f7736e87010e0594d7ba6db"
+    },
+    {
+      "path": "Sources/LoopFwd/Resources/agents/githubcopilot.png",
+      "upstreamPath": "package/dark/githubcopilot.png",
+      "sha256": "a9b80430e3b70f7ae4e294a5c2548aa4a7e38e8d933dfd7d2051d14dac620d6d"
+    },
+    {
+      "path": "Sources/LoopFwd/Resources/agents/grok.png",
+      "upstreamPath": "package/dark/grok.png",
+      "sha256": "dbd7bf8431752d3a1ad00f7b3b28df4ef5bd508cdb8583c3bd9f579936545fa0"
+    },
+    {
+      "path": "Sources/LoopFwd/Resources/agents/kimi.png",
+      "upstreamPath": "package/dark/kimi.png",
+      "sha256": "373db4703eb8b6e5a2e165c49708bb567ef29bb210f63ee8216f5c9ee1cb66ba"
+    },
+    {
+      "path": "Sources/LoopFwd/Resources/agents/mistral.png",
+      "upstreamPath": "package/dark/mistral.png",
+      "sha256": "bb5e5a02505c8e28bcc5016ca15a9bf5c320d402a939f7544a71dd3bfe583c3c"
+    },
+    {
+      "path": "Sources/LoopFwd/Resources/agents/openai.png",
+      "upstreamPath": "package/dark/openai.png",
+      "sha256": "375016542ebe78b63c7f36b8f6aee3058f2b706d861e5153fd74f9c27f63b8b7"
+    },
+    {
+      "path": "Sources/LoopFwd/Resources/agents/opencode.png",
+      "upstreamPath": "package/dark/opencode.png",
+      "sha256": "017ff9bc277303d042baa12017be114f876b045260603528f5a7beedfdd6c714"
+    },
+    {
+      "path": "Sources/LoopFwd/Resources/agents/qwen.png",
+      "upstreamPath": "package/dark/qwen.png",
+      "sha256": "3c7807f10dcf175842af41d763e5364b638776c8ffc43682efa4c4b0436b7b2a"
+    }
+  ]
+}

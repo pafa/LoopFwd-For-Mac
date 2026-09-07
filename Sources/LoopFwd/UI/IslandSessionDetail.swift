@@ -229,9 +229,6 @@ struct SessionDetail: View {
         if agent.codexManagedControl != nil {
             return "The Codex connection stopped. Your reply was not sent."
         }
-        if TerminalBridge.needsAccessibilityAccess(for: agent) {
-            return "Allow LoopFwd in System Settings → Privacy & Security → Accessibility, then try again."
-        }
         return "Couldn’t reach this terminal session. Your reply was not sent."
     }
 
