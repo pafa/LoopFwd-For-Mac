@@ -1,0 +1,3466 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "Preview tested": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"预览实测"}}}},
+    "%d integrations · %d preview-tested surfaces": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"%d 款接入 · %d 个表面已做预览实测"}}}},
+    "Preview tested means basic real-task monitoring was checked on a specific surface, not every feature or environment. Other integrations are optional experiments; enable only what you use.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"预览实测表示已检查特定运行表面的基础任务监控，不代表全部功能或环境均通过。其他接入是可选实验，请只启用自己使用的产品。"}}}},
+    "Basic monitoring tested on the listed surface; return and controls vary by session.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"所列表面已做基础监控实测；返回与控制能力以具体会话为准。"}}}},
+    "Optional CLI integration. Enable in Agents; observer setup may be required. Real model tasks are not yet verified.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"可选 CLI 接入，请在 Agent 中启用，可能需要配置观察器。真实模型任务尚未验证。"}}}},
+    "Installed does not mean configured or tested on this Mac.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"已安装不代表已配置，也不代表已在此 Mac 上验证。"}}}},
+    "Disabled in Agents": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"未在 Agent 中启用"}}}},
+    "Kimi Code observer": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Kimi Code 观察器"}}}},
+    "Read-only session observer": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"只读会话观察器"}}}},
+    "Select the KIMI_CODE_HOME folder": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"选择 KIMI_CODE_HOME 数据目录"}}}},
+    "Select Python 3.11 or newer": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"选择 Python 3.11 或更新版本"}}}},
+    "Requires Kimi Code 0.41.0, Node.js 24+ and Python 3.11+. Lifecycle hooks identify sessions; task state comes from the matching main wire. No approval or exact session return is promised. Configuration is backed up before changes.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"需要 Kimi Code 0.41.0、Node.js 24+ 和 Python 3.11+。生命周期 Hook 只识别会话，任务状态读取对应主会话记录。不承诺审批或精确返回会话，修改配置前先备份。"}}}},
+    "Kimi session cannot be selected precisely": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"无法精确选择此 Kimi 会话"}}}},
+    "Kimi session lifecycle heartbeat is stale": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Kimi 会话生命周期心跳已过期"}}}},
+    "Kimi lifecycle identity or data root is incompatible": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Kimi 生命周期身份或数据目录不匹配"}}}},
+    "Kimi lifecycle session has no matching readable main wire": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Kimi 会话没有匹配的可读主记录"}}}},
+    "WorkBuddy desktop observer": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"WorkBuddy 桌面观察器"}}}},
+    "Install WorkBuddy 5.5.3 first": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"请先安装 WorkBuddy 5.5.3"}}}},
+    "Observer configured. Restart WorkBuddy to load the hooks.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"观察器已配置，请重启 WorkBuddy 以加载 Hook。"}}}},
+    "Observer events detected · experimental": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"已检测到观察事件 · 实验支持"}}}},
+    "Observer configured · restart WorkBuddy if needed": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"观察器已配置 · 必要时重启 WorkBuddy"}}}},
+    "Desktop · versioned Hook observer": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"桌面应用 · 版本化 Hook 观察器"}}}},
+    "Experimental tool progress and session return. Install the observer in Integrations.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"实验性工具进展观察与会话返回。请在“集成”中安装观察器。"}}}},
+    "Requires WorkBuddy 5.5.3 with bundled CLI 2.137.1 and Node 24+. Select the WorkBuddy configuration folder (normally ~/.workbuddy, or your WORKBUDDY_CONFIG_DIR). Existing hooks are backed up and preserved. Only short-term tool progress and session return are supported; approvals and successful goal completion are not confirmed.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"需要 WorkBuddy 5.5.3（内置 CLI 2.137.1）及 Node 24+。请选择 WorkBuddy 配置目录，通常是 ~/.workbuddy 或自定义 WORKBUDDY_CONFIG_DIR。原有 Hook 会备份并保留。目前只支持短时工具进展观察和会话返回，尚不能确认审批与目标成功完成。"}}}},
+    "Desktop installed · observer setup required": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"桌面应用已安装 · 需要配置观察器"}}}},
+    "Desktop app not found": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"未发现桌面应用"}}}},
+    "Gemini CLI observer": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Gemini CLI 观察器"}}}},
+    "Qwen Code observer": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Qwen Code 观察器"}}}},
+    "Cursor CLI observer": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Cursor CLI 观察器"}}}},
+    "Remove or recover the existing observer before choosing another folder.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"请先移除或恢复现有观察器，再选择其他配置目录。"}}}},
+    "Read-only event observer": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"只读事件观察器"}}}},
+    "Cursor uses ~/.cursor/hooks.json or <project>/.cursor/hooks.json, independent of CURSOR_CONFIG_DIR. Only identity and output events are observed; busy, completion and approvals are not confirmed. Existing hooks are preserved and backed up.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Cursor 使用 ~/.cursor/hooks.json 或 <项目>/.cursor/hooks.json，与 CURSOR_CONFIG_DIR 无关。目前只观察身份与输出事件，不能确认正在执行、完成或审批状态。原有 Hook 会保留并备份。"}}}},
+    "Read-only stream observer": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"只读进展观察器"}}}},
+    "Choose a configuration folder to set up observation": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"选择配置目录以设置观察器"}}}},
+    "Choose the official CLI in Agents first": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"请先在 Agent 设置中选择官方 CLI"}}}},
+    "Select the provider configuration folder": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"选择该 Agent 的配置目录"}}}},
+    "Observer resources are unavailable": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"观察器资源不可用，请重新安装 LoopFwd"}}}},
+    "Observer configured. Restart the CLI; workspace trust may still be required.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"观察器已配置，请重启 CLI。可能仍需信任当前工作目录。"}}}},
+    "Observer is not configured": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"观察器未配置"}}}},
+    "Hooks are disabled in the selected settings. No disable switches were changed.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"所选配置已禁用 Hook，未更改你的禁用设置。"}}}},
+    "Observer setup is incomplete. Reinstall to repair it, or remove it.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"观察器配置不完整，请重新安装以修复，或移除配置。"}}}},
+    "Reinstall": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"重新安装"}}}},
+    "Review settings and backups before retrying an interrupted operation": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"中断操作后，请先检查当前配置和备份再重试"}}}},
+    "Choose the provider settings folder explicitly. Existing hooks and comments are preserved, settings are backed up, and disabled hooks stay disabled. Observation only; no approvals or successful completion guarantees.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"请明确选择该 Agent 的配置目录。保留已有 Hook 与注释，修改前备份，已禁用的 Hook 保持禁用。仅观察进展，不提供审批，也不保证能确认任务成功。"}}}},
+    "Tool result received; the next execution stage is not confirmed": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"已收到工具结果，尚不能确认下一执行阶段"}}}},
+    "Qwen session switch is waiting for registry reconciliation": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Qwen 正在切换会话，等待登记数据同步"}}}},
+    "Receiving session model output": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"正在接收会话的模型输出"}}}},
+    "Hook event does not confirm the current task state": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Hook 事件尚不能确认当前任务状态"}}}},
+    "Permission was requested; return to the terminal to check its current state": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"曾发出权限请求，请返回终端确认当前状态"}}}},
+    "Hook progress is stale": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Hook 进展数据已过期"}}}},
+    "Hook event order is ambiguous": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"无法确认 Hook 事件的先后顺序"}}}},
+    "Gemini Hook session identity is ambiguous": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"无法确定 Gemini Hook 的会话身份"}}}},
+    "Gemini Hook recording location could not be verified": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"无法核验 Gemini Hook 的记录位置"}}}},
+    "Mistral Vibe observer": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Mistral Vibe 观察器"}}}},
+    "Read-only tool observer": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"只读工具观察器"}}}},
+    "Select a Vibe home folder to configure the observer": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"选择 Vibe 配置目录以安装观察器"}}}},
+    "Choose the official Vibe CLI in Agents first": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"请先在 Agent 设置中选择官方 Vibe CLI"}}}},
+    "Select the VIBE_HOME folder": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"选择 VIBE_HOME 配置目录"}}}},
+    "Select Node.js 24 or newer": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"选择 Node.js 24 或更新版本的可执行文件"}}}},
+    "A Python-based Vibe 2.25.0 installation is required": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"需要基于 Python 安装的官方 Vibe 2.25.0"}}}},
+    "Checking and backing up observer configuration…": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"正在检查并备份观察器配置…"}}}},
+    "Observer installed. Restart Vibe to load it.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"观察器已安装。请重启 Vibe 以加载配置。"}}}},
+    "Observer removed. Backups and private script copies are retained.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"观察器配置已移除，备份及私有脚本副本仍保留。"}}}},
+    "Observer configuration failed. Review the current settings and available backups.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"观察器配置失败。请检查现有设置，并查看可用的备份。"}}}},
+    "Configuration outcome is uncertain. Review the current settings and backups.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"配置操作结果尚不确定。请检查当前设置和备份。"}}}},
+    "Configuration backup": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"配置备份"}}}},
+    "Original settings are retained for manual recovery": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"原始设置已保留，可手动恢复"}}}},
+    "Show backup": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"显示备份"}}}},
+    "Requires Vibe 2.25.0 and Node.js 24+. Choose VIBE_HOME explicitly. Only tool events are observable; approval and successful completion are not confirmed. Other hooks are preserved and configuration is backed up.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"需要 Vibe 2.25.0 和 Node.js 24+，请明确选择 VIBE_HOME。仅观察工具事件，不能确认审批或任务成功。保留其他 Hook，并在修改前备份配置。"}}}},
+    "Copilot open-session tracker": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Copilot 已打开会话状态"}}}},
+    "Copilot process identity could not be confirmed": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"无法确认 Copilot 进程身份"}}}},
+    "Copilot open-session tracker is missing or unreadable": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Copilot 已打开会话状态缺失或无法读取"}}}},
+    "Copilot session state is incompatible or invalid": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Copilot 会话状态不兼容或无效"}}}},
+    "Copilot event format or version is incompatible": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Copilot 事件格式或版本不兼容"}}}},
+    "Copilot event log is unreadable or incomplete": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Copilot 事件记录无法读取或尚未写入完整"}}}},
+    "Copilot session tab cannot be selected precisely": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"暂时无法精确选择 Copilot 会话标签页"}}}},
+    "Qwen session registry + transcript": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Qwen 会话登记与聊天记录"}}}},
+    "Qwen session matched; CLI history does not confirm the live task state": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"已匹配 Qwen 会话，CLI 历史记录不能确认实时任务状态"}}}},
+    "No verified Gemini session matched this process": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"无法确认此进程对应的 Gemini 会话"}}}},
+    "Gemini session discovery exceeded its read budget": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Gemini 会话发现未能在读取限额内完成"}}}},
+    "Gemini session data is unavailable or ambiguous": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Gemini 会话记录不可读取或存在多个匹配"}}}},
+    "Gemini history matched; live task state is not available": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"已匹配 Gemini 历史记录，尚无可靠实时任务状态"}}}},
+    "Gemini local recording": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Gemini 本地会话记录"}}}},
+    "OpenCode loopback API requires a stable 1.18.x version": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"OpenCode 本地接口需要稳定版 1.18.x"}}}},
+    "%d need attention": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"%d 个需要处理"}}}},
+    "%d may be stalled": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"%d 个可能停滞"}}}},
+    "%d completed": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"%d 个已完成"}}}},
+    "session": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"个会话"}}}},
+    "sessions": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"个会话"}}}},
+    "Needs your approval": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"需要你审批"}}}},
+    "Live": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"实时事件"}}}},
+    "Local": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"本地记录"}}}},
+    "Observer": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"观察器"}}}},
+    "Process": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"进程检测"}}}},
+    "Status": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"状态"}}}},
+    "Attention": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"待处理事项"}}}},
+    "Task time": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"任务用时"}}}},
+    "Updated": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"更新时间"}}}},
+    "Evidence": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"判断依据"}}}},
+    "Source": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"数据来源"}}}},
+    "Observation": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"观察状态"}}}},
+    "Directory": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"目录"}}}},
+    "Uptime": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"运行时长"}}}},
+    "Question": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"问题"}}}},
+    "Approval": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"审批"}}}},
+    "Authentication": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"登录验证"}}}},
+    "Confirmation": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"确认"}}}},
+    "Database discovery could not finish": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"数据库发现尚未完成"}}}},
+    "Database scan did not finish": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"数据库扫描尚未完成"}}}},
+    "Invalid snapshot time, session identity, or session count": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"快照时间、会话身份或会话数量无效"}}}},
+    "Multiple open rollouts make the session ambiguous": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"检测到多个打开的会话记录，无法确定对应任务"}}}},
+    "No compatible local OpenCode service responded": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"没有兼容的本地 OpenCode 服务响应"}}}},
+    "No compatible session data matched this process": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"未找到与此进程匹配的兼容会话数据"}}}},
+    "No current Codex task boundary could be confirmed": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"无法确认当前 Codex 任务的开始或结束事件"}}}},
+    "No current Grok task boundary could be confirmed": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"无法确认当前 Grok 任务的开始或结束事件"}}}},
+    "No exact return target": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"没有可精确返回的目标"}}}},
+    "Observer snapshot exceeds the read budget": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"观察器快照超出读取上限"}}}},
+    "Observer snapshot is unreadable": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"无法读取观察器快照"}}}},
+    "Observer snapshot not found; enable it in Settings": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"未找到观察器快照，请在设置中启用"}}}},
+    "Observer supplied a non-loopback URL": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"观察器提供的地址不是本机回环地址"}}}},
+    "OpenCode database is missing or unreadable": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"OpenCode 数据库缺失或无法读取"}}}},
+    "OpenCode discovery or status read failed": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"OpenCode 会话发现或状态读取失败"}}}},
+    "Registry discovery could not finish": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"会话注册表发现尚未完成"}}}},
+    "Registry does not expose a recognized task state": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"注册表未提供可识别的任务状态"}}}},
+    "Registry scan did not finish": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"会话注册表扫描尚未完成"}}}},
+    "Scan incomplete; remaining processes will be read first next time": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"扫描尚未完成，下次优先读取剩余进程"}}}},
+    "Session message, tool or todo data could not be read": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"无法读取会话消息、工具活动或待办数据"}}}},
+    "Session registry could not be opened": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"无法打开会话注册表"}}}},
+    "Session registry is not available": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"会话注册表不可用"}}}},
+    "Claude session registry process identity could not be verified": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"无法核验 Claude 会话登记的进程出生身份"}}}},
+    "Some session records were invalid": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"部分会话记录无效"}}}},
+    "Temporarily unavailable; reconciling the provider session": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"数据暂不可用，正在重新核对会话"}}}},
+    "The Codex task link could not be resolved": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"无法解析 Codex 任务链接"}}}},
+    "The managed Codex connection is not active": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"托管 Codex 连接未处于活动状态"}}}},
+    "The owning terminal could not be resolved": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"无法确定会话所属终端"}}}},
+    "The process's current rollout could not be verified": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"无法核实进程当前的会话记录"}}}},
+    "Unsupported message, part, or todo schema": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"不支持的消息、内容片段或待办格式"}}}},
+    "Unsupported or unreadable registry schema": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"注册表格式不受支持或无法读取"}}}},
+    "Unsupported session schema": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"不支持的会话格式"}}}},
+    "Rollout could not be read or parsed": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"无法读取或解析会话记录"}}}},
+    "Latest record exceeds the observation window; waiting for readable progress": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"最新记录超出读取窗口，等待可读取的新进展"}}}},
+    "Layout trace": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"布局事件记录"}}}},
+    "Local geometry only. Updates when you click Refresh.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"仅记录本应用几何状态，点击刷新时更新。"}}}},
+    "Interface language": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"界面语言"}}}},
+    "Follow system": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"跟随系统"}}}},
+    "Language changes take effect after restarting LoopFwd.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"语言更改将在重启 LoopFwd 后生效。"}}}},
+    "%d%% remaining": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"剩余 %d%%"}}}},
+    "%d%% used": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"已用 %d%%"}}}},
+    "Shortcut registration failed": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"快捷键注册失败"}}}},
+    "Registration details": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"注册详情"}}}},
+    "Check the error below. Another app may use this shortcut; you can choose a different modifier.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"请查看下方错误。此快捷键可能被其他应用占用，你可以选择其他修饰键。"}}}},
+    "Keyboard event handler": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"键盘事件处理器"}}}},
+    "%@ could not be registered (macOS error %d).": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"无法注册%@（macOS 错误 %d）。"}}}},
+    "macOS did not return a registration handle for %@.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"macOS 未返回%@的注册句柄。"}}}},
+    "Notification permission has not been requested": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"尚未申请通知权限"}}}},
+    "Notifications are blocked in System Settings": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"系统设置中已禁止通知"}}}},
+    "Notification permission could not be confirmed": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"无法确认通知权限"}}}},
+    "Notification not submitted (%@): %@": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"通知未提交（%@）：%@"}}}},
+    "Submitted to macOS (%@); banner display is not confirmed": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"已提交至 macOS（%@），尚未确认横幅展示"}}}},
+    "Data temporarily unavailable": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"数据暂不可用"}}}},
+    "Data source ready · no sessions": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"数据源正常 · 无会话"}}}},
+    "Partial data · scan incomplete": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"部分数据可用 · 扫描未完整完成"}}}},
+    "Data source version incompatible": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"数据源版本不兼容"}}}},
+    "Last complete read: %@": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"上次完整读取：%@"}}}},
+    "No open rollout could be verified for this process": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"未能核验此进程当前打开的会话记录"}}}},
+    "Managed tasks are still running": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"托管任务仍在运行"}}}},
+    "Quitting LoopFwd disconnects its managed Codex tasks. External agent tasks are not stopped.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"退出 LoopFwd 会断开其托管的 Codex 任务。外部 Agent 任务不会被停止。"}}}},
+    "Return to tasks": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"返回任务"}}}},
+    "Task unavailable": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"任务不可用"}}}},
+    "This task ended or its exact return target is no longer available.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"此任务已结束，或已无法准确定位返回位置。"}}}},
+    "LoopFwd Settings": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"LoopFwd 设置"}}}},
+    "The setting could not be changed.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"未能更改此设置。"}}}},
+    "Sound Library": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"声音库"}}}},
+    "The sound library could not be changed.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"未能更改声音库。"}}}},
+    "Add Sound…": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"添加声音…"}}}},
+    "Preview sound %@": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"试听声音 %@"}}}},
+    "Remove sound %@": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"移除声音 %@"}}}},
+    "Preview sound for %@": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"试听“%@”的提示音"}}}},
+    "Launch at Login is available only from a packaged LoopFwd app.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"仅打包后的 LoopFwd App 支持登录时启动。"}}}},
+    "Refusing to edit invalid JSON at %@": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"%@ 中的 JSON 无效，已拒绝修改。"}}}},
+    "Could not serialize the Claude hook settings": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"无法生成 Claude Hook 设置文件。"}}}},
+    "%@ weighted · resets %@": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"加权用量 %@ · %@重置"}}}},
+    "%@ weighted tokens": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"加权用量 %@ Token"}}}},
+    "Source: local Codex rate-limit event. %@. Historical values may be out of date.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"来源：Codex 本机额度事件。%@。历史值可能已过期。"}}}},
+    "Last reported %@": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"最近报告时间：%@"}}}},
+    "Report time unavailable": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"报告时间不可用"}}}},
+    "Resets %@": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"%@重置"}}}},
+    "Rolling %lld-day window": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"滚动 %lld 天窗口"}}}},
+    "Current %lld-hour window": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"当前 %lld 小时窗口"}}}},
+    "%lld-minute window": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"%lld 分钟窗口"}}}},
+    "Usage data incomplete": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"用量数据不完整"}}}},
+    "History is still loading, unreadable, or contains oversized records. Estimates are hidden.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"历史记录尚未读完、无法读取或包含超大记录，暂不显示估算值。"}}}},
+    "Checking…": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"正在检查…"}}}},
+    "Installed · restart DeepSeek Harness Web after changes": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"已安装 · 更改后请重启 DeepSeek Harness Web"}}}},
+    "Not installed · supports dsh %@": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"未安装 · 支持 dsh %@"}}}},
+    "dsh CLI not found": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"未找到 dsh CLI"}}}},
+    "Observer bundle is missing from this build": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"此构建缺少 Observer 安装包"}}}},
+    "Previous Observer archive is unavailable; no profile was modified": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"原 Observer 安装包不可用；为保留现有安装，未修改 Profile"}}}},
+    "Installing…": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"正在安装…"}}}},
+    "Removing…": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"正在移除…"}}}},
+    "Install failed: %@": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"安装失败：%@"}}}},
+    "Remove failed: %@": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"移除失败：%@"}}}},
+    "Observer removed, but its old snapshot could not be removed: %@": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Observer 已移除，但旧快照未能移除：%@"}}}},
+    "Unsupported Harness version; no profile was modified": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Harness 版本不兼容，未修改任何 Profile"}}}},
+    "Install failed: %@. Rollback: %@. Backup: %@": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"安装失败：%@。回滚：%@。备份：%@"}}}},
+    "completed": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"已完成"}}}},
+    "failed: %@": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"失败：%@"}}}},
+    "profile did not exist": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"原 Profile 不存在"}}}},
+    "Command timed out": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"命令执行超时"}}}},
+    "dsh plugin command failed": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"dsh 插件命令执行失败"}}}},
+    "Show fewer sessions": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"收起会话列表"}}}},
+    "Show all sessions": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"显示全部会话"}}}},
+    "The terminal return helper is not available": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"缺少此终端的返回工具"}}}},
+    "An exact terminal session could not be identified": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"无法识别准确的终端会话"}}}},
+    "The task terminal has closed": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"任务所在的终端已关闭"}}}},
+    "This terminal does not have a supported return path": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"此终端暂无可用的返回方式"}}}},
+    "The provider application is not installed": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"尚未安装对应的应用"}}}},
+    "No matching application handles this task link": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"没有匹配的应用可以打开此任务链接"}}}},
+    "The Harness process and local Web address cannot be verified": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"无法核验 Harness 进程和本地 Web 地址"}}}},
+    "Back to active tasks": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"返回活跃任务"}}}},
+    "Managed": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"托管"}}}},
+    "Stop this task before removing its card": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"请先停止任务，再移除卡片"}}}},
+    "Remove this card from LoopFwd": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"从 LoopFwd 移除此卡片"}}}},
+    "Remove managed task from LoopFwd": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"从 LoopFwd 移除托管任务"}}}},
+    "Couldn’t remove this card. The Codex conversation was not changed.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"无法移除此卡片，Codex 对话未被修改。"}}}},
+    "Remove this card from LoopFwd?": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"要从 LoopFwd 移除此卡片吗？"}}}},
+    "The conversation and rollout stay in Codex. LoopFwd will only forget this card.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"对话和执行记录仍保留在 Codex 中，LoopFwd 只会移除此卡片。"}}}},
+    "Reply to %@…": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"回复 %@…"}}}},
+    "Answer %@…": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"回答 %@…"}}}},
+    "Send answer to %@": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"向 %@ 发送回答"}}}},
+    "Sending…": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"正在发送…"}}}},
+    "You": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"你"}}}},
+    "No conversation yet": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"暂无对话"}}}},
+    "Conversation preview is unavailable for this session. Return to its provider to continue.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"此会话暂不支持对话预览，请返回原应用继续。"}}}},
+    "Tasks": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"任务"}}}},
+    "%d/%d steps · %d active · %d open": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"%d/%d 步 · %d 进行中 · %d 待办"}}}},
+    "… +%d more": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"… 另有 %d 项"}}}},
+    "(%d running)": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"（%d 个运行中）"}}}},
+    "Approval needed: %@": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"需要审批：%@"}}}},
+    "%@ needs your attention": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"%@ 需要你处理"}}}},
+    "Jump to answer": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"跳转处理"}}}},
+    "Codex connection stopped; your reply was not sent": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Codex 连接已中断，回答未发送"}}}},
+    "Allow LoopFwd in Accessibility, then try again": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"请在辅助功能中允许 LoopFwd，然后重试"}}}},
+    "Request expired or could not be reached": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"请求已过期或无法连接"}}}},
+    "The Codex connection stopped. Your reply was not sent.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Codex 连接已中断，回答未发送。"}}}},
+    "Allow LoopFwd in System Settings → Privacy & Security → Accessibility, then try again.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"请在系统设置 → 隐私与安全性 → 辅助功能中允许 LoopFwd，然后重试。"}}}},
+    "Couldn’t reach this terminal session. Your reply was not sent.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"无法连接到此终端会话，回答未发送。"}}}},
+    "· pick any": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"· 可多选"}}}},
+    "Return to session": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"返回会话"}}}},
+    "↑↓ select · ⏎ jump · esc close": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"↑↓ 选择 · ⏎ 跳转 · esc 关闭"}}}},
+    "New Codex task": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"新建 Codex 任务"}}}},
+    "workspace sandbox": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"工作区沙盒"}}}},
+    "Choose…": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"选择…"}}}},
+    "What should Codex do?": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"希望 Codex 做什么？"}}}},
+    "Start Codex task": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"开始 Codex 任务"}}}},
+    "Starting the official Codex connection…": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"正在建立官方 Codex 连接…"}}}},
+    "Dismiss message": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"关闭消息"}}}},
+    "Last reported usage, not a live account balance. See Usage for source and time.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"这是最近报告的用量，并非实时账户余额。来源和时间详见「用量」。"}}}},
+    "Estimated Claude usage — Settings → Usage": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"Claude 估算用量 — 设置 → 用量"}}}},
+    "Done": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"已完成"}}}},
+    "Plan": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"计划"}}}},
+    "Running a command": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"正在执行命令"}}}},
+    "Running a tool script": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"正在执行工具脚本"}}}},
+    "Editing files": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"正在修改文件"}}}},
+    "Updating the plan": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"正在更新计划"}}}},
+    "Searching the web": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"正在搜索网页"}}}},
+    "Viewing an image": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"正在查看图片"}}}},
+    "Running %@": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"正在执行 %@"}}}},
+    "Editing %@": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"正在修改 %@"}}}},
+    "Using %@": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"正在使用 %@"}}}},
+    "Preparing %@": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"正在准备 %@"}}}},
+    "%@ failed": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 执行失败"
+          }
+        }
+      }
+    },
+    "%@ finished": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 已完成"
+          }
+        }
+      }
+    },
+    "%@ may be stalled": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 可能停滞"
+          }
+        }
+      }
+    },
+    "%@ needs you": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 需要你处理"
+          }
+        }
+      }
+    },
+    "%@ resumed": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 已恢复"
+          }
+        }
+      }
+    },
+    "%@ started": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 已开始"
+          }
+        }
+      }
+    },
+    "%@ stopped": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 已停止"
+          }
+        }
+      }
+    },
+    "%d done": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d 个已完成"
+          }
+        }
+      }
+    },
+    "%d failed": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d 个失败"
+          }
+        }
+      }
+    },
+    "%d need you": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d 个需要处理"
+          }
+        }
+      }
+    },
+    "%d observed sessions": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "检测到 %d 个会话"
+          }
+        }
+      }
+    },
+    "%d stalled": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d 个可能停滞"
+          }
+        }
+      }
+    },
+    "%d tasks failed": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d 条任务失败"
+          }
+        }
+      }
+    },
+    "%d tasks finished": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d 条任务完成"
+          }
+        }
+      }
+    },
+    "%d tasks may be stalled": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d 条任务可能停滞"
+          }
+        }
+      }
+    },
+    "%d tasks need you": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d 条任务需要处理"
+          }
+        }
+      }
+    },
+    "%d tasks resumed": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d 条任务已恢复"
+          }
+        }
+      }
+    },
+    "%d tasks started": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d 条任务已开始"
+          }
+        }
+      }
+    },
+    "%d tasks stopped": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d 条任务已停止"
+          }
+        }
+      }
+    },
+    "%d verified surfaces · other integrations experimental": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d 个运行表面已验证 · 其他接入为实验支持"
+          }
+        }
+      }
+    },
+    "%d working": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d 个执行中"
+          }
+        }
+      }
+    },
+    "%g seconds": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%g 秒"
+          }
+        }
+      }
+    },
+    "+ %d more": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+ 另外 %d 个"
+          }
+        }
+      }
+    },
+    "1 hour": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 小时"
+          }
+        }
+      }
+    },
+    "1 second": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 秒"
+          }
+        }
+      }
+    },
+    "10pt": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "10 磅"
+          }
+        }
+      }
+    },
+    "11pt (Default)": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "11 磅（默认）"
+          }
+        }
+      }
+    },
+    "12pt": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "12 磅"
+          }
+        }
+      }
+    },
+    "13pt": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "13 磅"
+          }
+        }
+      }
+    },
+    "2 hours": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2 小时"
+          }
+        }
+      }
+    },
+    "2 seconds": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2 秒"
+          }
+        }
+      }
+    },
+    "2 ses": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2 个会话"
+          }
+        }
+      }
+    },
+    "3 seconds": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 秒"
+          }
+        }
+      }
+    },
+    "30 minutes": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30 分钟"
+          }
+        }
+      }
+    },
+    "5 seconds": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5 秒"
+          }
+        }
+      }
+    },
+    "8 seconds": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "8 秒"
+          }
+        }
+      }
+    },
+    "A live question, approval, sign-in or confirmation is waiting": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "有一个实时问题、审批、登录或确认请求等待处理"
+          }
+        }
+      }
+    },
+    "A missing permission disables only the capability that needs it. Passive observation remains read-only.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "权限缺失只影响依赖它的能力，观察功能始终只读。"
+          }
+        }
+      }
+    },
+    "A new Claude / Codex / OpenCode session appears": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "出现新的 Claude / Codex / OpenCode 会话"
+          }
+        }
+      }
+    },
+    "A provider-confirmed turn failed": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Provider 明确报告任务失败"
+          }
+        }
+      }
+    },
+    "About": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关于"
+          }
+        }
+      }
+    },
+    "Accessibility permission is available": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已获得辅助功能权限"
+          }
+        }
+      }
+    },
+    "Accessibility permission required for replies": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "回复需要辅助功能权限"
+          }
+        }
+      }
+    },
+    "Active only while the switcher panel is open.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "仅在切换面板打开时生效。"
+          }
+        }
+      }
+    },
+    "Activity detected": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "检测到活动"
+          }
+        }
+      }
+    },
+    "Adds Shift for backwards cycling. Only registered while enabled.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "加按 Shift 反向切换，仅在启用时注册。"
+          }
+        }
+      }
+    },
+    "Advanced": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "高级"
+          }
+        }
+      }
+    },
+    "Agents": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agent"
+          }
+        }
+      }
+    },
+    "AI finished its turn": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI 已完成当前轮任务"
+          }
+        }
+      }
+    },
+    "Allow…": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "允许…"
+          }
+        }
+      }
+    },
+    "Allowed": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已允许"
+          }
+        }
+      }
+    },
+    "Allowed — enabled task alerts can appear": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已允许 — 将显示你启用的任务通知"
+          }
+        }
+      }
+    },
+    "Always Allow": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "始终允许"
+          }
+        }
+      }
+    },
+    "Approval Shortcuts": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "审批快捷键"
+          }
+        }
+      }
+    },
+    "Approve": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "批准"
+          }
+        }
+      }
+    },
+    "Approximate transcript-based budgets, not official account limits": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "根据本机记录估算，并非官方账户额度"
+          }
+        }
+      }
+    },
+    "Attention observer": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "待处理事件观察器"
+          }
+        }
+      }
+    },
+    "Authorized": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已授权"
+          }
+        }
+      }
+    },
+    "Auto reveal dwell": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自动展开停留时间"
+          }
+        }
+      }
+    },
+    "Auto-collapse on mouse leave": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "鼠标离开时自动收起"
+          }
+        }
+      }
+    },
+    "Auto-expand panel on task complete": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "任务完成时自动展开"
+          }
+        }
+      }
+    },
+    "Auto-hide when no active sessions": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "没有活跃任务时自动隐藏"
+          }
+        }
+      }
+    },
+    "Automatic": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自动"
+          }
+        }
+      }
+    },
+    "Automatic · 2s active / 8s idle": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自动 · 活跃 2 秒 / 空闲 8 秒"
+          }
+        }
+      }
+    },
+    "Automatic prefers the built-in notch. On a display without a notch, LoopFwd stays hidden until you move the pointer to the top center.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自动优先使用内置刘海屏。无刘海屏上保持隐藏，鼠标移到顶部中央才展开。"
+          }
+        }
+      }
+    },
+    "Available": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可用"
+          }
+        }
+      }
+    },
+    "Back": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "返回"
+          }
+        }
+      }
+    },
+    "Blocked in System Settings": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已在系统设置中阻止"
+          }
+        }
+      }
+    },
+    "Build %@ · %@": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "构建 %@ · %@"
+          }
+        }
+      }
+    },
+    "Cancel": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消"
+          }
+        }
+      }
+    },
+    "Check notification access in System Settings": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请在系统设置中检查通知权限"
+          }
+        }
+      }
+    },
+    "Choose an installed CLI or review agent setup to begin": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择已安装的 CLI，或查看 Agent 配置说明"
+          }
+        }
+      }
+    },
+    "Choose CLI…": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择 CLI…"
+          }
+        }
+      }
+    },
+    "Claude community usage estimates": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude 社区用量估算"
+          }
+        }
+      }
+    },
+    "Claude plan": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude 套餐"
+          }
+        }
+      }
+    },
+    "Clicking anywhere outside the panel closes an event reveal immediately.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "事件自动展开后，点击面板外部即可收起。"
+          }
+        }
+      }
+    },
+    "Close": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关闭"
+          }
+        }
+      }
+    },
+    "Codex displays its last reported limits, not a live balance. Claude community estimates are optional in Labs.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex 显示最后一次报告的额度，并非实时余额。Claude 社区估算可在实验室中启用。"
+          }
+        }
+      }
+    },
+    "Collapse Panel": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "收起面板"
+          }
+        }
+      }
+    },
+    "Completed": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已完成"
+          }
+        }
+      }
+    },
+    "Completed: %@": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已完成：%@"
+          }
+        }
+      }
+    },
+    "Content Font Size": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "内容字号"
+          }
+        }
+      }
+    },
+    "Control requires a live process-owned loopback request.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "控制要求有当前进程所属的实时 loopback 请求。"
+          }
+        }
+      }
+    },
+    "Copied": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已复制"
+          }
+        }
+      }
+    },
+    "Copy Report": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "复制报告"
+          }
+        }
+      }
+    },
+    "Current 5-hour window": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "当前 5 小时窗口"
+          }
+        }
+      }
+    },
+    "Data source ready": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "数据源可读"
+          }
+        }
+      }
+    },
+    "Data stale": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "数据已过期"
+          }
+        }
+      }
+    },
+    "DeepSeek observer": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DeepSeek 观察插件"
+          }
+        }
+      }
+    },
+    "Deny": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拒绝"
+          }
+        }
+      }
+    },
+    "Diagnostics": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "诊断"
+          }
+        }
+      }
+    },
+    "Disable click-to-jump": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "点击时打开详情"
+          }
+        }
+      }
+    },
+    "Disabling controls does not stop existing managed tasks. Return and stop remain available.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关闭控制不会停止已有托管任务。仍可返回或停止这些任务。"
+          }
+        }
+      }
+    },
+    "Disconnected display": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示器已断开"
+          }
+        }
+      }
+    },
+    "Dismiss auto reveal on outside click": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "点击外部时收起"
+          }
+        }
+      }
+    },
+    "Dismissal": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "收起"
+          }
+        }
+      }
+    },
+    "Display": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示"
+          }
+        }
+      }
+    },
+    "Enable Keyboard Shortcuts": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "启用键盘快捷键"
+          }
+        }
+      }
+    },
+    "Enable Sound Effects": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "启用提示音"
+          }
+        }
+      }
+    },
+    "Enable…": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "启用…"
+          }
+        }
+      }
+    },
+    "Estimated locally from transcript token counts (cache reads weighted at 10%). Anthropic doesn't publish exact budgets — treat the percentages as a guide.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "根据本机对话 Token 数估算（缓存读取按 10% 权重计算）。Anthropic 未公布精确预算，百分比仅供参考。"
+          }
+        }
+      }
+    },
+    "Every provider": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有 Provider"
+          }
+        }
+      }
+    },
+    "Exact session control when the host API is available": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "宿主 API 可用时，控制精确会话"
+          }
+        }
+      }
+    },
+    "Exact task return; reply and stop only for LoopFwd-managed tasks.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可返回精确任务；仅 LoopFwd 托管任务支持回复和停止。"
+          }
+        }
+      }
+    },
+    "Expand notch on hover": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "鼠标悬停时展开"
+          }
+        }
+      }
+    },
+    "Expansion": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "展开"
+          }
+        }
+      }
+    },
+    "Experimental digit/text injection into one exact terminal session": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "实验功能：向精确定位的终端会话输入数字或文字"
+          }
+        }
+      }
+    },
+    "Experimental managed Codex creation and OpenCode replies/approvals": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "实验功能：创建托管 Codex 任务、回复与审批 OpenCode 请求"
+          }
+        }
+      }
+    },
+    "Experimental provider-owned local session readers": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "实验支持：读取 Provider 的本机会话数据"
+          }
+        }
+      }
+    },
+    "Failed": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "失败"
+          }
+        }
+      }
+    },
+    "Failed: %@": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "执行失败：%@"
+          }
+        }
+      }
+    },
+    "Fan-out Task subagents while they run. Keeps the panel clean when off.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "展示运行中的子 Agent。关闭后面板更简洁。"
+          }
+        }
+      }
+    },
+    "Fine-tune the pill dimensions if your machine doesn't fit perfectly. 0 uses the macOS API value.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "仅在屏幕适配不佳时微调。0 表示使用 macOS API 提供的尺寸。"
+          }
+        }
+      }
+    },
+    "From": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "从"
+          }
+        }
+      }
+    },
+    "General": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通用"
+          }
+        }
+      }
+    },
+    "Global Shortcuts": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全局快捷键"
+          }
+        }
+      }
+    },
+    "Global, but only registered while a permission request is pending — they never shadow other apps' shortcuts in normal use. Needs the Claude Code hook (Integrations).": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "仅在等待权限处理时注册，不在日常使用中占用其他应用的快捷键。需要在“集成”中安装 Claude Code Hook。"
+          }
+        }
+      }
+    },
+    "Harness Web, Grok and Mistral remain experimental": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Harness Web、Grok 和 Mistral 保持实验支持"
+          }
+        }
+      }
+    },
+    "Hide in fullscreen": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全屏时隐藏"
+          }
+        }
+      }
+    },
+    "Hide notification details": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "隐藏通知详情"
+          }
+        }
+      }
+    },
+    "Keeps the island out of other apps' fullscreen spaces. Menu-bar auto-hide does not affect this setting.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不在其他应用的全屏空间显示 Island。菜单栏自动隐藏不会影响此设置。"
+          }
+        }
+      }
+    },
+    "Qwen session matched; no unique task recording is available": {
+      "localizations": { "zh-Hans": { "stringUnit": { "state": "translated", "value": "已匹配 Qwen 会话，尚无唯一可用的任务记录" } } }
+    },
+    "Hook update required": {
+      "localizations": { "zh-Hans": { "stringUnit": { "state": "translated", "value": "需更新 Hook 以验证事件来源" } } }
+    },
+    "Update hook": {
+      "localizations": { "zh-Hans": { "stringUnit": { "state": "translated", "value": "更新 Hook" } } }
+    },
+    "Hook installed": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已安装 Hook"
+          }
+        }
+      }
+    },
+    "Hook not installed": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未安装 Hook"
+          }
+        }
+      }
+    },
+    "Hover duration": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "悬停时间"
+          }
+        }
+      }
+    },
+    "How long the cursor must rest on the island before it opens.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "鼠标停留多久后展开 Island。"
+          }
+        }
+      }
+    },
+    "How long the panel stays open after an event reveal.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "事件触发自动展开后，面板保持可见的时间。"
+          }
+        }
+      }
+    },
+    "Idle": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "空闲"
+          }
+        }
+      }
+    },
+    "Idle agents stay out of the island until work starts": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "空闲 Agent 会隐藏，任务开始后自动出现"
+          }
+        }
+      }
+    },
+    "Idle session cleanup": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "空闲会话清理"
+          }
+        }
+      }
+    },
+    "Imported sounds appear in every picker above.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "导入的声音将出现在上方所有选择器中。"
+          }
+        }
+      }
+    },
+    "Incompatible data": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "数据不兼容"
+          }
+        }
+      }
+    },
+    "Install": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安装"
+          }
+        }
+      }
+    },
+    "Installation": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安装"
+          }
+        }
+      }
+    },
+    "Installed · not verified": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已安装 · 尚未验证"
+          }
+        }
+      }
+    },
+    "Installed in /Applications": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已安装到 Applications"
+          }
+        }
+      }
+    },
+    "Installs a Notification hook into ~/.claude/settings.json after writing a backup. It observes explicit attention events and never answers them unless Labs control is separately enabled.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "先备份，再向 ~/.claude/settings.json 安装通知 Hook。仅观察明确的待处理事件，除非另行启用 Labs 控制，否则不会回复。"
+          }
+        }
+      }
+    },
+    "Installs LoopFwd's bundled read-only observer through the official dsh profile plugin command. Profile metadata is backed up first. The observer writes a 0600 local snapshot with bounded titles and latest messages; it never copies API keys, tool arguments, cookies, or full transcripts. Restart the Web profile after installing or removing.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通过官方 dsh profile 插件命令安装随附的只读 Observer，并先备份 Profile 元数据。插件写入权限为 0600 的本机快照，标题与最新消息均限长；不复制 API Key、工具参数、Cookie 或完整对话。安装或移除后需重启 Web profile。"
+          }
+        }
+      }
+    },
+    "Integrations": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "集成"
+          }
+        }
+      }
+    },
+    "Integrations remain experimental until their specific CLI or Desktop surface passes real release checks. Installed software is not proof of working observation or control.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "各 CLI 或桌面运行表面通过实机验收前，均保持实验支持。检测到软件不代表观察或控制能力已验证。"
+          }
+        }
+      }
+    },
+    "Interaction": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "交互"
+          }
+        }
+      }
+    },
+    "Interactions": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "交互"
+          }
+        }
+      }
+    },
+    "Jump to task": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "跳转到任务"
+          }
+        }
+      }
+    },
+    "Jump to Terminal": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "返回终端"
+          }
+        }
+      }
+    },
+    "Just now": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "刚刚"
+          }
+        }
+      }
+    },
+    "Keeps the latest meaningful user goal; short confirmations are ignored.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保留最近有实际含义的用户目标，忽略简短确认。"
+          }
+        }
+      }
+    },
+    "Labs": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "实验室"
+          }
+        }
+      }
+    },
+    "Labs: terminal input controls": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "实验室：终端输入控制"
+          }
+        }
+      }
+    },
+    "Last control failure": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上次控制失败"
+          }
+        }
+      }
+    },
+    "Last notification decision": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上次通知决策"
+          }
+        }
+      }
+    },
+    "Last return failure": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上次返回失败"
+          }
+        }
+      }
+    },
+    "Last successful scan": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上次成功扫描"
+          }
+        }
+      }
+    },
+    "Launch at Login": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登录时启动"
+          }
+        }
+      }
+    },
+    "Limited data": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "有限数据"
+          }
+        }
+      }
+    },
+    "LoopFwd changes no provider configuration on startup. Installers, hooks, notification access and login items run only after you choose them.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LoopFwd 启动时不会修改 Agent 配置。安装、Hook、通知权限与登录项只会在你明确操作后变更。"
+          }
+        }
+      }
+    },
+    "LoopFwd observer": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LoopFwd 观察器"
+          }
+        }
+      }
+    },
+    "LoopFwd only sends text when it can address the exact session. Other terminal and editor hosts remain Jump-only until they expose a proven control API.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "只有能精确定位会话时，LoopFwd 才发送文本。其他终端和编辑器在具备经验证的控制 API 前，仅支持返回。"
+          }
+        }
+      }
+    },
+    "LoopFwd posts only the notification types enabled below.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LoopFwd 只发送下方已启用类型的通知。"
+          }
+        }
+      }
+    },
+    "LoopFwd reads provider-owned local session stores and the process table. It never reads API keys or uploads transcript data.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LoopFwd 读取 Provider 的本机会话存储与进程表，不读取 API Key，也不上传对话内容。"
+          }
+        }
+      }
+    },
+    "LoopFwd Settings…": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LoopFwd 设置…"
+          }
+        }
+      }
+    },
+    "macOS Notifications": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS 通知"
+          }
+        }
+      }
+    },
+    "Manual installation required": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "需要手动安装"
+          }
+        }
+      }
+    },
+    "Max Panel Height": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "面板最大高度"
+          }
+        }
+      }
+    },
+    "Max Panel Width": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "面板最大宽度"
+          }
+        }
+      }
+    },
+    "Max visible sessions": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "默认可见会话数"
+          }
+        }
+      }
+    },
+    "Modifier Key": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "修饰键"
+          }
+        }
+      }
+    },
+    "Monitor your local AI coding tasks at a glance.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一眼掌握本机 AI 编程任务。"
+          }
+        }
+      }
+    },
+    "Mutes all sounds during the selected time range (crosses midnight if end is earlier than start). Useful when agents run overnight.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在所选时段内静音。如果结束时间早于开始时间，则跨越午夜。适合夜间运行任务。"
+          }
+        }
+      }
+    },
+    "My Sounds": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "我的声音"
+          }
+        }
+      }
+    },
+    "Navigate Sessions": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "切换会话"
+          }
+        }
+      }
+    },
+    "Navigation is active while the switcher is open.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "仅在切换面板打开时生效。"
+          }
+        }
+      }
+    },
+    "Needs attention": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "需要处理"
+          }
+        }
+      }
+    },
+    "Needs Attention": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "需要处理"
+          }
+        }
+      }
+    },
+    "Needs attention: %@": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "需要处理：%@"
+          }
+        }
+      }
+    },
+    "Needs your attention": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "需要你处理"
+          }
+        }
+      }
+    },
+    "Never": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "从未"
+          }
+        }
+      }
+    },
+    "New session started": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新会话开始"
+          }
+        }
+      }
+    },
+    "New tasks and provider controls": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新建任务与 Agent 控制"
+          }
+        }
+      }
+    },
+    "No active session · installed, not verified": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无活跃会话 · 已安装，尚未验证"
+          }
+        }
+      }
+    },
+    "No active session · software not found": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无活跃会话 · 未找到软件"
+          }
+        }
+      }
+    },
+    "No active tasks": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暂无活跃任务"
+          }
+        }
+      }
+    },
+    "No active window — opens with your next Claude message.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暂无活跃窗口，将在下一条 Claude 消息后开始。"
+          }
+        }
+      }
+    },
+    "No completed scan yet": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "尚未完成扫描"
+          }
+        }
+      }
+    },
+    "No imported sounds yet.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "尚未导入声音。"
+          }
+        }
+      }
+    },
+    "No provider-backed progress for three minutes": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "三分钟内未观察到 Provider 确认的进展"
+          }
+        }
+      }
+    },
+    "No provider-backed progress: %@": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暂未检测到新的进展：%@"
+          }
+        }
+      }
+    },
+    "Not authorized": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未授权"
+          }
+        }
+      }
+    },
+    "Not granted · required only for optional Terminal.app input": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未授权 · 仅可选的 Terminal.app 输入需要"
+          }
+        }
+      }
+    },
+    "Not installed": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未安装"
+          }
+        }
+      }
+    },
+    "Not requested — LoopFwd never asks at startup": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "尚未请求 — LoopFwd 不在启动时请求权限"
+          }
+        }
+      }
+    },
+    "Notch": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "刘海"
+          }
+        }
+      }
+    },
+    "Notch height": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "刘海高度"
+          }
+        }
+      }
+    },
+    "Notch width": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "刘海宽度"
+          }
+        }
+      }
+    },
+    "Notification access is requested only after an explicit click here; startup remains silent.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "只有你在这里点击后才请求通知权限，启动时不会询问。"
+          }
+        }
+      }
+    },
+    "Notifications": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通知"
+          }
+        }
+      }
+    },
+    "Observation and exact terminal return. Terminal control stays in Labs.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支持观察和精确返回终端。终端控制留在 Labs。"
+          }
+        }
+      }
+    },
+    "Observer installation is available in Integrations after dsh is installed.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安装 dsh 后，可在“集成”中安装 Observer。"
+          }
+        }
+      }
+    },
+    "Off": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关闭"
+          }
+        }
+      }
+    },
+    "Off by default. Completion still appears briefly and can notify without taking over the screen.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "默认关闭。完成状态仍会短暂显示并通知，不主动占据屏幕。"
+          }
+        }
+      }
+    },
+    "OK": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "好"
+          }
+        }
+      }
+    },
+    "Open Applications": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开 Applications"
+          }
+        }
+      }
+    },
+    "Open Island": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开 Island"
+          }
+        }
+      }
+    },
+    "Open LoopFwd Settings": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开 LoopFwd 设置"
+          }
+        }
+      }
+    },
+    "Open LoopFwd to view tasks": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开 LoopFwd 查看任务"
+          }
+        }
+      }
+    },
+    "Open LoopFwd to view the task": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开 LoopFwd 查看任务"
+          }
+        }
+      }
+    },
+    "Open Notifications to review macOS authorization": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "前往「通知」查看 macOS 授权"
+          }
+        }
+      }
+    },
+    "Open Settings": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开设置"
+          }
+        }
+      }
+    },
+    "Open Switcher": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开切换面板"
+          }
+        }
+      }
+    },
+    "Optional": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可选"
+          }
+        }
+      }
+    },
+    "Optional warning after three minutes without provider-backed progress.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可选提示：三分钟内未观察到 Provider 确认的进展。"
+          }
+        }
+      }
+    },
+    "Opus, Sonnet, Fable… read from the session transcript.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "从会话数据读取模型名称，如 Opus、Sonnet、Fable。"
+          }
+        }
+      }
+    },
+    "or": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "或"
+          }
+        }
+      }
+    },
+    "Panel Shortcuts": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "面板快捷键"
+          }
+        }
+      }
+    },
+    "Panel size": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "面板尺寸"
+          }
+        }
+      }
+    },
+    "Permission": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "权限"
+          }
+        }
+      }
+    },
+    "Possibly stalled": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可能已停滞"
+          }
+        }
+      }
+    },
+    "Possibly Stalled": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可能停滞"
+          }
+        }
+      }
+    },
+    "Process detected": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "检测到进程"
+          }
+        }
+      }
+    },
+    "Process discovery with a safe fallback when session data is unavailable": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通过进程发现；会话数据不可用时安全降级"
+          }
+        }
+      }
+    },
+    "Processing task": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在处理任务"
+          }
+        }
+      }
+    },
+    "Provider readiness": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agent 就绪状态"
+          }
+        }
+      }
+    },
+    "Provider sources": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Provider 数据源"
+          }
+        }
+      }
+    },
+    "Provider-confirmed failures only.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "仅在 Provider 明确报告失败时通知。"
+          }
+        }
+      }
+    },
+    "Questions, approvals, sign-in and confirmation requests.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "问题、审批、登录和确认请求。"
+          }
+        }
+      }
+    },
+    "Quiet Hours": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "静音时段"
+          }
+        }
+      }
+    },
+    "Quit LoopFwd": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "退出 LoopFwd"
+          }
+        }
+      }
+    },
+    "Quit LoopFwd and drag it into Applications. If blocked, review System Settings → Privacy & Security → Open Anyway.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "退出 LoopFwd 后拖入 Applications。如果被系统拦截，请检查“系统设置 → 隐私与安全性 → 仍要打开”。"
+          }
+        }
+      }
+    },
+    "Read-only observer installed for the supported Web profile.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已为指定 Web profile 安装只读 Observer。"
+          }
+        }
+      }
+    },
+    "Ready": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "就绪"
+          }
+        }
+      }
+    },
+    "Ready — exact tab selection plus keyboard input": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已授权 — 可选择精确标签页并输入"
+          }
+        }
+      }
+    },
+    "Refresh": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "刷新"
+          }
+        }
+      }
+    },
+    "Refresh interval": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "刷新间隔"
+          }
+        }
+      }
+    },
+    "Refresh Now": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "立即刷新"
+          }
+        }
+      }
+    },
+    "Refresh status": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "刷新状态"
+          }
+        }
+      }
+    },
+    "Remove": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移除"
+          }
+        }
+      }
+    },
+    "Request failed: %@": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请求失败：%@"
+          }
+        }
+      }
+    },
+    "Resumed: %@": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已恢复：%@"
+          }
+        }
+      }
+    },
+    "Return to session only; replies are disabled": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "仅支持返回会话，不支持回复"
+          }
+        }
+      }
+    },
+    "Reverse Switcher": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "反向切换"
+          }
+        }
+      }
+    },
+    "Review before sharing": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "分享前请检查"
+          }
+        }
+      }
+    },
+    "Review provider availability and supported capabilities": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查看软件、数据源和已验证能力"
+          }
+        }
+      }
+    },
+    "Rich data active": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在读取详细状态"
+          }
+        }
+      }
+    },
+    "Rolling 7-day window": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最近 7 天窗口"
+          }
+        }
+      }
+    },
+    "Running from /Applications.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在 Applications 中运行。"
+          }
+        }
+      }
+    },
+    "Sanitized diagnostics": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "脱敏诊断"
+          }
+        }
+      }
+    },
+    "Scanner": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "扫描器"
+          }
+        }
+      }
+    },
+    "Sent once per confirmed turn.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每个明确完成的任务轮次仅通知一次。"
+          }
+        }
+      }
+    },
+    "Session": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "会话"
+          }
+        }
+      }
+    },
+    "Session card": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "会话卡片"
+          }
+        }
+      }
+    },
+    "Session Start": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "会话开始"
+          }
+        }
+      }
+    },
+    "Set up an agent": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "配置一个 Agent"
+          }
+        }
+      }
+    },
+    "Settings…": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "设置…"
+          }
+        }
+      }
+    },
+    "Setup status": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "设置状态"
+          }
+        }
+      }
+    },
+    "Shortcuts": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "快捷键"
+          }
+        }
+      }
+    },
+    "Show AI model": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示 AI 模型"
+          }
+        }
+      }
+    },
+    "Show conversation": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查看对话"
+          }
+        }
+      }
+    },
+    "Show conversation details": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查看对话详情"
+          }
+        }
+      }
+    },
+    "Show fewer": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "收起列表"
+          }
+        }
+      }
+    },
+    "Show git branch": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示 Git 分支"
+          }
+        }
+      }
+    },
+    "Show live activity": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示当前步骤"
+          }
+        }
+      }
+    },
+    "Show subagents": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示子 Agent"
+          }
+        }
+      }
+    },
+    "Show task checklists": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示任务清单"
+          }
+        }
+      }
+    },
+    "Show task summary": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示任务目标"
+          }
+        }
+      }
+    },
+    "Show terminal app chip": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "显示终端应用标签"
+          }
+        }
+      }
+    },
+    "Show usage in the panel header": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在面板顶部显示用量"
+          }
+        }
+      }
+    },
+    "Silence during quiet hours": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "静音时段不播放声音"
+          }
+        }
+      }
+    },
+    "Smart suppression": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "智能免打扰"
+          }
+        }
+      }
+    },
+    "Sound": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "声音"
+          }
+        }
+      }
+    },
+    "Source: local Codex rate-limit event. ": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "来源：本机 Codex 用量事件。 "
+          }
+        }
+      }
+    },
+    "Started: %@": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已开始：%@"
+          }
+        }
+      }
+    },
+    "Step · %@": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "步骤 · %@"
+          }
+        }
+      }
+    },
+    "Stopped": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已停止"
+          }
+        }
+      }
+    },
+    "Stopped: %@": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已停止：%@"
+          }
+        }
+      }
+    },
+    "Support is verified per CLI, Desktop or managed surface": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CLI、桌面端、托管任务的支持能力分别验证"
+          }
+        }
+      }
+    },
+    "Supported means capability-backed, not merely detected.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正式支持表示能力已验证，而不只是检测到安装。"
+          }
+        }
+      }
+    },
+    "Suppress only when the exact task is known to be visible, not merely its application.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "只有确认正在查看同一任务时才抑制提醒，仅应用位于前台不够。"
+          }
+        }
+      }
+    },
+    "System": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "系统"
+          }
+        }
+      }
+    },
+    "System access": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "系统权限"
+          }
+        }
+      }
+    },
+    "System Settings could not be opened": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法打开系统设置"
+          }
+        }
+      }
+    },
+    "Tap to open, press again to cycle through sessions, ⏎ to jump (⌘Tab style).": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按下打开，再次按下切换会话，按 ⏎ 返回任务（类似 ⌘Tab）。"
+          }
+        }
+      }
+    },
+    "Task · %@": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "任务 · %@"
+          }
+        }
+      }
+    },
+    "Task Acknowledge": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "任务开始执行"
+          }
+        }
+      }
+    },
+    "Task Complete": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "任务完成"
+          }
+        }
+      }
+    },
+    "Task completed": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "任务完成"
+          }
+        }
+      }
+    },
+    "Task failed": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "任务失败"
+          }
+        }
+      }
+    },
+    "Task Failed": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "任务失败"
+          }
+        }
+      }
+    },
+    "Terminal control": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "终端控制"
+          }
+        }
+      }
+    },
+    "Terminal input (Labs)": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "终端输入（实验室）"
+          }
+        }
+      }
+    },
+    "The observer reports explicit permission and question events. Terminal input remains a Labs feature and is off by default.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Observer 报告明确的权限和问题事件。终端输入仍属于 Labs，默认关闭。"
+          }
+        }
+      }
+    },
+    "The session list scrolls when it grows past this.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "超过该高度后，会话列表可滚动。"
+          }
+        }
+      }
+    },
+    "This report omits prompts, messages, credentials and full paths. Review it before sharing in a LoopFwd bug report.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "报告不含提示词、对话、凭据和完整路径。提交问题前，请再次检查内容。"
+          }
+        }
+      }
+    },
+    "Tracked agents": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "监控的 Agent"
+          }
+        }
+      }
+    },
+    "Tracked data": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "读取的数据"
+          }
+        }
+      }
+    },
+    "Trim idle provider records from Diagnostics after this long. Idle never fills the island.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在此时间后从诊断信息中清理空闲记录。空闲任务不会出现在主岛中。"
+          }
+        }
+      }
+    },
+    "Tuning": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "微调"
+          }
+        }
+      }
+    },
+    "Turn off every LoopFwd shortcut without clearing your mappings.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关闭所有 LoopFwd 快捷键，但保留当前按键设置。"
+          }
+        }
+      }
+    },
+    "Unavailable": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不可用"
+          }
+        }
+      }
+    },
+    "Until": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "至"
+          }
+        }
+      }
+    },
+    "updated %dh ago": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d 小时前更新"
+          }
+        }
+      }
+    },
+    "updated %dm ago": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d 分钟前更新"
+          }
+        }
+      }
+    },
+    "updated %ds ago": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d 秒前更新"
+          }
+        }
+      }
+    },
+    "updated now": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "刚刚更新"
+          }
+        }
+      }
+    },
+    "Usage": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用量"
+          }
+        }
+      }
+    },
+    "Version %@": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "版本 %@"
+          }
+        }
+      }
+    },
+    "Visibility": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可见性"
+          }
+        }
+      }
+    },
+    "Volume": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "音量"
+          }
+        }
+      }
+    },
+    "When enabled, clicking a session opens its detail view instead of switching to its terminal.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开启后，点击会话显示详情，不直接跳转到原任务。"
+          }
+        }
+      }
+    },
+    "Working": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "执行中"
+          }
+        }
+      }
+    },
+    "You submitted a prompt and the agent got to work": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你提交请求后，Agent 开始工作"
+          }
+        }
+      }
+    },
+    "Local changes": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "含本地修改"
+          }
+        }
+      }
+    },
+    "Open %@": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开 %@"
+          }
+        }
+      }
+    },
+    "About LoopFwd": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关于 LoopFwd"
+          }
+        }
+      }
+    },
+    "Supported": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正式支持"
+          }
+        }
+      }
+    },
+    "Experimental": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "实验支持"
+          }
+        }
+      }
+    },
+    "CLI · local session registry": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CLI · 本机会话注册表"
+          }
+        }
+      }
+    },
+    "CLI · Desktop · LoopFwd managed": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CLI · 桌面端 · LoopFwd 托管"
+          }
+        }
+      }
+    },
+    "TUI HTTP · Desktop read-only": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TUI HTTP · 桌面端只读"
+          }
+        }
+      }
+    },
+    "WorkBuddy cannot read this configuration's BOM. Review the settings file.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "WorkBuddy 无法读取此配置的 BOM，请检查设置文件。"
+          }
+        }
+      }
+    },
+    "Harness Web · versioned observer": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Harness Web · 版本化 Observer"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

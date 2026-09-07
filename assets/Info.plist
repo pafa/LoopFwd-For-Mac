@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleExecutable</key>
+    <string>LoopFwd</string>
+    <key>CFBundleIdentifier</key>
+    <string>app.loopfwd.agent-control</string>
+    <key>CFBundleName</key>
+    <string>LoopFwd</string>
+    <key>CFBundleDisplayName</key>
+    <string>LoopFwd</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>14.0</string>
+    <key>LSUIElement</key>
+    <true/>
+    <key>CFBundleIconFile</key>
+    <string>AppIcon</string>
+    <key>NSAppleEventsUsageDescription</key>
+    <string>LoopFwd returns you to agent sessions in Terminal and iTerm.</string>
+    <key>NSDocumentsFolderUsageDescription</key>
+    <string>LoopFwd reads local session and Git metadata to identify your running agents.</string>
+    <key>NSDesktopFolderUsageDescription</key>
+    <string>LoopFwd reads local session and Git metadata to identify your running agents.</string>
+    <key>NSDownloadsFolderUsageDescription</key>
+    <string>LoopFwd reads local session and Git metadata to identify your running agents.</string>
+    <key>NSHighResolutionCapable</key>
+    <true/>
+</dict>
+</plist>

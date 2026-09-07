@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "harnessVersion": "0.1.2-alpha.5",
+  "generatedAt": "2026-09-03T00:00:00Z",
+  "loopbackURL": "http://127.0.0.1:3080",
+  "sessions": [
+    {
+      "sessionId": "session-a",
+      "cwd": "/tmp/example/project-a",
+      "title": "Implement monitor",
+      "running": true,
+      "updatedAt": "2026-09-03T00:00:00Z",
+      "lastPrompt": "Build the monitor",
+      "lastMessage": "Reading provider state",
+      "model": "deepseek-chat"
+    },
+    {
+      "sessionId": "session-b",
+      "cwd": "/tmp/example/project-b",
+      "title": "Review release",
+      "running": false,
+      "updatedAt": "2026-09-03T00:00:00Z",
+      "lastPrompt": "Review the release",
+      "lastMessage": "Ready for review",
+      "model": "deepseek-reasoner"
+    }
+  ]
+}

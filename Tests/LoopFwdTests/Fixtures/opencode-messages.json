@@ -1,0 +1,13 @@
+[
+  {
+    "info": {"role": "user"},
+    "parts": [{"type": "text", "text": "Fix the session state"}]
+  },
+  {
+    "info": {"role": "assistant", "modelID": "deepseek-v3"},
+    "parts": [
+      {"type": "text", "text": "Inspecting the state reader."},
+      {"type": "tool", "tool": "read", "state": {"status": "running"}}
+    ]
+  }
+]

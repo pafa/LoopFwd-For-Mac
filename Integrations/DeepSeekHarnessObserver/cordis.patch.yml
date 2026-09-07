@@ -1,0 +1,6 @@
+# LoopFwd's observer is intentionally host-only and read-only. It consumes the
+# official Web profile session events and writes a bounded local projection.
+- insert:
+    - id: loopfwd-observer
+      name: '@loopfwd/dsh-observer'
+      inject: [sessionController, webStartup]
