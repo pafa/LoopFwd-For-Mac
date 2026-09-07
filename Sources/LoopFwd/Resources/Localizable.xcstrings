@@ -1,6 +1,7 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "Unknown": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"未知"}}}},
     "Unsupported Claude hook layout. Settings were left unchanged.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"不支持此 Claude Hook 配置结构，原配置保持不变。"}}}},
     "Data directory unavailable. Choose it in Agents settings.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"无法确定数据目录，请在 Agent 设置中选择。"}}}},
     "Multiple data directories found. Choose one in Agents settings.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"发现多个数据目录，请在 Agent 设置中明确选择。"}}}},

@@ -213,7 +213,7 @@ final class PreviewHardeningTests: XCTestCase {
     func testNewVisibleAndVoiceOverStringsHaveChineseTranslations() {
         for key in [
             "LoopFwd, %d tasks need attention", "LoopFwd, %d active tasks",
-            "Observed version: %@", "%d cache hits", "Claude settings target",
+            "Observed version: %@", "Unknown", "%d cache hits", "Claude settings target",
             "Return only · keyboard injection disabled", "Codex Desktop data",
         ] {
             XCTAssertNotEqual(L10n.string(key, language: "zh-Hans"), key)
