@@ -19,7 +19,9 @@ Keep using your own agents, editors and terminals.
 
 ## See it in 26 seconds
 
-[▶ Watch the LoopFwd for Mac launch film — 26 seconds, with sound](https://github.com/pafa/LoopFwd-For-Mac/releases/download/v0.1.0/LoopFwd-Launch-Selected-A-26s.mp4)
+https://github.com/user-attachments/assets/d4fdb119-f78b-47f4-b49e-13d833e83da7
+
+[Download the launch film · 26 seconds, with sound](https://github.com/pafa/LoopFwd-For-Mac/releases/download/v0.1.0/LoopFwd-Launch-Selected-A-26s.mp4)
 
 *The selected product film. Integration availability for **0.1.0** is listed below.*
 
@@ -29,7 +31,7 @@ Keep using your own agents, editors and terminals.
 <tr>
 <td width="33%" valign="top"><h3>👀 One glance, multiple tasks</h3>Keep active sessions from different tools and projects together. Expand the island when you want detail; scroll to reach more sessions.</td>
 <td width="33%" valign="top"><h3>🧩 Know what is happening</h3>Read the <b>project, task and current step</b> separately. Meaningless follow-ups such as “continue” don't replace the task's goal.</td>
-<td width="33%" valign="top"><h3>🔔 Notice the moments that matter</h3>Get alerts for confirmed completions, failures and supported live requests. An old reply or an idle process isn't treated as a new decision.</td>
+<td width="33%" valign="top"><h3>🔔 Notice the moments that matter</h3>Get alerts for confirmed completions, failures and supported live requests. Keep focusing on your work instead of repeatedly checking each window.</td>
 </tr>
 <tr>
 <td width="33%" valign="top"><h3>🧭 Get back to the task</h3>Click to return using the available route. <b>Jump to task</b> and <b>Open App</b> are clearly different—Codex Desktop supports task links.</td>
@@ -63,8 +65,8 @@ off by default, and appear only when the session provides a valid control path.
 <table>
 <tr>
 <td width="33%" valign="top"><h3>🚀 Start a task</h3>Create a LoopFwd-managed Codex task from the island, send a follow-up, or stop that managed task. Your existing external sessions remain separate.</td>
-<td width="33%" valign="top"><h3>💬 Give a quick answer</h3>Respond to a supported live question or choose a provided option. OpenCode TUI HTTP and explicitly enabled Claude terminal controls require a verified target.</td>
-<td width="33%" valign="top"><h3>☑️ Approve or decline</h3>Handle a live approval request without hunting for its window, where supported. OpenCode uses its local API; Claude needs its hook, separate Labs opt-in and exact terminal access.</td>
+<td width="33%" valign="top"><h3>💬 Give a quick answer</h3>Answer a supported live question or choose one of its options without leaving the island. Available through OpenCode and optional Claude terminal controls.</td>
+<td width="33%" valign="top"><h3>☑️ Approve or decline</h3>Review a live request and choose whether the agent may continue. For supported OpenCode and Claude requests, with setup and permission requirements below.</td>
 </tr>
 </table>
 

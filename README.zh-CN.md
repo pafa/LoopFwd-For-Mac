@@ -19,7 +19,9 @@
 
 ## 26 秒看懂它
 
-[▶ 观看 LoopFwd for Mac 宣传片 · 26 秒，含配乐](https://github.com/pafa/LoopFwd-For-Mac/releases/download/v0.1.0/LoopFwd-Launch-Selected-A-26s.mp4)
+https://github.com/user-attachments/assets/d4fdb119-f78b-47f4-b49e-13d833e83da7
+
+[下载宣传片 · 26 秒，含配乐](https://github.com/pafa/LoopFwd-For-Mac/releases/download/v0.1.0/LoopFwd-Launch-Selected-A-26s.mp4)
 
 *已选定的产品宣传片；**0.1.0** 的实际接入范围见下方说明。*
 
@@ -29,7 +31,7 @@
 <tr>
 <td width="33%" valign="top"><h3>👀 多个任务，一眼掌握</h3>把不同工具、不同项目的活跃会话放在一起。想看细节就展开；任务变多时，继续滚动查看。</td>
 <td width="33%" valign="top"><h3>🧩 不只知道“正在运行”</h3>分开看清<b>项目、任务、当前步骤</b>。“继续”“好的”不会覆盖真正的任务目标，更容易接上之前的工作。</td>
-<td width="33%" valign="top"><h3>🔔 在有依据时提醒</h3>收到明确完成、失败和可观察的实时请求时提醒你。历史回答或空闲进程，不会被当成新的待决策事项。</td>
+<td width="33%" valign="top"><h3>🔔 在有依据时提醒</h3>收到明确完成、失败和可观察的实时请求时提醒你。少一次反复确认，多一段属于自己的专注时间。</td>
 </tr>
 <tr>
 <td width="33%" valign="top"><h3>🧭 少找窗口，更快返回</h3>按当前接入的实际能力返回。<b>准确跳转</b>和<b>仅打开应用</b>清楚区分；Codex Desktop 可返回对应任务。</td>
@@ -63,8 +65,8 @@
 <table>
 <tr>
 <td width="33%" valign="top"><h3>🚀 下达任务</h3>从岛内创建 LoopFwd 托管的 Codex 任务，续发指令，或停止这项托管任务。不会把你已有的外部会话变成托管任务。</td>
-<td width="33%" valign="top"><h3>💬 快捷回复</h3>对支持的实时问题直接回答或选择选项。OpenCode TUI HTTP，以及单独开启的 Claude 终端控制，都需要核验对应目标。</td>
-<td width="33%" valign="top"><h3>☑️ 快捷同意或拒绝</h3>在支持的接入中直接处理实时审批。OpenCode 通过本机 API；Claude 需要 Hook、独立 Labs 开关，以及精确终端访问条件。</td>
+<td width="33%" valign="top"><h3>💬 快捷回复</h3>不离开小岛，就能对支持的实时问题直接回答或选择选项。适用于 OpenCode 和单独开启的 Claude 终端控制。</td>
+<td width="33%" valign="top"><h3>☑️ 快捷同意或拒绝</h3>看清实时请求，决定是否让 Agent 继续。适用于受支持的 OpenCode 和 Claude 请求；具体设置与权限条件见下方说明。</td>
 </tr>
 </table>
 
