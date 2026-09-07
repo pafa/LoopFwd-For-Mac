@@ -155,6 +155,11 @@
 2|SECURITY.md
 2|THIRD_PARTY_NOTICES.md
 2|docs/ARCHITECTURE.md
+2|docs/SETUP.md
+2|docs/SETUP.zh-CN.md
+2|docs/assets/product-overview-en.svg
+2|docs/assets/product-overview-zh.svg
+2|docs/assets/product-overview-checksums.sha256
 2|docs/assets/agent-icon-checksums.sha256
 2|docs/assets/agents/light/openai.png
 2|docs/assets/agents/dark/openai.png
