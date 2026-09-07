@@ -1,0 +1,56 @@
+#!/bin/zsh
+set -euo pipefail
+
+repo_dir="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$repo_dir"
+
+command -v rg >/dev/null 2>&1 || { echo "Missing hygiene tool: rg (ripgrep)" >&2; exit 1; }
+
+required=(
+    LICENSE
+    PRIVACY.md
+    SECURITY.md
+    THIRD_PARTY_NOTICES.md
+    CONTRIBUTING.md
+    Package.swift
+    Sources
+    Tests
+    Integrations/DeepSeekHarnessObserver
+)
+for required_path in "${required[@]}"; do
+    test -e "$required_path" || { echo "Missing public file: $required_path" >&2; exit 1; }
+done
+
+for private_path in website archive output research direction design .codex .agents .pnpm-store AGENTS.md; do
+    if [[ -e "$private_path" ]]; then
+        echo "Private-only path is present in the public tree: $private_path" >&2
+        exit 1
+    fi
+done
+
+if rg -n --hidden \
+    -g '!.git/**' -g '!.build/**' -g '!dist/**' -g '!scripts/verify-public-tree' \
+    '(/Users/[^ /]+|/home/[^ /]+|BEGIN (RSA |OPENSSH )?PRIVATE KEY|sk-[A-Za-z0-9_-]{16,})' .; then
+    echo "Personal path or credential-shaped text found" >&2
+    exit 1
+else
+    scan_status=$?
+    if [[ "$scan_status" != 1 ]]; then
+        echo "Public-tree content scan failed; absence of matches was not verified" >&2
+        exit "$scan_status"
+    fi
+fi
+
+symlinks="$(find . \( -path './.git' -o -path './.build' -o -path './dist' \) -prune -o -type l -print)"
+if [[ -n "$symlinks" ]]; then
+    echo "Symlinks are not allowed in the public snapshot" >&2
+    exit 1
+fi
+
+if [[ "${1:-}" == "--release" ]]; then
+    git diff --quiet
+    git diff --cached --quiet
+    test -z "$(git ls-files --others --exclude-standard)"
+fi
+
+echo "LoopFwd public tree verification passed"

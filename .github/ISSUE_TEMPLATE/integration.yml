@@ -1,0 +1,17 @@
+name: Integration request
+description: Propose an evidence-backed provider integration
+body:
+  - type: input
+    id: provider
+    attributes:
+      label: Provider, version and surface
+      placeholder: CLI, Desktop, or local Web interface
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Official observation and return interfaces
+      description: Link public documentation. Explain stable session identity and which events prove work, completion or attention. Do not attach private transcripts.
+    validations:
+      required: true

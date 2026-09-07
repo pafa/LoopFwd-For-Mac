@@ -1,0 +1,13 @@
+#!/bin/sh
+set -eu
+for tool in swift xcrun xcodebuild node npm jq rg shasum codesign python3; do
+    command -v "$tool" >/dev/null 2>&1 || { echo "Missing build tool: $tool" >&2; exit 1; }
+done
+xcrun --find actool >/dev/null 2>&1 || {
+    echo "Install full Xcode and select it with xcode-select; Command Line Tools alone do not include actool." >&2
+    exit 1
+}
+node -e 'if (Number(process.versions.node.split(".")[0]) < 24) { console.error("Node 24+ is required"); process.exit(1) }'
+python3 -c 'import sys; sys.exit(0 if sys.version_info >= (3, 11) else "Python 3.11+ is required for installer tests")'
+node "$(dirname "$0")/verify-release.mjs"
+echo "Build prerequisites available"

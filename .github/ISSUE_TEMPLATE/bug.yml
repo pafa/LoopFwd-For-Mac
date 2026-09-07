@@ -1,0 +1,22 @@
+name: Bug report
+description: Report a reproducible monitoring or interaction problem
+body:
+  - type: input
+    id: version
+    attributes:
+      label: LoopFwd version and build
+      description: Copy the version and commit from About, plus macOS version.
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected behavior and what happened
+      description: Include the provider, CLI/Desktop surface, steps, and whether the issue repeats.
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Redacted diagnostics (optional)
+      description: Review before sharing. Do not paste credentials, prompts, transcripts or full local paths.

@@ -1,0 +1,39 @@
+# macOS and editors
+.DS_Store
+*.swp
+*.swo
+
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Swift / Xcode
+.build/
+.swiftpm/
+DerivedData/
+dist/
+xcuserdata/
+*.xcuserstate
+
+# JavaScript tooling used by optional prototypes
+node_modules/
+.pnpm-store/
+
+# Python caches used by local validators
+__pycache__/
+*.py[cod]
+
+# Local runtime and diagnostics
+*.sock
+*.pid
+*.log
+artifacts/builds/
+artifacts/runtime/
+
+# Temporary exports
+output/
+tmp/
+.tmp/

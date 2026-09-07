@@ -1,0 +1,65 @@
+#!/bin/zsh
+set -euo pipefail
+
+repo_dir="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$repo_dir"
+. ./assets/release.env
+./scripts/preflight
+node --test scripts/verify-release.test.mjs
+
+xcrun swift-format lint --strict --recursive Sources Tests
+git diff --check
+test -f LICENSE
+test -f PRIVACY.md
+test -f SECURITY.md
+test -f LICENSES/lobe-icons-MIT.txt
+jq empty Sources/LoopFwd/Resources/Localizable.xcstrings
+shasum -a 256 -c assets/agent-icon-checksums.sha256
+shasum -a 256 -c assets/brand-checksums.sha256
+npm test --prefix Integrations/DeepSeekHarnessObserver
+node --test Integrations/LocalHooks/observer.test.mjs
+node --test Integrations/LocalHooks/configuration.test.mjs
+shasum -a 256 -c Integrations/LocalHooks/vendor/checksums.sha256
+python3 -m unittest discover -s Integrations/LocalHooks -p 'test_*.py'
+swift test
+./make-app.sh
+
+app="dist/LoopFwd.app"
+binary="$app/Contents/MacOS/LoopFwd"
+bundle="$app/Contents/Resources/LoopFwd_LoopFwd.bundle"
+
+test "$(plutil -extract CFBundleShortVersionString raw "$app/Contents/Info.plist")" = "$app_version"
+test "$(plutil -extract CFBundleVersion raw "$app/Contents/Info.plist")" = "$build_number"
+test "$(plutil -extract LoopFwdReleaseVersion raw "$app/Contents/Info.plist")" = "$release_version"
+test "$(plutil -extract LoopFwdReleaseChannel raw "$app/Contents/Info.plist")" = "$release_channel"
+test "$(plutil -extract LSMinimumSystemVersion raw "$app/Contents/Info.plist")" = "14.0"
+test "$(lipo -archs "$binary")" = "arm64"
+test -d "$bundle/agents"
+test -f "$bundle/Localizable.xcstrings"
+test -f "$bundle/en.lproj/Localizable.strings"
+test -f "$bundle/zh-Hans.lproj/Localizable.strings"
+plutil -lint "$bundle/en.lproj/Localizable.strings" "$bundle/zh-Hans.lproj/Localizable.strings"
+observer_archive="$app/Contents/Resources/LoopFwdDSHObserver.tgz"
+test -f "$observer_archive"
+test "$(tar -xOf "$observer_archive" package/package.json | jq -r .version)" = "$(jq -r .version Integrations/DeepSeekHarnessObserver/package.json)"
+test -f "$app/Contents/Resources/LICENSE"
+cmp Integrations/LocalHooks/observe-hook.mjs "$app/Contents/Resources/LoopFwdObserveHook.mjs"
+cmp Integrations/LocalHooks/install-mistral.py "$app/Contents/Resources/LoopFwdInstallMistral.py"
+cmp Integrations/LocalHooks/configure-json-hooks.mjs "$app/Contents/Resources/LoopFwdJSONHooks/configure-json-hooks.mjs"
+diff -qr Integrations/LocalHooks/vendor "$app/Contents/Resources/LoopFwdJSONHooks/vendor"
+test -f "$app/Contents/Resources/PRIVACY.md"
+test -f "$app/Contents/Resources/THIRD_PARTY_NOTICES.md"
+test -f "$app/Contents/Resources/lobe-icons-MIT.txt"
+codesign --verify --deep --strict "$app"
+
+zip="dist/LoopFwd-$release_version-macOS-arm64.zip"
+test -s "$zip"
+test -s "$zip.sha256"
+test -s "dist/LoopFwd-$release_version-build-manifest.txt"
+rg -Fx "version=$release_version" "dist/LoopFwd-$release_version-build-manifest.txt"
+rg -Fx "build=$build_number" "dist/LoopFwd-$release_version-build-manifest.txt"
+rg -Fx "channel=$release_channel" "dist/LoopFwd-$release_version-build-manifest.txt"
+rg -Fx "releaseTag=v$release_version" "dist/LoopFwd-$release_version-build-manifest.txt"
+(cd dist && shasum -a 256 -c "LoopFwd-$release_version-macOS-arm64.zip.sha256")
+
+echo "LoopFwd $release_version candidate verification passed"

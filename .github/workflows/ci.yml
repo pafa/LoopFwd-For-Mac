@@ -1,0 +1,75 @@
+name: Verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  macos:
+    name: macOS build and tests
+    runs-on: macos-26
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Select Xcode 26.6
+        run: sudo xcode-select --switch /Applications/Xcode_26.6.app
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install missing build tools
+        shell: bash
+        run: |
+          missing=()
+          command -v jq >/dev/null || missing+=(jq)
+          command -v rg >/dev/null || missing+=(ripgrep)
+          if (( ${#missing[@]} )); then
+            brew install "${missing[@]}"
+          fi
+      - name: Verify public tree
+        run: ./scripts/verify-public-tree
+      - name: Test and package
+        run: ./scripts/verify
+      - name: Retain verified main candidate
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v7
+        with:
+          name: LoopFwd-macOS-arm64-${{ github.sha }}
+          path: |
+            dist/LoopFwd-*-macOS-arm64.zip
+            dist/LoopFwd-*-macOS-arm64.zip.sha256
+            dist/LoopFwd-*-build-manifest.txt
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 0
+
+  observer:
+    name: Observer and configuration tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Test observer
+        run: npm test --prefix Integrations/DeepSeekHarnessObserver
+      - name: Test local Hook collector
+        run: node --test Integrations/LocalHooks/observer.test.mjs
+      - name: Test JSONC Hook configuration
+        run: node --test Integrations/LocalHooks/configuration.test.mjs
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test observer configuration transactions
+        run: python3 -m unittest discover -s Integrations/LocalHooks -p 'test_*.py'
