@@ -25,6 +25,7 @@ shasum -a 256 -c Integrations/LocalHooks/vendor/checksums.sha256
 python3 -m unittest discover -s Integrations/LocalHooks -p 'test_*.py'
 swift test
 ./make-app.sh
+node scripts/verify-packaged-resources.mjs
 
 app="dist/LoopFwd.app"
 binary="$app/Contents/MacOS/LoopFwd"

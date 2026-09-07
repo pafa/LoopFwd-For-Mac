@@ -23,13 +23,13 @@ enum L10n {
         return localized == key ? developmentTranslations[key] ?? key : localized
     }
 
-    private static let chineseBundle = Bundle.module.path(forResource: "zh-Hans", ofType: "lproj")
+    private static let chineseBundle = LoopFwdResources.bundle?.path(forResource: "zh-Hans", ofType: "lproj")
         .flatMap { Bundle(path: $0) }
 
     /// `swift run` has an uncompiled catalog; packaged apps use generated
     /// .strings. Both paths consume the same catalog rather than two sources.
     private static let developmentTranslations: [String: String] = {
-        guard let url = Bundle.module.url(forResource: "Localizable", withExtension: "xcstrings"),
+        guard let url = LoopFwdResources.bundle?.url(forResource: "Localizable", withExtension: "xcstrings"),
             let data = try? Data(contentsOf: url),
             let catalog = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
             let strings = catalog["strings"] as? [String: [String: Any]]
