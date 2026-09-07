@@ -1,182 +1,232 @@
 <p align="center">
-  <img src="assets/icon-1024.png" width="96" height="96" alt="LoopFwd for Mac 图标">
+  <img src="assets/icon-1024.png" width="72" height="72" alt="LoopFwd for Mac 图标">
 </p>
 <h1 align="center">LoopFwd for Mac</h1>
-<p align="center"><strong>让 AI 继续工作，让你不必反复切窗。</strong></p>
-<p align="center">Mac 顶部的一座小岛，看清多个 AI 任务的进展。</p>
+<p align="center"><strong>让 AI 继续推进，让你少些反复切窗。</strong></p>
+<p align="center">Mac 顶部的任务监控小岛：看清进展，接住请求，回到工作。</p>
 <p align="center">
-  <a href="https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.1"><strong>下载 Mac 版</strong></a> ·
-  <a href="#26-秒看懂它">观看宣传片</a> ·
-  <a href="#让多任务工作更从容">了解功能</a> ·
+  <a href="https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.1"><strong>下载预览版</strong></a> ·
+  <a href="#26-秒感受它">观看宣传片</a> ·
+  <a href="#熟悉的工具先聚在一起">接入范围</a> ·
   <a href="README.md">English</a>
 </p>
-<p align="center">Apple Silicon · macOS 14+ · 原生 SwiftUI + AppKit · MIT 开源</p>
-
-一个 AI 在写代码，另一个在处理别的项目。你不需要不断切换窗口，确认“它还在运行吗？”
-**LoopFwd for Mac** 将正在进行的任务放进一座随时可看的小岛：
-看清正在做什么，及时发现需要你处理的事，再返回对应任务。
-不用更换你习惯的 Agent、编辑器或终端。
-
-## 26 秒看懂它
-
-https://github.com/user-attachments/assets/d4fdb119-f78b-47f4-b49e-13d833e83da7
-
-[下载宣传片 · 26 秒，含配乐](https://github.com/pafa/LoopFwd-For-Mac/releases/download/v0.1.0/LoopFwd-Launch-Selected-A-26s.mp4)
-
-*已选定的产品宣传片；**0.1.1** 的实际接入范围见下方说明。*
-
-## 让多任务工作更从容
-
-<table>
-<tr>
-<td width="33%" valign="top"><h3>👀 多个任务，一眼掌握</h3>把不同工具、不同项目的活跃会话放在一起。想看细节就展开；任务变多时，继续滚动查看。</td>
-<td width="33%" valign="top"><h3>🧩 不只知道“正在运行”</h3>分开看清<b>项目、任务、当前步骤</b>。“继续”“好的”不会覆盖真正的任务目标，更容易接上之前的工作。</td>
-<td width="33%" valign="top"><h3>🔔 在有依据时提醒</h3>收到明确完成、失败和可观察的实时请求时提醒你。少一次反复确认，多一段属于自己的专注时间。</td>
-</tr>
-<tr>
-<td width="33%" valign="top"><h3>🧭 少找窗口，更快返回</h3>按当前接入的实际能力返回。<b>准确跳转</b>和<b>仅打开应用</b>清楚区分；Codex Desktop 可返回对应任务。</td>
-<td width="33%" valign="top"><h3>✅ 做完就让出位置</h3>完成任务只短暂展示，空闲任务不常驻。这里关注正在推进的工作，不把已完成记录堆成一张长清单。</td>
-<td width="33%" valign="top"><h3>⌨️ 不离开键盘，也能切换</h3><b>Control + G</b> 打开任务切换器，继续切换会话，回车返回，Escape 收起。修饰键可按习惯选择。</td>
-</tr>
-</table>
-
-
-## 按你的 Mac，调成你的习惯
-
-<table>
-<tr>
-<td width="33%" valign="top"><h3>🖥️ 刘海屏与外接屏</h3>借用 MacBook 刘海两侧；无刘海屏通过顶部中心透明热区展开。可选显示器，也可切换简洁或详细样式。</td>
-<td width="33%" valign="top"><h3>🎛️ 信息多少，你来决定</h3>调整面板宽高和字体。按需显示任务摘要、当前活动、模型、分支、终端和待办清单；数据由实际来源提供。</td>
-<td width="33%" valign="top"><h3>🌐 中文、英文，自己选</h3>跟随系统，或在设置中明确选择简体中文与 English。切换的是界面语言，不会翻译或改写你的任务原文。</td>
-</tr>
-<tr>
-<td width="33%" valign="top"><h3>🌙 配合你的工作节奏</h3>可调悬停延迟、离开收起、事件展开和全屏隐藏。提醒类型、通知详情隐藏、登录启动，都由你选择。</td>
-<td width="33%" valign="top"><h3>🎵 提醒也可以有个性</h3>按事件选择声音、试听或导入自己的音效，调节音量。静音时段让夜间更安静，但不会隐藏真正待处理的任务。</td>
-<td width="33%" valign="top"><h3>📊 额度与用量，随手可看</h3>有数据时展示 Codex 最近报告的使用情况、剩余额度、重置时间与数据时间。主 Codex 和 Spark 分开，不把本地报告说成实时余额查询。</td>
-</tr>
-</table>
-
-
-## 下一步，也可以在岛内完成
-
-可选 **Labs** 把常用小操作带到任务旁边。这些功能仍属实验、默认关闭，
-只有当前会话具备有效控制通道时，才开放相应操作。
-
-<table>
-<tr>
-<td width="33%" valign="top"><h3>🚀 下达任务</h3>从岛内创建 LoopFwd 托管的 Codex 任务，续发指令，或停止这项托管任务。不会把你已有的外部会话变成托管任务。</td>
-<td width="33%" valign="top"><h3>💬 快捷回复</h3>不离开小岛，就能对支持的实时问题直接回答或选择选项。适用于 OpenCode 和单独开启的 Claude 终端控制。</td>
-<td width="33%" valign="top"><h3>☑️ 快捷同意或拒绝</h3>看清实时请求，决定是否让 Agent 继续。适用于受支持的 OpenCode 和 Claude 请求；具体设置与权限条件见下方说明。</td>
-</tr>
-</table>
-
-这些不是八款 Agent 全部通用的控制能力。不可用或无法核验的操作会保持禁用；
-Codex CLI/Desktop 的观察接入不提供审批控制。具体条件放在下方设置说明中。
-
-### 🔒 本地观察，有问题也说清楚
-
-监控路径读取本机会话数据，不需要 LoopFwd 云端账户，不做遥测或上传完整对话。
-Setup status 帮你了解接入是否可用；Diagnostics 说明数据缺失、过期等问题，
-并提供脱敏报告便于反馈。权限申请与观察器安装都需要你的明确操作。
-
-## 熟悉的工具，聚在一起
+<p align="center">Apple Silicon · macOS 14+ 部署目标 · 0.1.1 预览版 · MIT 开源</p>
 
 <p align="center">
-  <picture>
+  <img src="docs/assets/product-overview-zh.svg" width="960" alt="产品示意，使用示例任务：Codex 正在检查移动端结账流程，OpenCode 正在询问测试范围。看清进展、接住请求、回到工作。">
+</p>
+
+*产品示意图，并非 App 实机截图。任务内容为示例，实际能力取决于接入方式。*
+
+一个 Agent 在修复结账流程，另一个在等你选择测试范围。**你不必逐个打开对话，才知道它们到了哪一步。**
+LoopFwd for Mac 把本机任务汇聚到一座小岛：哪些还在推进，哪些真正需要你处理，下一步可以回到哪里。
+Agent 继续留在你熟悉的编辑器、终端和对话里。
+
+## 熟悉的工具，先聚在一起
+
+### 指定运行方式已有基础真实任务验证
+
+<p align="center">
+<picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agents/dark/openai.png">
     <source media="(prefers-color-scheme: light)" srcset="docs/assets/agents/light/openai.png">
     <img src="docs/assets/agents/light/openai.png" width="32" height="32" alt="Codex">
   </picture>&nbsp;&nbsp;
-  <picture>
+<picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agents/dark/opencode.png">
     <source media="(prefers-color-scheme: light)" srcset="docs/assets/agents/light/opencode.png">
     <img src="docs/assets/agents/light/opencode.png" width="32" height="32" alt="OpenCode">
   </picture>&nbsp;&nbsp;
-  <picture>
+<picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agents/dark/githubcopilot.png">
     <source media="(prefers-color-scheme: light)" srcset="docs/assets/agents/light/githubcopilot.png">
     <img src="docs/assets/agents/light/githubcopilot.png" width="32" height="32" alt="Copilot">
-  </picture>&nbsp;&nbsp;
-  <picture>
+  </picture>
+</p>
+
+<p align="center"><strong>Codex Desktop · OpenCode TUI HTTP · Copilot CLI</strong></p>
+
+### 按需开启的实验接入
+
+<p align="center">
+<picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agents/dark/claude-color.png">
     <source media="(prefers-color-scheme: light)" srcset="docs/assets/agents/light/claude-color.png">
     <img src="docs/assets/agents/light/claude-color.png" width="32" height="32" alt="Claude Code">
   </picture>&nbsp;&nbsp;
-  <picture>
+<picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agents/dark/gemini-color.png">
     <source media="(prefers-color-scheme: light)" srcset="docs/assets/agents/light/gemini-color.png">
     <img src="docs/assets/agents/light/gemini-color.png" width="32" height="32" alt="Gemini">
   </picture>&nbsp;&nbsp;
-  <picture>
+<picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agents/dark/qwen.png">
     <source media="(prefers-color-scheme: light)" srcset="docs/assets/agents/light/qwen.png">
     <img src="docs/assets/agents/light/qwen.png" width="32" height="32" alt="Qwen">
   </picture>&nbsp;&nbsp;
-  <picture>
+<picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agents/dark/kimi.png">
     <source media="(prefers-color-scheme: light)" srcset="docs/assets/agents/light/kimi.png">
     <img src="docs/assets/agents/light/kimi.png" width="32" height="32" alt="Kimi">
   </picture>&nbsp;&nbsp;
-  <picture>
+<picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agents/dark/grok.png">
     <source media="(prefers-color-scheme: light)" srcset="docs/assets/agents/light/grok.png">
     <img src="docs/assets/agents/light/grok.png" width="32" height="32" alt="Grok">
   </picture>
 </p>
 
-**Codex · OpenCode · Copilot · Claude Code · Gemini · Qwen · Kimi · Grok**
+<p align="center"><strong>Claude Code CLI · Gemini CLI · Qwen Code · Kimi Code · Grok CLI</strong></p>
 
-首发包含 8 款接入，按需开启。前三款在指定运行表面有基础真实任务验证；
-后五款为可选 **Experimental** 接入，新安装默认关闭。
-[查看完整支持范围与当前限制](#兼容性与预览版说明)。
+八款接入，按需启用。实验接入在新安装时默认关闭。
+**监控、返回、控制是三种不同的能力**；同一品牌的 CLI、桌面版也可能不同。
+[查看各接入的实际能力](#兼容性与预览版说明)。
+
+## 看见进展，接住提醒，再回到工作
+
+### 👀 看清项目、任务和当前步骤
+
+**工作属于哪个项目、你让它做什么、现在进行到哪一步**，分开显示。
+“继续”“好的”不会覆盖真正的任务目标。展开看细节，任务多了继续滚动；不把空闲对话堆成常驻清单。
+
+### 🔔 有值得处理的变化，再提醒你
+
+明确完成、失败和能够观察到的实时请求，可以通知你。
+完成任务短暂出现后离开主列表，**做完了，不等于还要等你审批。**
+提醒哪些事件、用什么声音、是否显示通知详情，都可以自己选择。
+
+### 🧭 回到工作，不再重新找一遍
+
+Codex Desktop 可以返回对应任务。
+其他会话按实际能力显示**准确跳转、仅打开应用，或不可返回原因**，让点击后的结果有预期。
+按 **Control + G** 打开任务切换器，选中后按回车返回，Escape 收起。
+
+## 26 秒感受它
+
+https://github.com/user-attachments/assets/d4fdb119-f78b-47f4-b49e-13d833e83da7
+
+[下载已选定的宣传片 · 26 秒，含配乐](https://github.com/pafa/LoopFwd-For-Mac/releases/download/v0.1.0/LoopFwd-Launch-Selected-A-26s.mp4)
+
+*产品演示；当前版本的实际接入范围见下方说明，影片不代表画面中的所有能力均已验证。*
+
+## 📊 额度看得见，也知道它来自哪里
+
+有数据时，查看 Codex **最近报告的用量、剩余额度、重置时间和数据时间**。
+主 Codex 与 Spark 分开显示；窗口名称跟随实际报告，不假定所有套餐都有同样的限制。
+
+这不是实时账户余额查询。缺失或过期的主额度报告，不会被当成当前余量。
+Claude 社区预算估算保留在 Labs，明确作为估算，不与官方账户数据混在一起。
+
+## 小细节，调成你的使用习惯
+
+<table>
+<tr>
+<td width="50%" valign="top"><h3>🖥️ 刘海屏，也照顾外接屏</h3>借用 MacBook 刘海两侧；没有刘海时，通过顶部中心透明热区展开。可以选择显示在哪块屏幕。</td>
+<td width="50%" valign="top"><h3>🎛️ 信息多少，你来决定</h3>选择简洁或详细样式，调整面板宽高和字体。模型、分支、终端、摘要、待办清单，在有数据时按需显示。</td>
+</tr>
+<tr>
+<td width="50%" valign="top"><h3>🌐 中文、英文，自己选</h3>跟随系统，或明确选择简体中文与 English，重启后生效。切换界面语言，不翻译或改写你的任务原文。</td>
+<td width="50%" valign="top"><h3>⌨️ 不离开键盘，也能切换</h3><b>Control + G</b> 打开任务列表，切换后回车返回。快捷键修饰键可按习惯选择。</td>
+</tr>
+<tr>
+<td width="50%" valign="top"><h3>🎵 提醒也可以合你的心意</h3>按事件选音效、试听或导入自己的声音，调整音量。静音时段只静音，不隐藏需要你处理的任务。</td>
+<td width="50%" valign="top"><h3>🌙 配合你的工作节奏</h3>可调悬停延迟、鼠标离开收起、事件展开和全屏可见性。是否登录启动，也由你决定。</td>
+</tr>
+<tr>
+<td width="50%" valign="top"><h3>🔒 通知内容，不必全部露出</h3>选择提醒类型，按需隐藏通知详情。完成可以发通知，不必自动展开面板占用你的屏幕。</td>
+<td width="50%" valign="top"><h3>🩺 有问题，也看得明白</h3>设置状态显示软件、数据源和权限情况；诊断解释缺失与过期，提供脱敏报告。分享前仍请检查内容。</td>
+</tr>
+</table>
+
+## 下一步，也可以在岛内完成 · Labs
+
+**可选、实验、默认关闭。** 只有当前会话具备有效控制通道时，才开放相应操作。
+
+| 你想做的事 | 适用范围 |
+| --- | --- |
+| 🚀 **下达任务** | 创建 LoopFwd 托管的 Codex 任务，不会接管已有外部会话。 |
+| ✍️ **补充指令或停止** | 续发或停止托管 Codex 任务。关闭 Labs 不停止现有任务，但退出 LoopFwd 可能影响它们。 |
+| 💬 **快捷回复** | 回答支持的 OpenCode 实时问题，或使用单独启用、能定向到会话的 Claude 终端控制。 |
+| ☑️ **同意或拒绝** | 处理支持的 OpenCode／Claude 实时请求；请求与控制目标仍须有效。 |
+
+**不是八款 Agent 全部通用的控制能力。** Codex CLI/Desktop 观察接入不提供实时审批控制。
+0.1.1 的 Terminal.app 只监控和返回；开启 Labs 也不会恢复全局按键注入。
+[查看设置与控制条件](docs/SETUP.zh-CN.md#设置与可选观察器)。
+
+## 在本机观察，按你的选择连接
+
+观察路径不需要 LoopFwd 云账户，不做遥测或上传完整对话。
+Agent 继续使用自己的服务；主动创建的托管任务仍受 Provider 自身联网行为约束。
+Hook、观察器和系统权限需要明确操作，配置修改保留备份，不静默安装。
+
+## 三步开始使用
+
+1. **[下载 0.1.1 预览版](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.1)**，同时取得校验文件。
+2. **退出旧版，把 LoopFwd 拖入 Applications。**
+3. **打开“设置 → 设置状态”**，启用需要的接入，继续在原来的工具里工作。
+
+预览包采用 ad-hoc 签名，**尚未经过 Apple 公证**。如果系统阻止打开，请先核验来源与校验和，
+确认信任后再使用“**系统设置 → 隐私与安全性 → 仍要打开**”。不要关闭整个系统的安全保护。
+
+[安装、自定义目录与恢复指南](docs/SETUP.zh-CN.md) · [从源码构建](docs/SETUP.zh-CN.md#从源码构建)
+
+<details>
+<summary><strong>你可能还想知道</strong></summary>
+
+**没有刘海、用外接屏，可以吗？**
+
+可以。通过顶部中心透明热区展开，并可选择显示器。
+
+**每款接入都能回复、审批吗？**
+
+不能。观察、返回和控制分别判断；具体见后面的能力说明，可选操作保留在 Labs。
+
+**它会替我运行或停止已有任务吗？**
+
+默认观察原有工具。只有你主动创建的托管 Codex 任务属于 LoopFwd 管理路径，退出可能影响这些任务。
+
+**为什么某项任务或额度没有出现？**
+
+数据来源、版本、权限和新鲜度都会影响可用性。先看设置状态，再看诊断；必要时自选 CLI 或配置数据目录。
+
+**需要额外账户或订阅吗？**
+
+不需要 LoopFwd 云账户。源码 MIT 开源，当前预览包可直接下载；原 Agent 的账户、订阅和模型费用仍由各自产品决定。
+
+</details>
 
 ## Fork 它，让你的 Agent 帮你改成自己的工具
 
-每个人的工作方式都不同，不必等一个统一版本满足所有需求。
-**LoopFwd for Mac 采用 MIT 开源协议，你可以用自己习惯的编程 Agent 继续扩展它。**
-
-| 🍴 从 Fork 开始 | 🤖 告诉 Agent 你的需要 | 🌱 把好改进分享回来 |
-| --- | --- | --- |
-| 保留原生小岛和你正在使用的接入。 | 增加一种本地工具、改进任务摘要、调整界面细节，或补充语言。 | 验证这个小改动后提交 PR，说明实际可用能力与限制。 |
-
-不同接入可以有不同能力：本地会话记录用于描述任务，可靠的应用链接用于返回，
-实时控制接口才用于回复。**不需要一次做全，一个可靠的小接入就有价值。**
+**保留原生小岛，调整你真正需要的部分。**
+增加一个本地观察源、改进任务摘要、调整显示偏好，或补充语言。
+不必一次做全：一个可靠的只读接入，也值得分享。
 
 <details>
-<summary><strong>复制这段话，让你的 Agent 开始</strong></summary>
+<summary><strong>复制这段话，让你的编程 Agent 开始</strong></summary>
 
 ```text
-我 Fork 了 LoopFwd for Mac，希望实现：[你的具体需求]。
+我 Fork 了 LoopFwd for Mac，希望实现：[我的工作方式或具体需要]。
 先阅读 README、CONTRIBUTING 和 docs/ARCHITECTURE.md，在独立任务分支工作。
-参考现有接入和官方接口，实现最小、可用的修改，不重写无关架构。
-如果是新增 Agent，明确它能观察什么、能否准确返回，以及是否真的支持控制。
-不要从历史回答猜测完成，不要把进程检测伪装成真实任务状态。
-用户配置修改必须明确触发、先备份；不自动登录、购买额度或扩大权限。
-补关键回归，运行 ./scripts/verify；界面变化另外做真实 App 冒烟。
-提交一个聚焦的 PR，写清修改、验证和限制；不要自行合并或发布。
+复用现有接入与官方接口，实现聚焦的修改，不重写无关架构。
+明确能观察什么、能返回哪里，以及哪些控制真的有权限。
+不编造任务状态，不把进程检测当成审批权限。
+配置修改必须明确触发、先备份，并提供可恢复的失败处理。
+不自动登录、购买额度或扩大权限。
+运行 ./scripts/verify；界面或打包变化另外做真实 App 冒烟。
+提交聚焦的 PR，说明实际验证和限制，不自行合并或发布。
 ```
 
 </details>
 
-参阅[贡献指南与英文 Agent 提示词](CONTRIBUTING.md#develop-with-your-own-agent)。
-
-## 开始使用
-
-1. **[下载 0.1.1 预览版](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.1)** 及对应校验文件。
-2. **拖入 Applications。** 替换旧版前，先退出正在运行的 LoopFwd。
-3. **打开 Setup status**，开启你需要的接入，然后继续使用原有工具工作。
-
-预览包采用 ad-hoc 签名，未经 Apple 公证。如果 macOS 阻止打开，请先核验下载来源，
-再查看“**系统设置 → 隐私与安全性 → 仍要打开**”。不要关闭整个系统的安全保护。
+[贡献指南](CONTRIBUTING.md#develop-with-your-own-agent) · [提出接入建议](https://github.com/pafa/LoopFwd-For-Mac/issues/new/choose)
 
 ---
 
 ## 兼容性与预览版说明
 
 当前公开下载是 **0.1.1**，属于早期预览版，不是稳定 1.0。
-下方修复已包含在此版本中。原
-[0.1.0 发布页](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.0)
-及安装包继续保留，可手动回退。
+原 [0.1.0 发布页](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.0) 和文件保留作历史版本。
+它也存在本次修复的语言资源启动风险，不建议用于回退这一故障。
 
 macOS 14 是编译部署目标。目前 CI 在 macOS 26 运行，本地开发 Mac 为 26.6.2；
 干净 macOS 14 设备上的实际运行尚未验证。
@@ -200,123 +250,10 @@ macOS 14 是编译部署目标。目前 CI 在 macOS 26 运行，本地开发 Ma
 只有明确的成功边界才能显示完成。历史回答、非 busy、进程存在都不代表完成。
 过期和不兼容属于观察健康，不代表任务要求用户决策。
 
-<details>
-<summary><strong>下载校验、安装与回退</strong></summary>
+## 隐私、反馈与源码
 
-从 [0.1.1 发布页](https://github.com/pafa/LoopFwd-For-Mac/releases/tag/v0.1.1) 下载 ZIP 及同名 SHA-256 文件，在下载目录校验：
-`shasum -a 256 -c <下载包文件名>.sha256`。
-退出旧版，将解压后的 LoopFwd 拖入 Applications，再启动。
+[隐私](PRIVACY.md) · [安全](SECURITY.md) · [设置与恢复](docs/SETUP.zh-CN.md) · [贡献指南](CONTRIBUTING.md) · [架构](docs/ARCHITECTURE.md)
 
-测试包采用 ad-hoc 签名，未经 Apple 公证。若系统拦截，请确认来源和校验和，
-再按 **系统设置 → 隐私与安全性 → 仍要打开** 操作。
-不要关闭整个系统的安全保护。源码开源不需要发布到 App Store。
-
-目前手动更新；保留旧 ZIP 便于回退。退出可能影响 LoopFwd 托管的任务，
-不会停止外部 Agent。
-
-</details>
-
-<details>
-<summary><strong>从源码构建</strong></summary>
-
-需要完整 **Xcode 26.6**、**Node 24+**、**Python 3.11+**、**jq** 和 **ripgrep**。Python 用于安装事务测试和显式 Kimi 观察器设置。LoopFwd 不安装或额外管理 Python 环境。
-仅 Command Line Tools 不包含图标打包工具。
-
-```sh
-./scripts/preflight
-./scripts/verify
-open dist/LoopFwd.app
-```
-
-快速编译用 `swift build`，单独测试用 `swift test`。
-构建和首次启动不自动修改 Provider 配置或申请系统权限。
-
-</details>
-
-<details>
-<summary><strong>设置细节、可选观察器与开发版升级</strong></summary>
-
-- 在“Setup status”检查软件、数据源和权限，不把安装状态当成验证结果。
-- Finder 找不到 CLI 时，在 Agents 的“Choose CLI…”显式选择可执行文件。
-- 新建托管任务、OpenCode 回复和审批位于 Labs，默认关闭。
-- 关闭 Labs 不停止现有托管任务；仍可返回和停止。
-- Claude 终端输入使用独立 Labs 开关；Hook 和 Observer 安装需明确点击。
-
-跳转区分“准确返回任务”“仅打开应用”和“不可返回”。仅打开应用不会把任务标为已查看。
-
-在“通用 → 界面语言”选择跟随系统、简体中文或 English。默认跟随 macOS；
-显式选择在重启 LoopFwd 后生效，不修改系统语言。
-
-Codex 额度来自本地报告，不是实时查询账户余额。主 Codex 与 Spark 的限额分别处理，
-窗口名称以报告中的实际时长为准；缺失或过期的主额度报告不会显示为当前余量。
-
-旧版 Claude Hook 需在“集成”中显式点击“更新 Hook”，增加事件产生时的进程身份。
-更新前，无来源身份的旧事件不再触发待处理提醒；重启 LoopFwd 不会自动改写 Hook
-或开启控制。更新前保留旧脚本备份。
-
-## 自定义目录、控制与恢复
-
-**0.1.1 中的 Terminal.app 仅支持监控和返回**：已移除全局键盘输入及其辅助功能授权入口。
-其他终端的实验回复／审批必须使用能定向到具体会话的接口，开启 Labs 也不能绕过此限制。
-
-在 Agent → Codex 桌面版数据中，默认读取正在运行的 Codex 应用环境；无法读取或发现多个
-不同目录时，选择实际 CODEX_HOME 目录。此操作只改变 LoopFwd 的偏好，不会移动 Codex 数据。
-
-在集成 → Claude Code 中，安装前先核对显示的配置文件；使用自定义 CLAUDE_CONFIG_DIR 时
-选择对应文件夹。选择目录不会安装 Hook。每次配置修改均保留独立私有备份，
-“显示备份”可打开恢复目录。移除只取消所选配置的 Hook，保留其他配置可能仍使用的共享脚本。
-不支持的结构和符号链接配置文件保持不变。如果安装中断，先退出 LoopFwd 并确认记录的进程
-已结束，再移开对应配置／共享脚本锁文件；不要打断活跃锁或删除备份。
-
-诊断报告区分“支持的格式／版本”和“观察到的版本及来源”；无法确定时明确写未知，
-不会为了探测版本而启动各个 Agent。
-
-## Gemini / Qwen 可选观察器
-
-在“集成”安装 Gemini CLI **0.58.0** 或 Qwen Code **0.23.0** 的只读观察器。
-选择该 CLI 存放 `settings.json` 的配置目录及 **Node 24+** 可执行文件。
-只追加 LoopFwd 自有 Hook，保留 JSONC 注释、原有 Hook 和禁用设置。
-随后重启 CLI；工作区信任仍由原产品决定。这里只观察进展，不授予审批能力，
-也不保证能确认成功完成；两款仍为 Experimental。
-
-LoopFwd 按官方 Node 重启关系找到实际运行进程，不把启动器当成额外会话。
-Qwen 在登录前也可能登记会话；缺少匹配记录时只保留该稳定身份并标为“仅进程检测”，
-不会借用历史任务或推断完成。已有观察器须显式“重新安装”才会更新进程匹配逻辑；
-只重启 LoopFwd 不会覆盖你已安装的 Hook。
-
-“重新安装”可补回丢失的观察器副本；“移除”不要求原 CLI 仍在，但仍需要 Node。
-“显示备份文件夹”打开配置旁的 `.loopfwd-json-hooks`。安装被强制中断后，
-可能残留 `transaction.lock`；先确认其中记录的安装进程已经结束，再将这一文件
-移到别处保留并重试移除或重新安装。不要在安装器运行时移走锁。
-手动恢复前对比备份与当前配置，避免覆盖后来修改；LoopFwd 不自动强行解除锁。
-
-## Kimi 可选观察器
-
-在“集成 → Kimi Code 观察器”选择实际 `KIMI_CODE_HOME` 目录、Node 24+
-和 Python 3.11+。安装只读检查所选官方 npm 客户端为 **0.41.0**，不启动 Kimi；
-备份 `config.toml` 后加入三个生命周期 Hook。移除不依赖 Kimi，重新安装可修复
-丢失的脚本副本。请保留显示的备份目录；不兼容的 TOML Hook 写法和被手动修改的
-托管配置块会原样保留并报错。
-
-Kimi 每次写入后会关闭 wire 文件，观察器通过实际进程及出生身份绑定独立会话，
-避免文件句柄关闭时漏报。心跳只证明会话归属，任务状态与进展仍来自对应的
-主会话记录。官方 client identity 不能区分 TUI、Web 和 ACP，故不承诺精准任务
-跳转、审批或控制。仍为 Experimental；构建或启动 LoopFwd 不会自动安装 Hook。
-
-## 从开发版升级
-
-暂缓项不再扫描或提供新安装入口，即使旧设置开启了它们也不会启用。
-不会自动卸载原软件、观察器或删除会话、配置。此前安装的 Hook 可能仍由原产品
-运行，关闭 LoopFwd 观察不等于卸载 Hook。若需移除或恢复，请保留前一个开发版
-及其配置备份，使用其中原有移除入口。手动恢复前比较当前配置，避免覆盖后续修改。
-
-</details>
-
-## 隐私、反馈与开源
-
-观察路径不做遥测、云同步或 transcript 上传。可选托管命令仍受 Provider
-自己的执行和网络行为约束。分享 Diagnostics 前请检查，不提交密钥和完整对话。
-
-参阅 [隐私](PRIVACY.md)、[安全](SECURITY.md)、[贡献说明](CONTRIBUTING.md)、
-[架构](docs/ARCHITECTURE.md) 和 [第三方声明](THIRD_PARTY_NOTICES.md)。
-LoopFwd 采用 [MIT](LICENSE)，与被监控的各品牌没有隶属关系。
+反馈问题时，请提供版本／构建号、Agent 运行方式和检查过的脱敏诊断，不提交凭据或完整对话。
+LoopFwd for Mac 采用 [MIT](LICENSE)，与被观察的各品牌没有隶属关系。
+导入代码、图标来源、许可证及商标说明见[第三方声明](THIRD_PARTY_NOTICES.md)。

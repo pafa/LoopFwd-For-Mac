@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="800" viewBox="0 0 1120 800" role="img" aria-labelledby="title desc">
+<title id="title">A clear view of the work in motion.</title><desc id="desc">ILLUSTRATED PREVIEW · SAMPLE TASKS · CAPABILITIES VARY BY INTEGRATION. Codex Desktop: Make checkout work on mobile. OpenCode TUI: Which test suite should I run?.</desc>
+<defs><linearGradient id="back" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0d1b2c"/><stop offset="1" stop-color="#183744"/></linearGradient><linearGradient id="green" x2="1" y2="0"><stop stop-color="#162a24"/><stop offset="1" stop-color="#14211e"/></linearGradient><linearGradient id="amber" x2="1" y2="0"><stop stop-color="#31291c"/><stop offset="1" stop-color="#211e19"/></linearGradient></defs>
+<g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
+<rect width="1120" height="800" rx="24" fill="url(#back)"/>
+<text x="56" y="63" font-size="20" fill="#91b5d0" font-weight="600">LoopFwd for Mac</text>
+<text x="56" y="118" font-size="38" fill="#f3f8fc" font-weight="700">A clear view of the work in motion.</text>
+<text x="56" y="158" font-size="22" fill="#b4c2d3" font-weight="400">Your agents keep their workspace. You keep the overview.</text>
+<rect x="73" y="206" width="974" height="463" rx="36" fill="#080c10" stroke="#334552" stroke-width="2"/>
+<path d="M425 206h270v28q0 24-24 24H449q-24 0-24-24Z" fill="#000"/>
+<svg x="94" y="218" width="42" height="39" viewBox="0 0 195 174"><path id="forward-sail" d="M0 0 C5.55 2 9.52 5.24 14 9 C14.6 9.5 15.2 10.01 15.82 10.52 C27.58 21.3 33.44 35.43 35 51 C25.76 51 16.52 51 7 51 C6.01 54.63 5.02 58.26 4 62 C3.67 62.66 3.34 63.32 3 64 C10.59 64 18.18 64 26 64 C25 69 25 69 21 78 C13.08 78.33 5.16 78.66 -3 79 C-6.44 87.94 -6.44 87.94 -7.52 90.76 C-7.8 91.49 -8.08 92.21 -8.37 92.96 C-8.66 93.71 -8.95 94.46 -9.24 95.23 C-10 97 -10 97 -11 98 C-13.36 98.24 -15.7 98.42 -18.06 98.56 C-18.73 98.61 -19.39 98.65 -20.07 98.69 C-21.71 98.8 -23.36 98.9 -25 99 C-23.67 92.24 -21.72 85.83 -19.48 79.32 C-18.78 77.25 -18.08 75.17 -17.39 73.1 C-17.03 72.03 -16.67 70.96 -16.29 69.86 C-10.21 51.74 -4.52 34.01 -2 15 C-1.76 13.37 -1.52 11.75 -1.29 10.12 C-0.8 6.75 -0.37 3.38 0 0 Z" fill="#4b7cff" transform="translate(115 30)"/>
+  <path id="hull" d="M0 0 C-2.93 4 -5.96 6.73 -10.06 9.5 C-10.64 9.89 -11.22 10.28 -11.81 10.68 C-37.75 27.83 -73.94 26.2 -103.87 26.55 C-106.87 26.58 -109.87 26.64 -112.86 26.73 C-127.41 27.19 -138.82 27.25 -150 17 C-150 16.34 -150 15.68 -150 15 C-149.44 14.96 -148.87 14.92 -148.29 14.88 C-105.77 11.93 -63.55 7.78 -21.32 1.88 C-20.41 1.75 -19.51 1.63 -18.57 1.5 C-16.88 1.27 -15.19 1.03 -13.51 0.79 C-8.95 0.16 -4.59 -0.11 0 0 Z" fill="#f4f7f5" transform="translate(173 126)"/>
+  <path id="leading-sail" d="M0 0 C1.63 5.08 0.04 9.45 -1.19 14.5 C-1.45 15.58 -1.71 16.65 -1.97 17.76 C-5.97 33.8 -11.58 49.4 -17 65 C-17.27 65.79 -17.55 66.58 -17.83 67.4 C-18.65 69.78 -19.48 72.15 -20.31 74.53 C-20.57 75.27 -20.82 76 -21.08 76.76 C-22.88 81.88 -22.88 81.88 -24 83 C-30.96 84.02 -37.98 84.14 -45 84 C-41.33 76.21 -37.2 68.73 -32.94 61.25 C-21.47 41.09 -10.63 20.61 0 0 Z" fill="#f4f7f5" transform="translate(104 47)"/>
+  <path id="wake" d="M0 0 C-12.04 11.97 -25.71 14.36 -42.08 14.21 C-44.06 14.19 -46.05 14.19 -48.03 14.19 C-54.74 14.17 -61.35 13.98 -68 13 C-68 12.34 -68 11.68 -68 11 C-67.4 10.97 -66.8 10.93 -66.18 10.9 C-46.3 9.68 -27.05 6.65 -8.09 0.44 C-3.3 -1.1 -3.3 -1.1 0 0 Z" fill="#00c2a8" transform="translate(173 145)"/></svg>
+<circle cx="160" cy="240" r="6" fill="#5ade94"/><text x="177" y="248" font-size="22" fill="#e8f3ed" font-weight="600">1 working</text>
+<circle cx="786" cy="240" r="6" fill="#eeb85b"/><text x="803" y="248" font-size="22" fill="#efdec3" font-weight="600">1 needs you</text>
+<rect x="94" y="280" width="932" height="174" rx="22" fill="url(#green)" stroke="#366950"/>
+<rect x="94" y="301" width="4" height="132" rx="2" fill="#62d993"/>
+<text x="118" y="315" font-size="13" fill="#8ea69e" font-weight="600">PROJECT</text><text x="118" y="350" font-size="29" fill="#f1f7f4" font-weight="700">Atlas website</text>
+<rect x="755" y="304" width="245" height="37" rx="18" fill="#274237"/><text x="777" y="330" font-size="19" fill="#c5e7d4" font-weight="600">Codex · Desktop</text>
+<text x="118" y="388" font-size="25" fill="#e0e9e5" font-weight="400">TASK · Make checkout work on mobile</text>
+<text x="118" y="429" font-size="23" fill="#88b6f1" font-weight="400">CURRENT STEP · Checking the responsive layout</text>
+<rect x="94" y="470" width="932" height="174" rx="22" fill="url(#amber)" stroke="#796135"/>
+<rect x="94" y="491" width="4" height="132" rx="2" fill="#eabb64"/>
+<text x="118" y="505" font-size="13" fill="#b8a586" font-weight="600">PROJECT</text><text x="118" y="540" font-size="29" fill="#fff5e3" font-weight="700">Release checks</text>
+<rect x="755" y="494" width="245" height="37" rx="18" fill="#443923"/><text x="777" y="520" font-size="19" fill="#ecd6aa" font-weight="600">OpenCode · TUI</text>
+<text x="118" y="578" font-size="25" fill="#eee3d2" font-weight="400">TASK · Run the final verification</text>
+<text x="118" y="619" font-size="24" fill="#f1c576" font-weight="400">Which test suite should I run?</text>
+<circle cx="77" cy="717" r="16" fill="#30516a"/><text x="71" y="723" font-size="17" fill="#e4f2ff" font-weight="700">1</text><text x="104" y="725" font-size="23" fill="#d9e7f2" font-weight="600">Follow progress</text>
+<path d="M333 717h36m-7-6 7 6-7 6" fill="none" stroke="#7893ab" stroke-width="2"/>
+<circle cx="432" cy="717" r="16" fill="#30516a"/><text x="426" y="723" font-size="17" fill="#e4f2ff" font-weight="700">2</text><text x="459" y="725" font-size="23" fill="#d9e7f2" font-weight="600">Catch a request</text>
+<path d="M689 717h36m-7-6 7 6-7 6" fill="none" stroke="#7893ab" stroke-width="2"/>
+<circle cx="789" cy="717" r="16" fill="#30516a"/><text x="783" y="723" font-size="17" fill="#e4f2ff" font-weight="700">3</text><text x="816" y="725" font-size="23" fill="#d9e7f2" font-weight="600">Return to work</text>
+<text x="56" y="775" font-size="13" fill="#9fb5c7" font-weight="500">ILLUSTRATED PREVIEW · SAMPLE TASKS · CAPABILITIES VARY BY INTEGRATION</text>
+</g></svg>
