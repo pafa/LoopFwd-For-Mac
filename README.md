@@ -82,14 +82,46 @@ redacted report for troubleshooting. Permissions and observer installation stay 
 ## Your tools, together
 
 <p align="center">
-  <img src="Sources/LoopFwd/Resources/agents/openai.png" width="32" height="32" alt="Codex">&nbsp;&nbsp;
-  <img src="Sources/LoopFwd/Resources/agents/opencode.png" width="32" height="32" alt="OpenCode">&nbsp;&nbsp;
-  <img src="Sources/LoopFwd/Resources/agents/githubcopilot.png" width="32" height="32" alt="Copilot">&nbsp;&nbsp;
-  <img src="Sources/LoopFwd/Resources/agents/claude-color.png" width="32" height="32" alt="Claude Code">&nbsp;&nbsp;
-  <img src="Sources/LoopFwd/Resources/agents/gemini-color.png" width="32" height="32" alt="Gemini">&nbsp;&nbsp;
-  <img src="Sources/LoopFwd/Resources/agents/qwen.png" width="32" height="32" alt="Qwen">&nbsp;&nbsp;
-  <img src="Sources/LoopFwd/Resources/agents/kimi.png" width="32" height="32" alt="Kimi">&nbsp;&nbsp;
-  <img src="Sources/LoopFwd/Resources/agents/grok.png" width="32" height="32" alt="Grok">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agents/dark/openai.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/assets/agents/light/openai.png">
+    <img src="docs/assets/agents/light/openai.png" width="32" height="32" alt="Codex">
+  </picture>&nbsp;&nbsp;
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agents/dark/opencode.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/assets/agents/light/opencode.png">
+    <img src="docs/assets/agents/light/opencode.png" width="32" height="32" alt="OpenCode">
+  </picture>&nbsp;&nbsp;
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agents/dark/githubcopilot.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/assets/agents/light/githubcopilot.png">
+    <img src="docs/assets/agents/light/githubcopilot.png" width="32" height="32" alt="Copilot">
+  </picture>&nbsp;&nbsp;
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agents/dark/claude-color.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/assets/agents/light/claude-color.png">
+    <img src="docs/assets/agents/light/claude-color.png" width="32" height="32" alt="Claude Code">
+  </picture>&nbsp;&nbsp;
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agents/dark/gemini-color.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/assets/agents/light/gemini-color.png">
+    <img src="docs/assets/agents/light/gemini-color.png" width="32" height="32" alt="Gemini">
+  </picture>&nbsp;&nbsp;
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agents/dark/qwen.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/assets/agents/light/qwen.png">
+    <img src="docs/assets/agents/light/qwen.png" width="32" height="32" alt="Qwen">
+  </picture>&nbsp;&nbsp;
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agents/dark/kimi.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/assets/agents/light/kimi.png">
+    <img src="docs/assets/agents/light/kimi.png" width="32" height="32" alt="Kimi">
+  </picture>&nbsp;&nbsp;
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agents/dark/grok.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/assets/agents/light/grok.png">
+    <img src="docs/assets/agents/light/grok.png" width="32" height="32" alt="Grok">
+  </picture>
 </p>
 
 **Codex · OpenCode · Copilot · Claude Code · Gemini · Qwen · Kimi · Grok**

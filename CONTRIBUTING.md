@@ -88,6 +88,13 @@ Provider compatibility versions and snapshot schema versions are independent.
 change, keep unrelated formatting out of the diff, and prefer squash merge.
 Agent-created branches use the `codex/` prefix.
 
+Keep `main` protected: changes go through a PR, required checks must pass, and
+force pushes and branch deletion are disabled. A maintainer must approve the
+reviewed candidate before an agent merges it; green checks alone are not approval.
+After merging, delete that completed task branch and start the next change from
+the updated `main`. Keep release tags immutable; do not maintain a separate
+long-lived development or release branch for this preview.
+
 The required job names are `macOS build and tests` and `Observer and configuration tests`.
 The macOS job includes the public-tree hygiene check before building. UI or packaging changes also
 need a real launch smoke on macOS; record what was exercised in the pull

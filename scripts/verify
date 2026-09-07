@@ -16,6 +16,7 @@ test -f LICENSES/lobe-icons-MIT.txt
 jq empty Sources/LoopFwd/Resources/Localizable.xcstrings
 shasum -a 256 -c assets/agent-icon-checksums.sha256
 shasum -a 256 -c assets/brand-checksums.sha256
+shasum -a 256 -c docs/assets/agent-icon-checksums.sha256
 npm test --prefix Integrations/DeepSeekHarnessObserver
 node --test Integrations/LocalHooks/observer.test.mjs
 node --test Integrations/LocalHooks/configuration.test.mjs
