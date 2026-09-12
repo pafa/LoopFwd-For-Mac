@@ -46,6 +46,10 @@ enum CursorDesktopSessions {
         }
         let app = AXUIElementCreateApplication(processID)
         AXUIElementSetMessagingTimeout(app, 0.05)
+        // Electron requires this documented opt-in to keep its rendered tree
+        // available when no other assistive client is inspecting the window.
+        // This is transient interface exposure, not a permission/config edit.
+        AXUIElementSetAttributeValue(app, "AXManualAccessibility" as CFString, kCFBooleanTrue)
         let deadline = ProcessInfo.processInfo.systemUptime + 0.8
         var remaining = 1600
         var complete = true
