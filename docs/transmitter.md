@@ -24,7 +24,8 @@ Hooks (AppDelegate after existing starts):
 1. Start Hub (iOS repo):
 
 ```bash
-cd /Users/pafa/Documents/LoopFwd-For-iOS/Hub
+# sibling checkout of LoopFwd-For-iOS
+cd ../LoopFwd-For-iOS/Hub
 npm install && npm start
 # http://127.0.0.1:8787
 ```
