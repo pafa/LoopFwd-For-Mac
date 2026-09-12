@@ -44,7 +44,9 @@ struct SessionCard: View {
     private var hasApproval: Bool {
         agent.status == .needsAttention && (approval != nil || openCodePermission != nil)
     }
-    private var approvalColor: Color { AgentStatus.needsAttention.color }
+    private var approvalColor: Color {
+        AttentionUrgency.level(for: agent).color
+    }
     private var controlCapabilities: AgentCapabilities {
         agent.effectiveCapabilities(
             providerControlsEnabled: providerControlsEnabled, claudeControlsEnabled: claudeControlsEnabled)
@@ -270,41 +272,56 @@ struct SessionCard: View {
     /// "Needs approval: Bash" + Approve / Always / Deny. Claude replies to
     /// its live terminal prompt; OpenCode replies to its validated local API.
     private var approvalBar: some View {
-        VStack(alignment: .leading, spacing: 7) {
-            HStack(spacing: 5) {
-                Image(systemName: "lock.shield.fill")
-                    .font(.system(size: 10))
-                    .foregroundStyle(approvalColor)
-                Text(approvalHeadline)
-                    .font(.system(size: fs, weight: .semibold))
-                    .foregroundStyle(approvalColor)
-                    .lineLimit(1)
-            }
-            if let detail = approvalDetailLine {
-                Text(detail)
-                    .font(.system(size: fs - 1, weight: .medium))
-                    .foregroundStyle(.white.opacity(0.55))
-                    .lineLimit(2)
-            }
-            HStack(spacing: 6) {
-                ApprovalButton(label: "Approve", tint: AgentStatus.working.color) {
-                    respondApproval(.approve)
+        TimelineView(.periodic(from: .now, by: 1)) { context in
+            let now = context.date
+            let urgency = AttentionUrgency.level(for: agent, now: now)
+            let tint = urgency.color
+            let waitLabel: String? = {
+                guard let since = AttentionUrgency.waitingSince(for: agent) else { return nil }
+                return urgency.waitLabel(waitingSince: since, now: now)
+            }()
+            VStack(alignment: .leading, spacing: 7) {
+                HStack(spacing: 5) {
+                    Image(systemName: "lock.shield.fill")
+                        .font(.system(size: 10))
+                        .foregroundStyle(tint)
+                    Text(approvalHeadline)
+                        .font(.system(size: fs, weight: .semibold))
+                        .foregroundStyle(tint)
+                        .lineLimit(1)
+                    if let waitLabel {
+                        Text(waitLabel)
+                            .font(.system(size: fs - 1, weight: .medium, design: .rounded))
+                            .foregroundStyle(tint.opacity(0.85))
+                            .lineLimit(1)
+                    }
                 }
-                ApprovalButton(label: "Always Allow", tint: .white.opacity(0.75)) {
-                    respondApproval(.alwaysAllow)
+                if let detail = approvalDetailLine {
+                    Text(detail)
+                        .font(.system(size: fs - 1, weight: .medium))
+                        .foregroundStyle(.white.opacity(0.55))
+                        .lineLimit(2)
                 }
-                ApprovalButton(label: "Deny", tint: Color(red: 1.0, green: 0.45, blue: 0.45)) {
-                    respondApproval(.deny)
+                HStack(spacing: 6) {
+                    ApprovalButton(label: "Approve", tint: AgentStatus.working.color) {
+                        respondApproval(.approve)
+                    }
+                    ApprovalButton(label: "Always Allow", tint: .white.opacity(0.75)) {
+                        respondApproval(.alwaysAllow)
+                    }
+                    ApprovalButton(label: "Deny", tint: Color(red: 1.0, green: 0.45, blue: 0.45)) {
+                        respondApproval(.deny)
+                    }
+                    Spacer(minLength: 0)
                 }
-                Spacer(minLength: 0)
+                controlResultLine
             }
-            controlResultLine
+            .padding(8)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    .fill(tint.opacity(urgency == .normal ? 0.10 : 0.16)))
         }
-        .padding(8)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .fill(approvalColor.opacity(0.10)))
     }
 
     private var approvalName: String? {
@@ -337,27 +354,42 @@ struct SessionCard: View {
     }
 
     private var attentionOnlyBar: some View {
-        HStack(spacing: 7) {
-            Image(systemName: "exclamationmark.bubble.fill")
-                .font(.system(size: 10))
-                .foregroundStyle(approvalColor)
-            Text(
-                approvalName.map { L10n.format("Approval needed: %@", $0) }
-                    ?? L10n.format("%@ needs your attention", agent.kind.displayName)
+        TimelineView(.periodic(from: .now, by: 1)) { context in
+            let now = context.date
+            let tint = AttentionUrgency.level(for: agent, now: now).color
+            let waitLabel: String? = {
+                guard let since = AttentionUrgency.waitingSince(for: agent) else { return nil }
+                return AttentionUrgency.level(waitingSince: since, now: now)
+                    .waitLabel(waitingSince: since, now: now)
+            }()
+            HStack(spacing: 7) {
+                Image(systemName: "exclamationmark.bubble.fill")
+                    .font(.system(size: 10))
+                    .foregroundStyle(tint)
+                Text(
+                    approvalName.map { L10n.format("Approval needed: %@", $0) }
+                        ?? L10n.format("%@ needs your attention", agent.kind.displayName)
+                )
+                .font(.system(size: fs, weight: .semibold))
+                .foregroundStyle(tint)
+                .lineLimit(1)
+                if let waitLabel {
+                    Text(waitLabel)
+                        .font(.system(size: fs - 1, weight: .medium, design: .rounded))
+                        .foregroundStyle(tint.opacity(0.85))
+                        .lineLimit(1)
+                }
+                Spacer(minLength: 4)
+                Text(L10n.string("Jump to answer"))
+                    .font(.system(size: fs - 1, weight: .medium))
+                    .foregroundStyle(.white.opacity(0.45))
+            }
+            .padding(8)
+            .background(
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    .fill(tint.opacity(0.10))
             )
-            .font(.system(size: fs, weight: .semibold))
-            .foregroundStyle(approvalColor)
-            .lineLimit(1)
-            Spacer(minLength: 4)
-            Text(L10n.string("Jump to answer"))
-                .font(.system(size: fs - 1, weight: .medium))
-                .foregroundStyle(.white.opacity(0.45))
         }
-        .padding(8)
-        .background(
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .fill(approvalColor.opacity(0.10))
-        )
     }
 
     @ViewBuilder
