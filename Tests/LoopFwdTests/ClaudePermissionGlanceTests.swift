@@ -13,7 +13,7 @@ final class ClaudePermissionGlanceTests: XCTestCase {
     func testFormatReadPathUsesBasename() {
         let detail = ClaudePermissionGlance.formatInput(
             toolName: "Read",
-            toolInput: ["file_path": "/Users/pafa/Documents/LoopFwd/Sources/App.swift"])
+            toolInput: ["file_path": "/tmp/example-project/Sources/App.swift"])
         XCTAssertEqual(detail, "App.swift")
     }
 
