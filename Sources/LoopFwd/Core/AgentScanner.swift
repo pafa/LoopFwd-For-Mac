@@ -90,7 +90,7 @@ enum AgentScanner {
                 detect: {
                     detect(args: args, tty: tty)
                 }),
-                !disabled.contains(kind),
+                !disabled.contains(kind), kind != .cursorAgent,
                 !isHeadless(tty: tty, args: args)
             {
                 candidates.append((pid, ppid, cpu, tty, row.elapsed, args, kind))
@@ -678,6 +678,27 @@ enum AgentScanner {
             let duration = ProcessInfo.processInfo.systemUptime - started
             providerDurations[.workbuddy] = duration
             surfaceDurations[.workBuddyDesktop] = duration
+        }
+
+        if !disabled.contains(.cursorAgent) {
+            let apps = runningApplications.filter { $0.bundleIdentifier == CursorDesktopSessions.bundleIdentifier }
+            for app in apps {
+                let startedAt = Date()
+                let version = app.bundleURL.flatMap {
+                    Bundle(url: $0)?.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+                }
+                let read = CursorDesktopSessions.read(processID: app.processIdentifier, version: version)
+                readerResults[.cursorDesktop] = readerResults[.cursorDesktop]?.merging(read) ?? read
+                sessions.append(
+                    contentsOf: read.sessions.map {
+                        var session = $0
+                        session.observedVersion = .metadata(version, source: "Running app bundle")
+                        return session
+                    })
+                let duration = Date().timeIntervalSince(startedAt)
+                providerDurations[.cursorAgent, default: 0] += duration
+                surfaceDurations[.cursorDesktop, default: 0] += duration
+            }
         }
 
         // Each Desktop reader owns a separate database and bounded cursor.

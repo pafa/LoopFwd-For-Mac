@@ -1,6 +1,13 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "Cursor Desktop": {"localizations":{"en":{"stringUnit":{"state":"translated","value":"Cursor Desktop"}},"zh-Hans":{"stringUnit":{"state":"translated","value":"Cursor 客户端"}}}},
+    "Accessibility": {"localizations":{"en":{"stringUnit":{"state":"translated","value":"Accessibility"}},"zh-Hans":{"stringUnit":{"state":"translated","value":"辅助功能"}}}},
+    "Review Cursor access": {"localizations":{"en":{"stringUnit":{"state":"translated","value":"Review Cursor access"}},"zh-Hans":{"stringUnit":{"state":"translated","value":"检查 Cursor 读取权限"}}}},
+    "Allow LoopFwd in macOS Accessibility, then enable Cursor above.": {"localizations":{"en":{"stringUnit":{"state":"translated","value":"Allow LoopFwd in macOS Accessibility, then enable Cursor above."}},"zh-Hans":{"stringUnit":{"state":"translated","value":"在 macOS 辅助功能中允许 LoopFwd，然后在上方启用 Cursor。"}}}},
+    "Reads visible Cursor Agents panes locally. Account login is sufficient. Hidden tasks, approvals and completion are not inferred.": {"localizations":{"en":{"stringUnit":{"state":"translated","value":"Reads visible Cursor Agents panes locally. Account login is sufficient. Hidden tasks, approvals and completion are not inferred."}},"zh-Hans":{"stringUnit":{"state":"translated","value":"在本机读取 Cursor 可见的任务面板，账号登录即可。不推断隐藏任务、审批或完成状态。"}}}},
+    "Visible Agents panes · read only": {"localizations":{"en":{"stringUnit":{"state":"translated","value":"Visible Agents panes · read only"}},"zh-Hans":{"stringUnit":{"state":"translated","value":"可见任务面板 · 只读"}}}},
+    "Accessibility access required": {"localizations":{"en":{"stringUnit":{"state":"translated","value":"Accessibility access required"}},"zh-Hans":{"stringUnit":{"state":"translated","value":"需要辅助功能权限"}}}},
     "Applies to Claude CLI, Codex CLI, OpenCode TUI/Desktop and Qwen idle records. Other readers manage their own lifetime. Idle never fills the island.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"适用于 Claude CLI、Codex CLI、OpenCode TUI/桌面版和 Qwen 的空闲记录。其他读取器自行管理保留时间；空闲任务不会占据主岛。"}}}},
     "Sound import failed: %@. The previous sound could not be restored: %@. Recovery copy: %@": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"声音导入失败：%@。旧声音未能恢复：%@。恢复副本：%@"}}}},
     "The task target has closed or changed. Refresh tasks and try again.": {"localizations":{"zh-Hans":{"stringUnit":{"state":"translated","value":"任务目标已关闭或发生变化，请刷新任务后重试。"}}}},

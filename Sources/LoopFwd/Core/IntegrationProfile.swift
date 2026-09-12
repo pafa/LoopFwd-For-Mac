@@ -19,6 +19,7 @@ enum IntegrationSurfaceID: String, Codable, Equatable, CaseIterable {
     case geminiCLI = "gemini.cli"
     case qwenCLI = "qwen.cli"
     case cursorCLI = "cursor.cli"
+    case cursorDesktop = "cursor.desktop"
     case workBuddyDesktop = "workbuddy.desktop"
     case experimentalLocal = "experimental.local"
 
@@ -34,7 +35,7 @@ enum IntegrationSurfaceID: String, Codable, Equatable, CaseIterable {
         case .mistralCLI: return .mistral
         case .geminiCLI: return .gemini
         case .qwenCLI: return .qwen
-        case .cursorCLI: return .cursorAgent
+        case .cursorCLI, .cursorDesktop: return .cursorAgent
         case .workBuddyDesktop: return .workbuddy
         case .process, .experimentalLocal: return nil
         }
@@ -225,6 +226,13 @@ enum IntegrationProfiles {
                 id: surface, supportTier: SupportRegistry.tier(surface),
                 phaseAuthority: .versionedObserver, attentionAuthority: nil, completionAuthority: nil,
                 capabilities: terminal, controlPolicy: .none, supportedVersions: "Mistral Vibe 2.25.0 tool hooks",
+                degradationPolicy: .stale, readerBudget: 0.8, stalledAfter: 10 * 60, reconciliationGrace: 20)
+        case .cursorDesktop:
+            return .init(
+                id: surface, supportTier: SupportRegistry.tier(surface),
+                phaseAuthority: .versionedObserver, attentionAuthority: nil, completionAuthority: nil,
+                capabilities: observation, controlPolicy: .none,
+                supportedVersions: "Cursor 3.20.17 rendered Agents panes (Accessibility)",
                 degradationPolicy: .stale, readerBudget: 0.8, stalledAfter: 10 * 60, reconciliationGrace: 20)
         case .cursorCLI:
             return .init(

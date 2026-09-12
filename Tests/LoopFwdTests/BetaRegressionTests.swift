@@ -1479,12 +1479,13 @@ final class BetaRegressionTests: XCTestCase {
 
     func testPreviewScopeAndPreferencesCannotReenableDeferredReaders() throws {
         XCTAssertEqual(
-            SupportRegistry.shippedKinds, [.codex, .opencode, .copilot, .claude, .gemini, .qwen, .kimi, .grok])
-        XCTAssertEqual(SupportRegistry.deferredKinds, [.cursorAgent, .deepseek, .mistral, .workbuddy])
+            SupportRegistry.shippedKinds,
+            [.codex, .opencode, .copilot, .claude, .gemini, .qwen, .kimi, .grok, .cursorAgent])
+        XCTAssertEqual(SupportRegistry.deferredKinds, [.deepseek, .mistral, .workbuddy])
         let name = "LoopFwd-preview-scope-\(UUID().uuidString)"
         let defaults = try XCTUnwrap(UserDefaults(suiteName: name))
         defer { defaults.removePersistentDomain(forName: name) }
-        let optional: Set<AgentKind> = [.claude, .gemini, .qwen, .kimi, .grok]
+        let optional: Set<AgentKind> = [.claude, .gemini, .qwen, .kimi, .grok, .cursorAgent]
         XCTAssertEqual(Pref.disabledKinds(in: defaults), SupportRegistry.deferredKinds.union(optional))
         defaults.set("", forKey: Pref.disabledAgents)  // Older version enabled every brand.
         XCTAssertEqual(Pref.disabledKinds(in: defaults), SupportRegistry.deferredKinds)

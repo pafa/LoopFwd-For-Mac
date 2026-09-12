@@ -24,9 +24,11 @@ struct SetupStatusPane: View {
                         surfaces: SupportRegistry.testedSurfaces.filter { $0.providerKind == kind }
                             .map(\.rawValue).sorted().joined(separator: " · "),
                         softwareAvailable: kind.softwareAvailable,
-                        detail: kind.supportTier == .previewTested
-                            ? "Basic monitoring tested on the listed surface; return and controls vary by session."
-                            : "Optional CLI integration. Enable in Agents; observer setup may be required. Real model tasks are not yet verified."
+                        detail: kind == .cursorAgent
+                            ? "Reads visible Cursor Agents panes locally. Account login is sufficient. Hidden tasks, approvals and completion are not inferred."
+                            : kind.supportTier == .previewTested
+                                ? "Basic monitoring tested on the listed surface; return and controls vary by session."
+                                : "Optional CLI integration. Enable in Agents; observer setup may be required. Real model tasks are not yet verified."
                     )
                 }
             }
