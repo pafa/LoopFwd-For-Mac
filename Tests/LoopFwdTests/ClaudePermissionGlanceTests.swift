@@ -45,4 +45,25 @@ final class ClaudePermissionGlanceTests: XCTestCase {
         XCTAssertEqual(object["toolName"] as? String, "Bash")
         XCTAssertEqual(object["message"] as? String, "npm test")
     }
+
+    func testFormatEditGlanceUsesCompactDiff() {
+        let detail = ClaudePermissionGlance.formatInput(
+            toolName: "Edit",
+            toolInput: [
+                "file_path": "/tmp/Auth.swift",
+                "old_string": "a\nb\nc",
+                "new_string": "a\nx\ny\nz",
+            ])
+        XCTAssertEqual(detail, "Auth.swift · +3 −2")
+    }
+
+    func testFormatWriteWithoutOldStringShowsPlusLines() {
+        let detail = ClaudePermissionGlance.formatInput(
+            toolName: "Write",
+            toolInput: [
+                "file_path": "/tmp/New.swift",
+                "content": "one\ntwo\nthree",
+            ])
+        XCTAssertEqual(detail, "New.swift · +3")
+    }
 }
