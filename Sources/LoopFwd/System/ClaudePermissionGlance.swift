@@ -51,7 +51,8 @@ enum ClaudePermissionGlance {
 
     /// Compact edit summary when old/new strings are present in `tool_input`.
     static func formatEditGlance(toolName: String, toolInput: [String: Any]) -> String? {
-        let editLike = ["edit", "multiedit", "notebookedit", "write"].contains(toolName)
+        let editLike =
+            ["edit", "multiedit", "notebookedit", "write"].contains(toolName)
             || toolInput["old_string"] != nil || toolInput["new_string"] != nil
         guard editLike else { return nil }
 
@@ -59,7 +60,8 @@ enum ClaudePermissionGlance {
         let basename = path.map { ($0 as NSString).lastPathComponent }
 
         let oldString = stringValue(toolInput["old_string"])
-        let newString = stringValue(toolInput["new_string"])
+        let newString =
+            stringValue(toolInput["new_string"])
             ?? stringValue(toolInput["content"])
             ?? stringValue(toolInput["new_source"])
 

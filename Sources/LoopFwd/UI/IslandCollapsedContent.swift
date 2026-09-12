@@ -22,8 +22,7 @@ struct CollapsedContent: View {
         let attentionAgents = agents.filter { $0.status == .needsAttention }
         if !attentionAgents.isEmpty {
             let base = L10n.format("%d need attention", attentionAgents.count)
-            if let oldest = attentionAgents.compactMap({ AttentionUrgency.waitingSince(for: $0) }).min()
-            {
+            if let oldest = attentionAgents.compactMap({ AttentionUrgency.waitingSince(for: $0) }).min() {
                 let urgency = AttentionUrgency.level(waitingSince: oldest, now: now)
                 if let wait = urgency.waitLabel(waitingSince: oldest, now: now) {
                     return "\(base) · \(wait)"
