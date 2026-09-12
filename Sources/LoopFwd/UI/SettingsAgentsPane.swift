@@ -1,4 +1,5 @@
 import AppKit
+import ApplicationServices
 import SwiftUI
 import UniformTypeIdentifiers
 import UserNotifications
@@ -22,6 +23,11 @@ struct AgentsPane: View {
                     title: "Accessibility", subtitle: "Allow LoopFwd in macOS Accessibility, then enable Cursor above."
                 ) {
                     Button(L10n.string("Review Cursor access")) {
+                        // Explicit user action registers this exact build with macOS.
+                        // Startup and background scans never request access.
+                        let options =
+                            [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true] as CFDictionary
+                        _ = AXIsProcessTrustedWithOptions(options)
                         if let url = URL(
                             string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility")
                         {
