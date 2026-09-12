@@ -105,6 +105,7 @@ enum AgentKind: String, CaseIterable {
         switch self {
         case .codex: bundleID = "com.openai.codex"
         case .opencode: bundleID = "ai.opencode.desktop"
+        case .cursorAgent: bundleID = CursorDesktopSessions.bundleIdentifier
         case .workbuddy: bundleID = WorkBuddySessions.bundleIdentifier
         default: bundleID = nil  // Claude Desktop is not Claude Code CLI.
         }

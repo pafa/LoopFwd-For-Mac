@@ -192,3 +192,5 @@
 3|scripts/verify-public-tree
 1|Sources/LoopFwd/System/CodexUsageSource.swift
 1|Tests/LoopFwdTests/ReliabilityPolishTests.swift
+1|Sources/LoopFwd/Providers/CursorDesktopSessions.swift
+1|Tests/LoopFwdTests/CursorDesktopTests.swift

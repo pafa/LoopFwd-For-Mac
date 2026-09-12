@@ -14,6 +14,23 @@ struct AgentsPane: View {
         VStack(alignment: .leading, spacing: 22) {
             trackedAgents
             SSection(
+                title: "Cursor Desktop",
+                footer:
+                    "Reads visible Cursor Agents panes locally. Account login is sufficient. Hidden tasks, approvals and completion are not inferred."
+            ) {
+                SRow(
+                    title: "Accessibility", subtitle: "Allow LoopFwd in macOS Accessibility, then enable Cursor above."
+                ) {
+                    Button(L10n.string("Review Cursor access")) {
+                        if let url = URL(
+                            string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility")
+                        {
+                            NSWorkspace.shared.open(url)
+                        }
+                    }
+                }
+            }
+            SSection(
                 title: "Codex Desktop data",
                 footer:
                     "Automatic uses the running Codex app's environment. Choose its actual CODEX_HOME folder if detection is unavailable or ambiguous. This does not move or modify Codex data."
@@ -71,7 +88,7 @@ struct AgentsPane: View {
                             .lineLimit(1)
                     }
                     Spacer()
-                    if kind != .workbuddy {
+                    if kind != .workbuddy && kind != .cursorAgent {
                         Button(L10n.string("Choose CLI…")) {
                             let panel = NSOpenPanel()
                             panel.canChooseDirectories = false
@@ -113,6 +130,10 @@ struct AgentsPane: View {
     }
 
     private func availability(for kind: AgentKind) -> String {
+        if kind == .cursorAgent {
+            return L10n.string(
+                CursorDesktopSessions.authorized ? "Visible Agents panes · read only" : "Accessibility access required")
+        }
         let level = kind.hasRichSessionReader ? "local session reader" : "process tracking"
         if isRunning(kind) { return L10n.format("Running now · %@", L10n.string(level)) }
         if let path = kind.installedCLIPath {

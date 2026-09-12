@@ -8,7 +8,7 @@ agent work, explains attention and returns the user to the best verified target.
 
 `SupportRegistry.shippedKinds` is the allowlist for all scanning, settings,
 Setup and diagnostics. It contains Codex, OpenCode, Copilot, Claude, Gemini,
-Qwen, Kimi and Grok. Old preferences cannot re-enable deferred providers.
+Qwen, Kimi, Grok and the optional Cursor Desktop reader. Old preferences cannot re-enable deferred providers.
 
 Basic real-task evidence exists for `codex.desktop`, `opencode.tui-http` and
 `copilot.cli`. This is not a stable certification or permission to control
@@ -28,10 +28,25 @@ off by default on a fresh install; existing choices remain unchanged.
 | Kimi | Lifecycle identity plus matching main wire 1.5, client 0.41.0 | Experimental; no exact task return or approval/control promise |
 | Grok | Verified live session registry and event schema 1.0 | Experimental; authenticated model lifecycle and actual return remain unverified |
 
-Cursor, DeepSeek Harness, Mistral and WorkBuddy source remains available for
+DeepSeek Harness, Mistral and WorkBuddy source remains available for
 future work and recovery of older installations. They are not active preview
 integrations. Doubao Work has no production reader. Building or starting the app
 does not install, remove or reconfigure any provider.
+
+## Cursor Desktop observation
+
+Cursor 3.20.17 is an optional, local Accessibility reader. Enabling the integration
+and granting macOS access are explicit setup actions. Only live composer controls
+in the selected conversation of each rendered Agents pane establish Working or
+Idle. Old transcript text, process existence and cached titles are not phase evidence.
+Missing, incomplete, ambiguous or unverified-version UI reads fail closed and use
+the existing stale reconciliation. Unchanged reads do not advance progress time.
+UI identities are process/title scoped, not provider conversation IDs. Renaming or
+switching panes may retire a projection. Return opens the app only; completion,
+approval, reply and stop capabilities are absent. Hidden tasks are not enumerated.
+No tokens, provider configuration, editor contents or text input values are read.
+Cursor UI sessions are excluded from Session Hub export. The packaged app requires
+its own Accessibility grant; Codex Computer Use authorization does not transfer.
 
 ## Data flow and file ownership
 

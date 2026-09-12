@@ -10,7 +10,9 @@ enum SessionProjector {
         macDeviceId: String,
         macOnline: Bool
     ) -> [SessionProjection] {
-        agents.map { project(agent: $0, macDeviceId: macDeviceId, macOnline: macOnline) }
+        // Cursor UI access is authorized for the local island only.
+        agents.filter { $0.surfaceID != .cursorDesktop }
+            .map { project(agent: $0, macDeviceId: macDeviceId, macOnline: macOnline) }
     }
 
     static func project(

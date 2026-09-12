@@ -78,6 +78,12 @@ Your agents keep their own editors, terminals and conversations.
 
 <p align="center"><strong>Claude Code CLI · Gemini CLI · Qwen Code · Kimi Code · Grok CLI</strong></p>
 
+The development build also includes **Cursor Desktop 3.20.17** as an optional experiment:
+Settings → Agents → Cursor, with macOS Accessibility access for LoopFwd. It reads the selected
+conversation in each rendered Agents pane using your existing account login. Hidden conversations,
+approvals and successful completion are not inferred; return opens Cursor at app level.
+This local UI observation is excluded from the optional Session Hub transmitter.
+
 Eight integrations, enabled when you want them. Experimental integrations are off by default on fresh installs.
 Monitoring, return and control are separate capabilities; even different surfaces of the same provider can differ.
 [See what each integration can do](#compatibility-and-preview-notes).

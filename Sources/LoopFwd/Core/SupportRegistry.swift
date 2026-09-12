@@ -4,7 +4,7 @@ import Foundation
 /// shipped integrations; neither a badge nor a brand grants control authority.
 enum SupportRegistry {
     static let shippedKinds: [AgentKind] = [
-        .codex, .opencode, .copilot, .claude, .gemini, .qwen, .kimi, .grok,
+        .codex, .opencode, .copilot, .claude, .gemini, .qwen, .kimi, .grok, .cursorAgent,
     ]
     static let deferredKinds = Set(AgentKind.allCases).subtracting(shippedKinds)
 
