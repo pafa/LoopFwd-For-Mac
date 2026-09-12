@@ -372,6 +372,9 @@ struct SessionCard: View {
         }
         controlInFlight = true
         OpenCodeSessions.replyPermission(control: control, reply: reply) { success in
+            if success, action == .alwaysAllow {
+                StickyPermissionAllow.remember(control.permission?.name)
+            }
             finishProviderControl(success)
         }
     }

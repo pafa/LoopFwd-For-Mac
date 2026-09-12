@@ -120,6 +120,11 @@ enum ActionIngress {
             let ok = await withCheckedContinuation { (cont: CheckedContinuation<Bool, Never>) in
                 OpenCodeSessions.replyPermission(control: control, reply: reply) { cont.resume(returning: $0) }
             }
+            if ok, macAction == .alwaysAllow {
+                await MainActor.run {
+                    StickyPermissionAllow.remember(control.permission?.name)
+                }
+            }
             return await finish(env, success: ok, sessionId: agent.id, project: project)
         }
 
