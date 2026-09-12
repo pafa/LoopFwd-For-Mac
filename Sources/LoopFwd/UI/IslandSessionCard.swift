@@ -275,10 +275,16 @@ struct SessionCard: View {
                 Image(systemName: "lock.shield.fill")
                     .font(.system(size: 10))
                     .foregroundStyle(approvalColor)
-                Text(approvalName.map { L10n.format("Approval needed: %@", $0) } ?? L10n.string("Needs your approval"))
+                Text(approvalHeadline)
                     .font(.system(size: fs, weight: .semibold))
                     .foregroundStyle(approvalColor)
                     .lineLimit(1)
+            }
+            if let detail = approvalDetailLine {
+                Text(detail)
+                    .font(.system(size: fs - 1, weight: .medium))
+                    .foregroundStyle(.white.opacity(0.55))
+                    .lineLimit(2)
             }
             HStack(spacing: 6) {
                 ApprovalButton(label: "Approve", tint: AgentStatus.working.color) {
@@ -303,6 +309,31 @@ struct SessionCard: View {
 
     private var approvalName: String? {
         approval?.toolName ?? openCodePermission?.name
+    }
+
+    private var approvalCategory: String? {
+        approval?.category
+            ?? StickyPermissionAllow.category(from: approval?.toolName ?? openCodePermission?.name)
+    }
+
+    private var approvalHeadline: String {
+        if let name = approvalName {
+            if let label = ClaudePermissionGlance.categoryLabel(approvalCategory),
+                label.lowercased() != name.lowercased()
+            {
+                return L10n.format("Approval needed: %@ · %@", name, label)
+            }
+            return L10n.format("Approval needed: %@", name)
+        }
+        return L10n.string("Needs your approval")
+    }
+
+    private var approvalDetailLine: String? {
+        if let detail = approval?.detail, !detail.isEmpty { return detail }
+        if let patterns = openCodePermission?.patterns, !patterns.isEmpty {
+            return patterns.joined(separator: ", ")
+        }
+        return nil
     }
 
     private var attentionOnlyBar: some View {

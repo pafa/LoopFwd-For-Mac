@@ -37,6 +37,10 @@ final class ApprovalCenter: ObservableObject {
         let identity: RequestIdentity
         let message: String  // "Claude needs your permission to use Bash"
         let toolName: String?
+        /// Short glance detail from PermissionRequest `tool_input` (command / path).
+        let detail: String?
+        /// Sticky category (`files` / `app` / provider-native).
+        let category: String?
         let at: Date
         var activityAtCreate: String?
     }
@@ -235,13 +239,15 @@ final class ApprovalCenter: ObservableObject {
                 continue
             }
 
-            // PermissionRequest events carry the tool name directly; plain
-            // Notification events only when the message mentions permission
+            // PermissionRequest events carry the tool name (+ optional tool_input);
+            // plain Notification events only when the message mentions permission
             // (The card already carries the explicit needs-attention state.)
             let message = obj["message"] as? String ?? ""
             var tool: String?
+            var toolInput: [String: Any]?
             if event == "PermissionRequest" {
                 tool = obj["tool_name"] as? String
+                toolInput = obj["tool_input"] as? [String: Any]
             } else if event == "Notification", obj["notification_type"] as? String == "permission_prompt" {
                 tool = toolName(from: message)
             } else {
@@ -261,12 +267,16 @@ final class ApprovalCenter: ObservableObject {
             try? fm.removeItem(atPath: path)  // matched → consume
             let agent = AgentMonitor.shared.agents.first { $0.processID == pid }
             let toolName = tool
+            let detail = ClaudePermissionGlance.formatInput(toolName: toolName, toolInput: toolInput)
+            let category = StickyPermissionAllow.category(from: toolName)
             DispatchQueue.main.async {
                 if let previous = self.pending[pid], previous.at > at { return }
                 self.pending[pid] = Approval(
                     identity: identity,
                     message: message,
                     toolName: toolName,
+                    detail: detail,
+                    category: category,
                     at: at,
                     activityAtCreate: agent?.activity
                 )
@@ -413,6 +423,9 @@ final class ApprovalCenter: ObservableObject {
                 agent.status = .needsAttention
                 agent.attentionKind = .approval
                 agent.lastMessage = request.message
+                if let detail = request.detail, !detail.isEmpty {
+                    agent.activity = detail
+                }
                 agent.observation = .rich("Claude hook", updatedAt: request.at, authority: .officialLive)
             } else if let request = questions[pid], request.identity.matches(original) {
                 agent.status = .needsAttention

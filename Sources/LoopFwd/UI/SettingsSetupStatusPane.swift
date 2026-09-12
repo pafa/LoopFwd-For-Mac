@@ -88,7 +88,9 @@ struct SetupStatusPane: View {
             enabled: enabled, installed: softwareAvailable,
             observations: active.map { $0.observation.mode }, diagnostic: monitor.providerDiagnostics[kind],
             scanFailed: monitor.lastScanError != nil, missingConfiguration: missingFolder,
-            usesObserver: [.claude, .gemini, .qwen, .kimi].contains(kind))
+            usesObserver: [.claude, .gemini, .qwen, .kimi].contains(kind),
+            claudeHookInstalled: kind == .claude ? ApprovalCenter.hookInstalled : nil,
+            claudeHookNeedsUpdate: kind == .claude ? ApprovalCenter.hookNeedsUpdate : nil)
         let ready = readiness.ready
 
         return HStack(spacing: 11) {
@@ -101,6 +103,9 @@ struct SetupStatusPane: View {
                         .font(.system(size: 10))
                         .foregroundStyle(.secondary)
                 }
+                Text(L10n.string(readiness.status))
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundStyle(ready ? Color.secondary : Color.primary.opacity(0.75))
                 Text(L10n.string(readiness.detail ?? detail))
                     .font(.system(size: 10.5))
                     .foregroundStyle(.secondary)
@@ -148,7 +153,8 @@ struct ProviderReadiness {
     static func resolve(
         enabled: Bool, installed: Bool, observations: [ObservationMode],
         diagnostic: ProviderScanDiagnostic?, scanFailed: Bool = false,
-        missingConfiguration: Bool = false, usesObserver: Bool = false
+        missingConfiguration: Bool = false, usesObserver: Bool = false,
+        claudeHookInstalled: Bool? = nil, claudeHookNeedsUpdate: Bool? = nil
     ) -> Self {
         if !enabled {
             return .init(
@@ -168,10 +174,30 @@ struct ProviderReadiness {
                 detail: "Review Diagnostics for the failed source, then refresh after correcting it.",
                 action: .diagnostics)
         }
+        if claudeHookNeedsUpdate == true {
+            return .init(
+                status: "Claude hook update available",
+                detail: "Update the Claude observer in Integrations so permission prompts stay aligned.",
+                action: .integrations)
+        }
         if observations.contains(.rich) {
-            return .init(status: "Rich data active", detail: nil, action: .diagnostics, ready: true)
+            if claudeHookInstalled == false {
+                return .init(
+                    status: "Rich data · hook not installed",
+                    detail: "Install the Claude observer in Integrations for live Approve / Deny on Island and phone.",
+                    action: .integrations, ready: true)
+            }
+            return .init(
+                status: claudeHookInstalled == true ? "Rich data · Claude hook ready" : "Rich data active",
+                detail: nil, action: .diagnostics, ready: true)
         }
         if !observations.isEmpty {
+            if usesObserver, claudeHookInstalled == false {
+                return .init(
+                    status: "Limited data · hook not installed",
+                    detail: "Install the Claude observer in Integrations for live permission prompts.",
+                    action: .integrations)
+            }
             return .init(
                 status: "Limited data",
                 detail: usesObserver
@@ -189,6 +215,12 @@ struct ProviderReadiness {
             return .init(
                 status: "CLI or app not found",
                 detail: "Install the official provider, or choose an existing CLI in Agents.", action: .agents)
+        }
+        if claudeHookInstalled == false {
+            return .init(
+                status: "Installed · Claude hook missing",
+                detail: "Install the observer in Integrations before expecting live permission controls.",
+                action: .integrations)
         }
         return .init(
             status: "Installed · not verified",

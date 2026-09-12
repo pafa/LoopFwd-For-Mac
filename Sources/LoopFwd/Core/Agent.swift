@@ -605,12 +605,15 @@ struct AgentSession: Identifiable, Equatable {
         if controlsEnabled, status == .needsAttention, openCodeControl?.permission != nil {
             result.formUnion([.observeAttention, .approve])
         }
-        if kind == .claude,
-            status == .needsAttention,
-            pendingQuestion != nil,
-            claudeControlsEnabled
-        {
-            result.formUnion([.observeAttention, .reply])
+        if kind == .claude, status == .needsAttention, claudeControlsEnabled {
+            if pendingQuestion != nil {
+                result.formUnion([.observeAttention, .reply])
+            }
+            // Live PermissionRequest overlays live in ApprovalCenter; grant
+            // phone Approve only when that overlay matches this session.
+            if ApprovalCenter.shared.approval(for: self) != nil {
+                result.formUnion([.observeAttention, .approve])
+            }
         }
         if returnTarget.label != nil { result.insert(.providerReturn) }
         if returnTarget.isExact { result.insert(.exactReturn) }

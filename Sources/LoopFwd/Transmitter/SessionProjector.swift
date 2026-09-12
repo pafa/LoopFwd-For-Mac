@@ -50,10 +50,17 @@ enum SessionProjector {
         }
 
         if let live = ApprovalCenter.shared.approval(for: agent), agent.status == .needsAttention {
+            let category = live.category ?? StickyPermissionAllow.category(from: live.toolName)
+            let glanceMessage: String? = {
+                if let detail = live.detail, !detail.isEmpty { return detail }
+                let trimmed = live.message.trimmingCharacters(in: .whitespacesAndNewlines)
+                return trimmed.isEmpty ? nil : trimmed
+            }()
             approval = RemoteApprovalRequest(
-                title: live.toolName.map { "Allow \($0)" } ?? "Allow tool",
+                title: ClaudePermissionGlance.approvalTitle(toolName: live.toolName, category: category),
                 toolName: live.toolName,
-                message: live.message,
+                permissionCategory: category,
+                message: glanceMessage,
                 actions: [.approve, .alwaysAllow, .deny],
                 requestId: claudeApprovalRequestId(live),
                 expiresAt: live.at.addingTimeInterval(approvalTTL)
@@ -62,9 +69,11 @@ enum SessionProjector {
             status = .needsAttention
             pendingQuestion = nil
         } else if let permission = agent.openCodeControl?.permission, agent.status == .needsAttention {
+            let category = StickyPermissionAllow.category(from: permission.name)
             approval = RemoteApprovalRequest(
-                title: "Allow \(permission.name)",
+                title: ClaudePermissionGlance.approvalTitle(toolName: permission.name, category: category),
                 toolName: permission.name,
+                permissionCategory: category,
                 message: permission.patterns.isEmpty ? nil : permission.patterns.joined(separator: ", "),
                 actions: [.approve, .alwaysAllow, .deny],
                 requestId: permission.requestID,
