@@ -41,6 +41,8 @@ enum RemoteApprovalActionKind: String, Codable, Sendable {
 struct RemoteApprovalRequest: Codable, Sendable, Equatable {
     var title: String
     var toolName: String?
+    /// Sticky / glance category (`files`, `app`, or provider-native).
+    var permissionCategory: String?
     var message: String?
     var actions: [RemoteApprovalActionKind]
     var requestId: String
