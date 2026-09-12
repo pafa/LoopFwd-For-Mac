@@ -79,7 +79,7 @@ struct AggregateHeadline: Codable, Sendable, Equatable {
         let attention = sessions.filter { $0.status == .needsAttention }
         let working = sessions.filter { $0.status == .working || $0.status == .stalled }
         let order: [RemoteSessionStatus] = [
-            .needsAttention, .failed, .stalled, .working, .completed, .stopped, .idle
+            .needsAttention, .failed, .stalled, .working, .completed, .stopped, .idle,
         ]
         let priority = sessions.min { a, b in
             let ia = order.firstIndex(of: a.status) ?? 99

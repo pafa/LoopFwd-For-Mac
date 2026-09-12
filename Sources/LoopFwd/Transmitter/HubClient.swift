@@ -20,7 +20,15 @@ final class HubClient: NSObject, URLSessionWebSocketDelegate {
     private var receiveLoopActive = false
     private let protocolHeader = "1"
 
-    init(baseURL: URL = URL(string: "http://127.0.0.1:8787")!) {
+    static var defaultBaseURL: URL {
+        var components = URLComponents()
+        components.scheme = "http"
+        components.host = "127.0.0.1"
+        components.port = 8787
+        return components.url ?? URL(fileURLWithPath: "/")
+    }
+
+    init(baseURL: URL = HubClient.defaultBaseURL) {
         self.baseURL = baseURL
         super.init()
         let config = URLSessionConfiguration.default
@@ -199,7 +207,9 @@ final class HubClient: NSObject, URLSessionWebSocketDelegate {
     }
 
     private func postJSON(path: String, body: [String: Any], bearer: String?) async throws -> Data {
-        var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: false)!
+        guard var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: false) else {
+            throw HubClientError.badURL
+        }
         components.path = path
         guard let requestURL = components.url else { throw HubClientError.badURL }
         var request = URLRequest(url: requestURL)

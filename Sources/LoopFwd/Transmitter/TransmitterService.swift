@@ -45,9 +45,10 @@ final class TransmitterService: ObservableObject {
     /// Called from AppDelegate after AgentMonitor / ApprovalCenter start.
     func startIfEnabled() {
         let defaults = UserDefaults.standard
-        guard defaults.object(forKey: Pref.transmitterEnabled) as? Bool
+        let enabled =
+            defaults.object(forKey: Pref.transmitterEnabled) as? Bool
             ?? Pref.Default.transmitterEnabled
-        else {
+        guard enabled else {
             isEnabled = false
             return
         }
@@ -227,7 +228,11 @@ final class TransmitterService: ObservableObject {
 
     static func makePairingCode() -> String {
         let alphabet = Array("ABCDEFGHJKLMNPQRSTUVWXYZ23456789")
-        let part = (0..<4).map { _ in alphabet.randomElement()! }
-        return "LOOP-" + String(part)
+        var part = ""
+        for _ in 0..<4 {
+            let index = Int.random(in: 0..<alphabet.count)
+            part.append(alphabet[index])
+        }
+        return "LOOP-" + part
     }
 }

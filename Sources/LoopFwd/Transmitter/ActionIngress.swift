@@ -169,7 +169,9 @@ enum ActionIngress {
             if question.expiresAt <= Date() || env.requestId != question.requestId {
                 return expired(env, projection)
             }
-            return await submitAnswers(env, agent: agent, requestId: question.requestId, answers: [text], project: project)
+            return await submitAnswers(
+                env, agent: agent, requestId: question.requestId, answers: [text], project: project)
+
         }
 
         // Codex managed free-text (no pending question requestId required beyond session)
