@@ -83,6 +83,14 @@ enum Pref {
     static let codexDesktopDataDirectory = "codexDesktopDataDirectory"
     static let providerControlsEnabled = "providerControlsEnabled"
 
+    // MARK: Session Hub transmitter (additive; off by default)
+    static let transmitterEnabled = "transmitterEnabled"
+    static let transmitterHubURL = "transmitterHubURL"
+    static let transmitterDisplayName = "transmitterDisplayName"
+    static let transmitterPairingCode = "transmitterPairingCode"
+    static let transmitterMacDeviceId = "transmitterMacDeviceId"
+    static let transmitterMacToken = "transmitterMacToken"
+
     /// AppStorage fallbacks and registered defaults must share these values.
     /// A view-level literal that drifts from registration creates different
     /// first-run behavior depending on initialization order.
@@ -143,6 +151,8 @@ enum Pref {
         static let claudeControlsEnabled = false
         static let providerControlsEnabled = false
         static let hideNotificationDetails = false
+        static let transmitterEnabled = false
+        static let transmitterHubURL = "http://127.0.0.1:8787"
     }
 
     static func registerDefaults() {
@@ -211,6 +221,8 @@ enum Pref {
             claudeControlsEnabled: Default.claudeControlsEnabled,
             providerControlsEnabled: Default.providerControlsEnabled,
             hideNotificationDetails: Default.hideNotificationDetails,
+            transmitterEnabled: Default.transmitterEnabled,
+            transmitterHubURL: Default.transmitterHubURL,
         ])
     }
 

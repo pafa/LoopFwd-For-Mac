@@ -123,6 +123,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         ApprovalCenter.shared.start()
         UsageTracker.shared.start()
         HotKeyCenter.shared.update()
+        // Additive Session Hub transmitter (no-op unless Pref.transmitterEnabled).
+        TransmitterService.shared.startIfEnabled()
         panel = NotchPanel(monitor: AgentMonitor.shared)
         SwitcherState.shared.panel = panel
         panel?.orderFrontRegardless()
