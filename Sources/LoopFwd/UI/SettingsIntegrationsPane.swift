@@ -16,6 +16,7 @@ struct IntegrationsPane: View {
     @ObservedObject private var qwenHooks = JSONHookIntegration.qwen
     @AppStorage(Pref.providerControlsEnabled) private var providerControlsEnabled = Pref.Default.providerControlsEnabled
     @AppStorage(Pref.communityUsageEnabled) private var communityUsageEnabled = Pref.Default.communityUsageEnabled
+    @State private var stickySummary = StickyPermissionAllow.summary
 
     private func jsonObserver(_ integration: JSONHookIntegration, title: String) -> some View {
         SSection(
@@ -131,6 +132,17 @@ struct IntegrationsPane: View {
                             HotKeyCenter.shared.update()
                         }
                 }
+                SDiv()
+                SRow(
+                    title: "Remembered Always allows",
+                    subtitle: stickySummary == "None" ? L10n.string("None") : stickySummary
+                ) {
+                    Button(L10n.string("Clear")) {
+                        StickyPermissionAllow.clear()
+                        stickySummary = StickyPermissionAllow.summary
+                    }
+                    .disabled(StickyPermissionAllow.remembered().isEmpty)
+                }
             }
 
             jsonObserver(geminiHooks, title: "Gemini CLI observer")
@@ -179,6 +191,8 @@ struct IntegrationsPane: View {
         }
         .onAppear {
             kimiHooks.refresh(); geminiHooks.refresh(); qwenHooks.refresh()
+            stickySummary = StickyPermissionAllow.summary
+            installed = ApprovalCenter.hookInstalled
         }
     }
 }

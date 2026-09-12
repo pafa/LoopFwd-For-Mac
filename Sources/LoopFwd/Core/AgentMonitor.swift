@@ -88,7 +88,8 @@ final class AgentMonitor: ObservableObject {
             let firstScan = !self.hasScannedOnce
             self.hasScannedOnce = true
             let reduction = self.lifecycle.reduce(
-                ApprovalCenter.shared.projectLiveRequests(result.sessions),
+                StickyPermissionAllow.consumeStickyOpenCode(
+                    in: ApprovalCenter.shared.projectLiveRequests(result.sessions)),
                 suppressEvents: firstScan
             )
             guard self.agents != reduction.sessions || !reduction.events.isEmpty else {

@@ -82,6 +82,8 @@ enum Pref {
     static let claudeConfigurationDirectory = "claudeConfigurationDirectory"
     static let codexDesktopDataDirectory = "codexDesktopDataDirectory"
     static let providerControlsEnabled = "providerControlsEnabled"
+    /// Sorted unique permission categories sticky-allowed via Always Allow.
+    static let stickyAlwaysCategories = "stickyAlwaysCategories"
 
     // MARK: Session Hub transmitter (additive; off by default)
     static let transmitterEnabled = "transmitterEnabled"

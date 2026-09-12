@@ -270,6 +270,12 @@ final class ApprovalCenter: ObservableObject {
                     at: at,
                     activityAtCreate: agent?.activity
                 )
+                // Sticky Always by category: approve once without Island interrupt.
+                if StickyPermissionAllow.isRemembered(toolName) {
+                    self.stickyAutoApproving.insert(pid)
+                    self.respond(pid: pid, action: .approve)
+                    return
+                }
                 HotKeyCenter.shared.update()
                 AgentMonitor.shared.scanNow()
             }
@@ -292,13 +298,17 @@ final class ApprovalCenter: ObservableObject {
 
     // MARK: - Responding
 
+    private var stickyAutoApproving: Set<Int32> = []
+
     func respond(pid: Int32, action: Action, completion: @escaping (Bool) -> Void = { _ in }) {
         guard UserDefaults.standard.bool(forKey: Pref.claudeControlsEnabled) else { completion(false); return }
         guard let request = pending[pid],
             let agent = AgentMonitor.shared.agents.first(where: { $0.processID == pid }),
-            request.identity.matches(agent), agent.status == .needsAttention
+            request.identity.matches(agent),
+            agent.status == .needsAttention || stickyAutoApproving.contains(pid)
         else {
             pending[pid] = nil
+            stickyAutoApproving.remove(pid)
             completion(false)
             return
         }
@@ -307,8 +317,12 @@ final class ApprovalCenter: ObservableObject {
         DispatchQueue.global(qos: .userInitiated).async {
             let success = TerminalBridge.sendKey(action.key, to: agent)
             DispatchQueue.main.async {
+                self.stickyAutoApproving.remove(pid)
                 if success, self.pending[pid] == request {
                     self.pending[pid] = nil
+                    if action == .alwaysAllow {
+                        StickyPermissionAllow.remember(request.toolName)
+                    }
                     HotKeyCenter.shared.update()
                 }
                 completion(success)
