@@ -26,12 +26,19 @@ _pick_dir() {
   return 1
 }
 
-_mac_has_proof() {
+# Swift tip marker only (primary may lack scripts/gate-c/).
+_mac_has_swift_proof() {
   local repo="$1"
   [[ -n "$repo" ]] || return 1
   [[ -d "$repo/.git" || -f "$repo/.git" ]] || return 1
-  [[ -f "$repo/scripts/gate-c/gate-c-require-proof-tip.sh" ]] || return 1
   git -C "$repo" grep -q 'GATE_C_SAME_REQUEST_ID_PROOF' -- '*.swift' 2>/dev/null
+}
+
+# Hub-start eligibility: Swift proof + in-repo proof-tip script.
+_mac_is_hub_start_ready() {
+  local repo="$1"
+  _mac_has_swift_proof "$repo" || return 1
+  [[ -f "$repo/scripts/gate-c/gate-c-require-proof-tip.sh" ]]
 }
 
 export LOOPFWD_GATE_C_CREDS_DIR="${LOOPFWD_GATE_C_CREDS_DIR:-$HOME/LoopFwd-GateC-Creds}"
@@ -57,13 +64,13 @@ if [[ -z "${LOOPFWD_MAC_REPO:-}" ]]; then
   fi
 fi
 
-# If still unset, prefer proof-bearing hub-start; else primary with proof.
+# If still unset, prefer proof-bearing hub-start; else primary with Swift proof.
 if [[ -z "${LOOPFWD_MAC_REPO:-}" ]]; then
-  if _mac_has_proof "$_HUB_START_WT"; then
+  if _mac_is_hub_start_ready "$_HUB_START_WT"; then
     LOOPFWD_MAC_REPO="$_HUB_START_WT"
-  elif _mac_has_proof "$_PRIMARY_MAC"; then
+  elif _mac_has_swift_proof "$_PRIMARY_MAC"; then
     LOOPFWD_MAC_REPO="$_PRIMARY_MAC"
-  elif _mac_has_proof "$_LEGACY_MAC"; then
+  elif _mac_has_swift_proof "$_LEGACY_MAC"; then
     LOOPFWD_MAC_REPO="$_LEGACY_MAC"
   else
     LOOPFWD_MAC_REPO="$(_pick_dir "$_HUB_START_WT" "$_PRIMARY_MAC" "$_LEGACY_MAC" || true)"
@@ -71,14 +78,20 @@ if [[ -z "${LOOPFWD_MAC_REPO:-}" ]]; then
   export LOOPFWD_MAC_REPO
 fi
 
-# Fail-closed soft recovery: mac-repo.env / default pointed at a missing or
-# proof-less tree → fall back only when primary tip has proof. Never invent.
-if [[ -n "${LOOPFWD_MAC_REPO:-}" ]] && ! _mac_has_proof "$LOOPFWD_MAC_REPO"; then
-  if _mac_has_proof "$_PRIMARY_MAC"; then
-    export LOOPFWD_MAC_REPO="$_PRIMARY_MAC"
-  elif _mac_has_proof "$_LEGACY_MAC"; then
-    export LOOPFWD_MAC_REPO="$_LEGACY_MAC"
-  fi
+# Soft recovery for durable default: hub-start / mac-repo.env path vanished or
+# lacks Swift proof → fall back only when primary tip has Swift proof.
+# Explicit operator LOOPFWD_MAC_REPO to a bad path stays fail-closed at proof tip
+# unless it was the durable hub-start default path.
+if [[ -n "${LOOPFWD_MAC_REPO:-}" ]] && ! _mac_has_swift_proof "$LOOPFWD_MAC_REPO"; then
+  case "$LOOPFWD_MAC_REPO" in
+    "$_HUB_START_WT"|*/LoopFwd-worktrees/mac-gate-c-hub-start-641d)
+      if _mac_has_swift_proof "$_PRIMARY_MAC"; then
+        export LOOPFWD_MAC_REPO="$_PRIMARY_MAC"
+      elif _mac_has_swift_proof "$_LEGACY_MAC"; then
+        export LOOPFWD_MAC_REPO="$_LEGACY_MAC"
+      fi
+      ;;
+  esac
   # else keep current path; gate-c-require-proof-tip.sh will FAIL CLOSED
 fi
 
