@@ -6,14 +6,35 @@
 # Early gate (always): scripts/gate-c/gate-c-require-proof-tip.sh → TIP= / PROOF=1|0.
 # Full orchestrator (drop-dir SoT when present): ~/LoopFwd-GateC-Creds/RUN-GATE-C-DEVICE-E2E.sh
 # which also re-runs the proof tip before Hub start / device steps.
+#
+# Default LOOPFWD_MAC_REPO (when unset): this worktree if it has proof, else drop-dir
+# mac-repo.env / resolve-paths (prefer hub-start). Env only — no git checkout switch.
 set -euo pipefail
 
 DROP_DIR="${LOOPFWD_GATE_C_CREDS_DIR:-$HOME/LoopFwd-GateC-Creds}"
 SELF_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+MAC_ROOT="$(cd "$SELF_DIR/../.." && pwd)"
 
-# Ensure start-hub resolution prefers in-repo (iOS scripts/, then this dir).
 export LOOPFWD_IOS_REPO="${LOOPFWD_IOS_REPO:-$HOME/Documents/Cursor/LoopFwd-For-iOS}"
-export LOOPFWD_MAC_REPO="${LOOPFWD_MAC_REPO:-$HOME/Documents/Cursor/LoopFwd-For-Mac}"
+
+if [[ -z "${LOOPFWD_MAC_REPO:-}" ]]; then
+  if [[ -f "$DROP_DIR/gate-c-resolve-paths.sh" ]]; then
+    # shellcheck disable=SC1090
+    source "$DROP_DIR/gate-c-resolve-paths.sh"
+  elif [[ -f "$DROP_DIR/mac-repo.env" ]]; then
+    # shellcheck disable=SC1090
+    source "$DROP_DIR/mac-repo.env"
+  fi
+fi
+if [[ -z "${LOOPFWD_MAC_REPO:-}" ]]; then
+  # This entry lives under hub-start (or another Mac tip) — prefer SELF Mac root when proofful.
+  if [[ -f "$MAC_ROOT/scripts/gate-c/gate-c-require-proof-tip.sh" ]] \
+    && git -C "$MAC_ROOT" grep -q 'GATE_C_SAME_REQUEST_ID_PROOF' -- '*.swift' 2>/dev/null; then
+    export LOOPFWD_MAC_REPO="$MAC_ROOT"
+  else
+    export LOOPFWD_MAC_REPO="$HOME/Documents/Cursor/LoopFwd-worktrees/mac-gate-c-hub-start-641d"
+  fi
+fi
 
 # --- proof tip BEFORE drop exec / any Hub or device step (fail-closed) ---
 PROOF_TIP="$SELF_DIR/gate-c-require-proof-tip.sh"
