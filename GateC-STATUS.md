@@ -1,23 +1,22 @@
-# Gate C Status (Mac)
+# Gate C Status
 
-| Field | Value |
-|-------|-------|
-| tip SHA | `398c7fba4f64e503f741b497486bd930a0bb1b37` (`398c7fb`) |
-| markers | MARKERS_OK |
-| creds | CREDS_MISSING |
-| watcher | ARMED (`com.loopfwd.gate-c-creds-watch`) |
-| evidence | NOT_RUN |
-
-## Notes
-
-- Markers tip `398c7fb` greps `GATE_C_SAME_REQUEST_ID_PROOF`; phone projections use `openDetail: false`.
-- Never invent Team ID. Drop `team-id.txt` + `AuthKey_*.p8` → `~/LoopFwd-GateC-Creds/`.
-- Watcher polls drop-dir, refuses placeholders (`ABCDEF1234` / `TEST*`), writes `.ready-ok`, runs iOS `scripts/gate-c-creds-intake.sh`.
-- Log: `~/Library/Logs/LoopFwd/gate-c-creds-watch.log`
-- Watcher branch: `cursor/gate-c-creds-watcher-f858`. No device PASS claimed.
-
-## Next
-
-1. Place real `team-id.txt` + `AuthKey_*.p8` in `~/LoopFwd-GateC-Creds/` (watcher auto-intakes)
-2. Confirm `.ready-ok` + Hub `GATE_C_STRICT=1`
-3. Device E2E: live requestId clear proof via markers
+- **timestamp (UTC):** 2026-09-13T03:40:20Z
+- **READY_OK:** no (`~/LoopFwd-GateC-Creds/.ready-ok` missing)
+- **HAS_TEAM:** no (`team-id.txt` missing)
+- **HAS_P8:** no (`AuthKey_*.p8` missing)
+- **TIP:** `f8fcc1e` on `cursor/gate-c-creds-watcher-f858`
+- **MARKERS:** OK — `git grep -c GATE_C_SAME_REQUEST_ID_PROOF -- '*.swift'` → `Sources/LoopFwd/Transmitter/GateCEvidence.swift:1`
+- **OPENDETAIL:** OK — `RemoteProtocolModels.swift:26` and `SessionProjector.swift:105` have `openDetail: false`
+- **PRODUCT_LOCK_PROOF:** OK — `ActionIngress.productLockActions` = `{approve, deny, alwaysAllow, selectOptions, replyText}`; `gateCResult` emits `GATE_C_SAME_REQUEST_ID_PROOF` only when `productLockActions.contains(env.action)` (stop-only CLEAR without proof; comment at `ActionIngress.swift:311`)
+- **WATCHER:** OK — `launchctl print gui/501/com.loopfwd.gate-c-creds-watch` → `state = running`, plist `~/Library/LaunchAgents/com.loopfwd.gate-c-creds-watch.plist`
+- **RUNNER:** OK — `~/LoopFwd-GateC-Creds/RUN-GATE-C-DEVICE-E2E.sh` executable; dry-run without `.ready-ok` → rc=1 fail-closed (`Evidence: NOT_RUN — not PASS`)
+- **ONESHOT:** OK — drop-dir `run-gate-c-oneshot.sh` (+ store copy)
+- **DEVICE_E2E_SCRIPT:** OK — drop-dir `gate-c-device-e2e.sh` (+ store copy)
+- **IOS_HEAD:** `b2d08c7` (`main`)
+- **HUB_PKG:** OK — `~/Documents/Cursor/LoopFwd-For-iOS/Hub/package.json` present; Hub `GATE_C_STRICT` count=16; fail-close strings count=6 (`server.mjs` / `smoke.mjs` / `README.md`)
+- **PHYSICAL_DEVICE:** MISSING — `xcrun xctrace list devices` shows Mac + simulators only; `devicectl list devices` → `No devices found`
+- **CODESIGN_IDS:** 0 valid identities (`security find-identity -v -p codesigning` — expected without Team)
+- **FIXES_APPLIED:** copied into drop-dir: `gate-c-creds-intake.sh`, `gate-c-watch-and-apply.sh`, `gate-c-apply-creds.sh`, `gate-c-ready-check.sh` (chmod +x; no creds invented)
+- **verdict:** `BLOCKED_CREDS_ONLY`
+- **GAPS:** PHYSICAL_DEVICE offline (non-creds); codesign=0 until Team present
+- **Evidence:** NOT_RUN — not PASS. Do not start full device E2E until `.ready-ok` + real `team-id.txt` + `AuthKey_*.p8`.
