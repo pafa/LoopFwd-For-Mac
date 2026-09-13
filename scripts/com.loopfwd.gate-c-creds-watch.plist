@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.loopfwd.gate-c-creds-watch</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/bin/bash</string>
+		<string>/Users/pafa/Library/Application Support/LoopFwd/bin/gate-c-creds-watch.sh</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>KeepAlive</key>
+	<true/>
+	<key>StandardOutPath</key>
+	<string>/Users/pafa/Library/Logs/LoopFwd/gate-c-creds-watch.launchd.out.log</string>
+	<key>StandardErrorPath</key>
+	<string>/Users/pafa/Library/Logs/LoopFwd/gate-c-creds-watch.launchd.err.log</string>
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>PATH</key>
+		<string>/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin</string>
+		<key>LOOPFWD_GATE_C_CREDS_DIR</key>
+		<string>/Users/pafa/LoopFwd-GateC-Creds</string>
+		<key>LOOPFWD_IOS_ROOT</key>
+		<string>/Users/pafa/Documents/Cursor/LoopFwd-For-iOS</string>
+	</dict>
+	<key>ThrottleInterval</key>
+	<integer>10</integer>
+</dict>
+</plist>
