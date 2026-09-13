@@ -23,7 +23,7 @@ struct RemoteSessionCapabilities: Codable, Sendable, Equatable {
     var openDetail: Bool
 
     static let observeOnly = RemoteSessionCapabilities(
-        observe: true, reply: false, approve: false, stop: false, openDetail: true)
+        observe: true, reply: false, approve: false, stop: false, openDetail: false)
 }
 
 struct RemotePendingQuestion: Codable, Sendable, Equatable {
