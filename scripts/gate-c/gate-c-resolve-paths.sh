@@ -56,11 +56,13 @@ _PRIMARY_MAC="$HOME/Documents/Cursor/LoopFwd-For-Mac"
 _LEGACY_MAC="$HOME/Documents/LoopFwd-For-Mac"
 
 # Durable drop-dir override (env only; no git checkout switch).
+_MAC_REPO_FROM_DEFAULT=0
 if [[ -z "${LOOPFWD_MAC_REPO:-}" ]]; then
   _mac_env="$LOOPFWD_GATE_C_CREDS_DIR/mac-repo.env"
   if [[ -f "$_mac_env" ]]; then
     # shellcheck disable=SC1090
     source "$_mac_env"
+    _MAC_REPO_FROM_DEFAULT=1
   fi
 fi
 
@@ -75,23 +77,21 @@ if [[ -z "${LOOPFWD_MAC_REPO:-}" ]]; then
   else
     LOOPFWD_MAC_REPO="$(_pick_dir "$_HUB_START_WT" "$_PRIMARY_MAC" "$_LEGACY_MAC" || true)"
   fi
+  _MAC_REPO_FROM_DEFAULT=1
   export LOOPFWD_MAC_REPO
 fi
 
-# Soft recovery for durable default: hub-start / mac-repo.env path vanished or
-# lacks Swift proof → fall back only when primary tip has Swift proof.
-# Explicit operator LOOPFWD_MAC_REPO to a bad path stays fail-closed at proof tip
-# unless it was the durable hub-start default path.
+# Soft recovery for durable default only: hub-start / mac-repo.env path vanished
+# or lacks Swift proof → fall back only when primary tip has Swift proof.
+# Explicit operator LOOPFWD_MAC_REPO to an unrelated bad path stays fail-closed.
 if [[ -n "${LOOPFWD_MAC_REPO:-}" ]] && ! _mac_has_swift_proof "$LOOPFWD_MAC_REPO"; then
-  case "$LOOPFWD_MAC_REPO" in
-    "$_HUB_START_WT"|*/LoopFwd-worktrees/mac-gate-c-hub-start-641d)
-      if _mac_has_swift_proof "$_PRIMARY_MAC"; then
-        export LOOPFWD_MAC_REPO="$_PRIMARY_MAC"
-      elif _mac_has_swift_proof "$_LEGACY_MAC"; then
-        export LOOPFWD_MAC_REPO="$_LEGACY_MAC"
-      fi
-      ;;
-  esac
+  if [[ "$_MAC_REPO_FROM_DEFAULT" == "1" || "$LOOPFWD_MAC_REPO" == "$_HUB_START_WT" ]]; then
+    if _mac_has_swift_proof "$_PRIMARY_MAC"; then
+      export LOOPFWD_MAC_REPO="$_PRIMARY_MAC"
+    elif _mac_has_swift_proof "$_LEGACY_MAC"; then
+      export LOOPFWD_MAC_REPO="$_LEGACY_MAC"
+    fi
+  fi
   # else keep current path; gate-c-require-proof-tip.sh will FAIL CLOSED
 fi
 
