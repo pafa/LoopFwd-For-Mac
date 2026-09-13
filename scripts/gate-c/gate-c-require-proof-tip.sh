@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+# Gate C: fail-closed unless Mac tip Sources contain GATE_C_SAME_REQUEST_ID_PROOF.
+# Prints TIP=<sha> and PROOF=1|0. Never invents creds. Never claims evidence PASS.
+#
+# LOOPFWD_MAC_REPO defaults to $HOME/Documents/Cursor/LoopFwd-For-Mac.
+# If primary main lacks the marker, operators may set LOOPFWD_MAC_REPO to a
+# proof-bearing worktree (e.g. .../LoopFwd-worktrees/mac-gate-c-hub-start-641d).
+# Do not auto-switch a dirty checkout; set LOOPFWD_MAC_REPO explicitly.
+set -euo pipefail
+
+MARKER='GATE_C_SAME_REQUEST_ID_PROOF'
+MAC_REPO="${LOOPFWD_MAC_REPO:-$HOME/Documents/Cursor/LoopFwd-For-Mac}"
+
+usage() {
+  cat <<'EOF'
+Usage: gate-c-require-proof-tip.sh
+
+Fail-closed unless `git grep -q GATE_C_SAME_REQUEST_ID_PROOF -- '*.swift'`
+succeeds in LOOPFWD_MAC_REPO (default: Documents/Cursor/LoopFwd-For-Mac).
+Prints:
+  TIP=<full-sha>
+  PROOF=1|0
+Exit 0 only when PROOF=1. Does not invent creds or claim Gate C PASS.
+EOF
+}
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -h|--help) usage; exit 0 ;;
+    *)
+      echo "gate-c-require-proof-tip: unknown argument: $1" >&2
+      usage >&2
+      exit 2
+      ;;
+  esac
+done
+
+if [[ ! -d "$MAC_REPO/.git" ]] && [[ ! -f "$MAC_REPO/.git" ]]; then
+  echo "TIP="
+  echo "PROOF=0"
+  echo "gate-c-require-proof-tip: FAIL CLOSED — Mac repo missing/unusable: $MAC_REPO" >&2
+  echo "  Optional: export LOOPFWD_MAC_REPO=.../LoopFwd-worktrees/mac-gate-c-hub-start-641d when that tip has proof." >&2
+  exit 1
+fi
+
+TIP="$(git -C "$MAC_REPO" rev-parse HEAD 2>/dev/null || true)"
+if [[ -z "$TIP" ]]; then
+  echo "TIP="
+  echo "PROOF=0"
+  echo "gate-c-require-proof-tip: FAIL CLOSED — cannot resolve HEAD in $MAC_REPO" >&2
+  exit 1
+fi
+
+PROOF=0
+if git -C "$MAC_REPO" grep -q "$MARKER" -- '*.swift' 2>/dev/null; then
+  PROOF=1
+fi
+
+echo "TIP=$TIP"
+echo "PROOF=$PROOF"
+
+if [[ "$PROOF" != "1" ]]; then
+  echo "gate-c-require-proof-tip: FAIL CLOSED — tip missing $MARKER under $MAC_REPO" >&2
+  echo "  origin/main may lack proof; use a tip WITH proof (primary main@056e6eb+ or hub-start worktree)." >&2
+  echo "  Optional: export LOOPFWD_MAC_REPO=\$HOME/Documents/Cursor/LoopFwd-worktrees/mac-gate-c-hub-start-641d" >&2
+  echo "  Do not auto-switch if that checkout is dirty — set LOOPFWD_MAC_REPO explicitly." >&2
+  echo "  Evidence: NOT_RUN — not PASS." >&2
+  exit 1
+fi
+
+exit 0
