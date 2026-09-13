@@ -3,6 +3,11 @@ import Foundation
 /// Hub → Mac action ingress. Revalidates live requestId, then executes through
 /// existing ApprovalCenter / OpenCode / Codex paths. Fail closed.
 enum ActionIngress {
+    /// Product-lock actions that prove same live requestId clear (not stop).
+    static let productLockActions: Set<RemoteActionKind> = [
+        .approve, .deny, .alwaysAllow, .selectOptions, .replyText,
+    ]
+
     static func handle(
         _ envelope: RemoteActionEnvelope,
         macDeviceId: String,
@@ -11,21 +16,28 @@ enum ActionIngress {
     ) async -> ActionResult {
         var env = envelope
         env.normalize()
+        GateCEvidence.actionForward(requestId: env.requestId, action: env.action.rawValue)
 
         guard env.macDeviceId == macDeviceId else {
-            return ActionResult(
-                clientActionId: env.clientActionId,
-                status: .unauthorized,
-                message: "macDeviceId mismatch",
-                session: nil
+            return gateCResult(
+                ActionResult(
+                    clientActionId: env.clientActionId,
+                    status: .unauthorized,
+                    message: "macDeviceId mismatch",
+                    session: nil
+                ),
+                env: env
             )
         }
         guard macOnline else {
-            return ActionResult(
-                clientActionId: env.clientActionId,
-                status: .offline,
-                message: "Mac transmitter offline",
-                session: nil
+            return gateCResult(
+                ActionResult(
+                    clientActionId: env.clientActionId,
+                    status: .offline,
+                    message: "Mac transmitter offline",
+                    session: nil
+                ),
+                env: env
             )
         }
 
@@ -38,21 +50,27 @@ enum ActionIngress {
             )
         }
         guard let agent = agents.first(where: { $0.id == env.sessionId }) else {
-            return ActionResult(
-                clientActionId: env.clientActionId,
-                status: .rejected,
-                message: "Unknown session",
-                session: nil
+            return gateCResult(
+                ActionResult(
+                    clientActionId: env.clientActionId,
+                    status: .rejected,
+                    message: "Unknown session",
+                    session: nil
+                ),
+                env: env
             )
         }
 
         let projection = await MainActor.run { project(agent) }
         if projection.observationStale {
-            return ActionResult(
-                clientActionId: env.clientActionId,
-                status: .rejected,
-                message: "Observation stale",
-                session: projection
+            return gateCResult(
+                ActionResult(
+                    clientActionId: env.clientActionId,
+                    status: .rejected,
+                    message: "Observation stale",
+                    session: projection
+                ),
+                env: env
             )
         }
 
@@ -269,32 +287,56 @@ enum ActionIngress {
             return agents.first(where: { $0.id == sessionId }).map(project)
         }
         if success {
-            return ActionResult(
-                clientActionId: env.clientActionId,
-                status: .accepted,
-                message: nil,
-                session: session
+            return gateCResult(
+                ActionResult(
+                    clientActionId: env.clientActionId,
+                    status: .accepted,
+                    message: nil,
+                    session: session
+                ),
+                env: env
             )
         }
-        return ActionResult(
-            clientActionId: env.clientActionId,
-            status: .rejected,
-            message: "Request expired or could not be reached",
-            session: session
+        return gateCResult(
+            ActionResult(
+                clientActionId: env.clientActionId,
+                status: .rejected,
+                message: "Request expired or could not be reached",
+                session: session
+            ),
+            env: env
         )
+    }
+
+    /// On accepted: always CLEAR; sameRequestIdProof only for product-lock actions (not stop).
+    private static func gateCResult(_ result: ActionResult, env: RemoteActionEnvelope) -> ActionResult {
+        GateCEvidence.actionResult(status: result.status.rawValue, requestId: env.requestId)
+        if result.status == .accepted {
+            GateCEvidence.requestIdClear(requestId: env.requestId)
+            if productLockActions.contains(env.action) {
+                GateCEvidence.sameRequestIdProof(requestId: env.requestId)
+            }
+        }
+        return result
     }
 
     private static func rejected(
         _ env: RemoteActionEnvelope, _ message: String, _ session: SessionProjection?
     ) -> ActionResult {
-        ActionResult(clientActionId: env.clientActionId, status: .rejected, message: message, session: session)
+        gateCResult(
+            ActionResult(clientActionId: env.clientActionId, status: .rejected, message: message, session: session),
+            env: env
+        )
     }
 
     private static func expired(
         _ env: RemoteActionEnvelope, _ session: SessionProjection?
     ) -> ActionResult {
-        ActionResult(
-            clientActionId: env.clientActionId, status: .expired, message: "Request expired", session: session)
+        gateCResult(
+            ActionResult(
+                clientActionId: env.clientActionId, status: .expired, message: "Request expired", session: session),
+            env: env
+        )
     }
 
     private static func expired(
