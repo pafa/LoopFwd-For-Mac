@@ -111,7 +111,7 @@ enum SessionProjector {
                 reply: canReply,
                 approve: canApprove,
                 stop: canStop,
-                openDetail: true
+                openDetail: false
             ),
             macOnline: macOnline,
             observationStale: stale
