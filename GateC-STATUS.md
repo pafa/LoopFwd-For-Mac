@@ -2,7 +2,7 @@
 
 | Field | Value |
 |-------|-------|
-| tip SHA |  () |
+| tip SHA | `2854c7841fabb4a9a9473d0982a31a661845c250` (`2854c78`) |
 | markers | MARKERS_OK |
 | creds | CREDS_MISSING |
 | watcher | ARMED (`com.loopfwd.gate-c-creds-watch`) |
