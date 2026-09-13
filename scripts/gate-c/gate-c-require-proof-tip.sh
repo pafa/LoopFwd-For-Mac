@@ -2,21 +2,20 @@
 # Gate C: fail-closed unless Mac tip Sources contain GATE_C_SAME_REQUEST_ID_PROOF.
 # Prints TIP=<sha> and PROOF=1|0. Never invents creds. Never claims evidence PASS.
 #
-# When LOOPFWD_MAC_REPO unset: source drop-dir mac-repo.env / gate-c-resolve-paths.sh
-# (prefer hub-start WT with proof when origin/main lacks it). Env default only —
-# do not auto-switch a dirty unrelated checkout.
+# Prefer drop-dir gate-c-resolve-paths.sh (scrubs non-existent LOOPFWD_MAC_REPO
+# poison, then mac-repo.env / hub-start default). Env default only — do not
+# auto-switch a dirty unrelated checkout.
 set -euo pipefail
 
 MARKER='GATE_C_SAME_REQUEST_ID_PROOF'
 DROP_DIR="${LOOPFWD_GATE_C_CREDS_DIR:-$HOME/LoopFwd-GateC-Creds}"
 
-if [[ -z "${LOOPFWD_MAC_REPO:-}" && -f "$DROP_DIR/mac-repo.env" ]]; then
-  # shellcheck disable=SC1090
-  source "$DROP_DIR/mac-repo.env"
-fi
-if [[ -z "${LOOPFWD_MAC_REPO:-}" && -f "$DROP_DIR/gate-c-resolve-paths.sh" ]]; then
+if [[ -f "$DROP_DIR/gate-c-resolve-paths.sh" ]]; then
   # shellcheck disable=SC1090
   source "$DROP_DIR/gate-c-resolve-paths.sh"
+elif [[ -z "${LOOPFWD_MAC_REPO:-}" && -f "$DROP_DIR/mac-repo.env" ]]; then
+  # shellcheck disable=SC1090
+  source "$DROP_DIR/mac-repo.env"
 fi
 
 MAC_REPO="${LOOPFWD_MAC_REPO:-$HOME/Documents/Cursor/LoopFwd-For-Mac}"

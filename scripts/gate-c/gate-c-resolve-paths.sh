@@ -55,6 +55,14 @@ _HUB_START_WT="$HOME/Documents/Cursor/LoopFwd-worktrees/mac-gate-c-hub-start-641
 _PRIMARY_MAC="$HOME/Documents/Cursor/LoopFwd-For-Mac"
 _LEGACY_MAC="$HOME/Documents/LoopFwd-For-Mac"
 
+# Soft-probe / stale agent-shell poison: an explicit LOOPFWD_MAC_REPO that does
+# not exist (e.g. /tmp/does-not-exist-gate-c-hub) must not block mac-repo.env.
+# Existing but proof-less unrelated checkouts still fail closed below.
+if [[ -n "${LOOPFWD_MAC_REPO:-}" && ! -d "${LOOPFWD_MAC_REPO}" ]]; then
+  echo "gate-c-resolve-paths: ignoring non-existent LOOPFWD_MAC_REPO=${LOOPFWD_MAC_REPO}" >&2
+  unset LOOPFWD_MAC_REPO
+fi
+
 # Durable drop-dir override (env only; no git checkout switch).
 _MAC_REPO_FROM_DEFAULT=0
 if [[ -z "${LOOPFWD_MAC_REPO:-}" ]]; then
