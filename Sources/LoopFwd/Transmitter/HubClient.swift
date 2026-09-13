@@ -133,8 +133,11 @@ final class HubClient: NSObject, URLSessionWebSocketDelegate {
         }
     }
 
-    func sendActionResult(_ result: ActionResult) {
+    func sendActionResult(_ result: ActionResult, requestId: String? = nil) {
         do {
+            if let requestId {
+                GateCEvidence.hubActionResultSent(status: result.status.rawValue, requestId: requestId)
+            }
             send([
                 "type": "actionResult",
                 "result": try jsonObject(result),
@@ -182,6 +185,7 @@ final class HubClient: NSObject, URLSessionWebSocketDelegate {
                     let envelopeData = try JSONSerialization.data(withJSONObject: envelopeObj)
                     var envelope = try ProtocolJSON.decoder.decode(RemoteActionEnvelope.self, from: envelopeData)
                     envelope.normalize()
+                    GateCEvidence.hubForwardReceived(requestId: envelope.requestId)
                     onActionForward?(envelope)
                 } catch {
                     onError?("actionForward decode failed: \(error.localizedDescription)")

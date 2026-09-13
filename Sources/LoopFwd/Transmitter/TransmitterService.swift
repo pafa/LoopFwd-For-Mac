@@ -207,7 +207,7 @@ final class TransmitterService: ObservableObject {
                     agent: agent, macDeviceId: self.macDeviceId, macOnline: self.isConnected)
             }
         )
-        hub.sendActionResult(result)
+        hub.sendActionResult(result, requestId: envelope.requestId)
         // HTTPS fallback so Hub can complete pending waiters even if WS frame drops.
         if !macToken.isEmpty {
             try? await hub.postActionResult(result, token: macToken)
